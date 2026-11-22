@@ -1,0 +1,26 @@
+node_modules
+dist
+dist-ssr
+*.tsbuildinfo
+*.local
+.env
+.env.local
+.DS_Store
+Thumbs.db
+
+# Android build outputs & caches
+android/.gradle/
+android/build/
+android/app/build/
+android/.idea/
+android/*.iml
+android/app/*.iml
+.gradle/
+
+# iOS build temporary
+build-ipa-temp/
+*.zip
+
+# Root duplicate binaries (public/ has the live distribution packages)
+/FITLY.apk
+/FITLY.ipa

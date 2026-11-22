@@ -1,0 +1,17 @@
+{
+  "short_name": "FITLY",
+  "name": "FITLY — AI Daily Outfit & Lifestyle Assistant",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#080E1C",
+  "theme_color": "#0B1F4B",
+  "display": "standalone",
+  "orientation": "portrait"
+}
