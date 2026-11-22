@@ -589,19 +589,16 @@ export default function LandingPage() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-[#E2E8F0] flex flex-col gap-2">
-                <button
-                  onClick={() => navigate("/")}
-                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] hover:bg-[#163568] text-white font-black text-xs transition-transform active:scale-95 shadow-md"
-                >
-                  <span>📲 Launch App in Safari to Pin</span>
-                </button>
                 <a
                   href="/FITLY.ipa"
                   download="FITLY.ipa"
-                  className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#DCE5F2] bg-white text-[11px] font-bold text-[#0B1F4B] hover:bg-[#F1F5F9] active:scale-95 transition-all"
+                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] hover:bg-[#163568] text-white font-black text-xs transition-transform active:scale-95 shadow-md"
                 >
-                  <span>📦 Download FITLY.ipa (AltStore / Sideloadly)</span>
+                  <span>⬇️ Download FITLY.ipa</span>
                 </a>
+                <p className="text-center text-[10px] text-[#73819A]">
+                  For AltStore, Sideloadly, or direct developer install
+                </p>
               </div>
             </div>
           </div>

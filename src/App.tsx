@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Capacitor } from "@capacitor/core";
 import Layout from "./components/Layout";
 import HomeScreen from "./screens/HomeScreen";
 import ClosetScreen from "./screens/ClosetScreen";
@@ -19,8 +20,9 @@ import LandingPage from "./screens/LandingPage";
 import { useApp } from "./lib/store";
 
 export default function App() {
+  const isNative = Capacitor.isNativePlatform();
   const [showSplash, setShowSplash] = useState(
-    () => localStorage.getItem("fitly_onboarded") !== "1"
+    () => isNative && localStorage.getItem("fitly_onboarded") !== "1"
   );
   const [hasOnboarded, setHasOnboarded] = useState(
     () => localStorage.getItem("fitly_onboarded") === "1"
@@ -42,22 +44,27 @@ export default function App() {
     };
   }, []);
 
-  if (showSplash) {
-    return <SplashScreen onDone={() => setShowSplash(false)} />;
+  // On Native Android / iOS app, show native splash and onboarding flow
+  if (isNative) {
+    if (showSplash) {
+      return <SplashScreen onDone={() => setShowSplash(false)} />;
+    }
+
+    if (!hasOnboarded) {
+      return <OnboardingScreen onDone={handleFinishOnboarding} />;
+    }
   }
 
-  if (!hasOnboarded) {
-    return (
-      <OnboardingScreen
-        onDone={handleFinishOnboarding}
-      />
-    );
-  }
-
+  // On Web: Default route `/` is the official Landing Page so visitors download the app!
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/landing" element={<LandingPage />} />
+      <Route path="/about" element={<LandingPage />} />
+
+      {/* App Routes (For Native App & Direct Links) */}
       <Route element={<Layout />}>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/app" element={<HomeScreen />} />
         <Route path="/closet" element={<ClosetScreen />} />
         <Route path="/history" element={<HistoryScreen />} />
         <Route path="/upgrade" element={<UpgradeScreen />} />
@@ -74,8 +81,6 @@ export default function App() {
       <Route path="/camera" element={<PhotoStyleCameraScreen />} />
       <Route path="/photo-style" element={<PhotoStyleCameraScreen />} />
       <Route path="/packing" element={<PackingScreen />} />
-      <Route path="/landing" element={<LandingPage />} />
-      <Route path="/about" element={<LandingPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
