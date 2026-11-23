@@ -1,0 +1,9 @@
+# Cloudflare Workers Assets Ignore List
+# Ignore files larger than Cloudflare's 25 MiB asset limit
+*.apk
+*.ipa
+FITLY.apk
+FITLY.ipa
+FIRIE.apk
+FIRIE.ipa
+videos/*.mp4

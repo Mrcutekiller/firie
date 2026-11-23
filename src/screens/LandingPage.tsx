@@ -13,6 +13,20 @@ export default function LandingPage() {
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
+  // On local dev, serve from public folder. On Cloudflare / live production, download directly from GitHub repo.
+  const isLocal =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname.startsWith("192.168."));
+
+  const apkDownloadUrl = isLocal
+    ? "/FITLY.apk"
+    : "https://github.com/Mrcutekiller/FITLY/raw/main/public/FITLY.apk";
+  const ipaDownloadUrl = isLocal
+    ? "/FITLY.ipa"
+    : "https://github.com/Mrcutekiller/FITLY/raw/main/public/FITLY.ipa";
+
   const scrollToDownload = (e: React.MouseEvent) => {
     e.preventDefault();
     const el = document.getElementById("download");
@@ -272,32 +286,32 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-[#FFFFFF] text-[#18181B] selection:bg-[#FF7F02] selection:text-white font-sans antialiased overflow-x-hidden">
-      {/* ── Top Editorial Strip ── */}
-      <div className="border-b border-orange-100 bg-[#FFFBF7] px-4 py-2 text-[10px] font-black tracking-widest text-[#71717A]">
+      {/* ── Top Editorial Strip (Hidden on small mobile to eliminate vertical space, clean on desktop) ── */}
+      <div className="hidden sm:block border-b border-orange-100 bg-[#FFFBF7] px-4 py-1.5 text-[10px] font-black tracking-widest text-[#71717A]">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <span className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[#FF7F02] animate-ping" />
             <span className="text-[#FF7F02] font-black">ፍሬ · FIRIE LOOKBOOK</span>
             <span className="text-zinc-400">· 2026 COLLECTION</span>
           </span>
-          <span className="hidden sm:inline">DIGITAL WARDROBE INTELLIGENCE IN MOTION</span>
+          <span className="hidden md:inline">DIGITAL WARDROBE INTELLIGENCE IN MOTION</span>
           <span>ADDIS ABABA · GLOBAL</span>
         </div>
       </div>
 
-      {/* ── Main Sticky Navbar (Mobile & Desktop Responsive) ── */}
+      {/* ── Main Sticky Navbar (Tight and sleek with zero excess padding) ── */}
       <header className="sticky top-0 z-50 border-b border-orange-100 bg-white/95 backdrop-blur-xl transition-all shadow-xs">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex h-14 sm:h-16 max-w-6xl items-center justify-between px-3.5 sm:px-6">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5 active:scale-95 transition-transform">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white p-1 shadow-md border border-orange-200">
+          <Link to="/" className="flex items-center gap-2 active:scale-95 transition-transform">
+            <div className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-xl sm:rounded-2xl bg-white p-1 shadow-sm border border-orange-200">
               <img
                 src="/logo/firie-logo.png"
                 alt="ፍሬ (Firie) Logo"
                 className="h-full w-full object-contain"
               />
             </div>
-            <span className="text-xl font-black tracking-tight text-[#18181B]">
+            <span className="text-lg sm:text-xl font-black tracking-tight text-[#18181B]">
               ፍሬ<span className="text-[#FF7F02]">.</span>
               <span className="ml-1 text-xs font-bold text-[#FF7F02] tracking-normal">Firie</span>
             </span>
@@ -321,10 +335,10 @@ export default function LandingPage() {
             <a
               href="#download"
               onClick={scrollToDownload}
-              className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-5 sm:px-6 py-2.5 text-xs font-black text-white shadow-lg shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5"
+              className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5"
             >
               <span>Download</span>
-              <span className="text-[11px]">⬇</span>
+              <span className="text-[10px]">⬇</span>
             </a>
 
             {/* Mobile Hamburger Button */}
@@ -346,7 +360,7 @@ export default function LandingPage() {
 
         {/* Mobile Dropdown Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-b border-orange-100 bg-white/95 backdrop-blur-xl px-4 py-4 space-y-2 animate-fade">
+          <div className="lg:hidden border-b border-orange-100 bg-white/98 backdrop-blur-xl px-4 py-4 space-y-2 animate-fade">
             <div className="grid grid-cols-2 gap-2 text-xs font-bold text-[#71717A]">
               {sections.map((s) => (
                 <button
@@ -384,7 +398,7 @@ export default function LandingPage() {
         ))}
       </div>
 
-      {/* ── SECTIONS: FRAMELESS CINEMATIC VIDEO BACKGROUND & EDITORIAL TEXT ── */}
+      {/* ── SECTIONS: TIGHT EDITORIAL PADDING TO CLOSE GAP WITH NAVBAR ── */}
       <main className="divide-y divide-orange-100">
         {sections.map((s, index) => {
           const isTextLeft = s.align === "text-left";
@@ -396,55 +410,71 @@ export default function LandingPage() {
               data-section-index={index}
               ref={(el) => (sectionRefs.current[index] = el)}
               className={cn(
-                "relative min-h-[85vh] md:min-h-screen flex items-center py-12 sm:py-20 md:py-28 overflow-hidden",
+                "relative flex items-center pt-3 pb-8 sm:pt-6 sm:pb-12 md:pt-10 md:pb-16 overflow-hidden",
                 isEven ? "bg-white" : "bg-[#FFFBF7]"
               )}
             >
-              <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+              <div className="mx-auto max-w-6xl px-3.5 sm:px-6 w-full relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-14 items-center">
                   {/* ── Editorial Text Column ── */}
                   <div
                     className={cn(
-                      "lg:col-span-6 space-y-5 sm:space-y-6",
+                      "lg:col-span-6 space-y-3 sm:space-y-4 md:space-y-5",
                       isTextLeft ? "order-1" : "order-1 lg:order-2"
                     )}
                   >
                     {/* Minimalist Editorial Category Badge */}
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      <span className={cn("rounded-full px-4 py-1 text-[10px] font-black tracking-widest uppercase shadow-xs", s.badgeColor)}>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className={cn("rounded-full px-3 sm:px-4 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-black tracking-widest uppercase shadow-xs", s.badgeColor)}>
                         {s.badge}
                       </span>
-                      <span className="text-[10px] font-extrabold text-[#71717A] tracking-widest uppercase hidden sm:inline">
+                      <span className="text-[9px] sm:text-[10px] font-extrabold text-[#71717A] tracking-widest uppercase">
                         / {s.tagline}
                       </span>
                     </div>
 
                     {/* Headline */}
-                    <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-[#18181B] leading-[1.06] uppercase">
+                    <h2 className="text-2xl sm:text-4xl lg:text-[46px] font-black tracking-tight text-[#18181B] leading-[1.08] uppercase">
                       {s.title}
                     </h2>
 
                     {/* Subtitle Accent */}
-                    <p className="text-sm sm:text-base md:text-lg font-bold text-[#FF7F02] leading-snug">
+                    <p className="text-xs sm:text-base md:text-lg font-bold text-[#FF7F02] leading-snug">
                       {s.subtitle}
                     </p>
 
+                    {/* ── MOBILE VIDEO CARD (Visible right under headline on mobile phones so it is never hidden!) ── */}
+                    <div className="lg:hidden w-full my-2.5">
+                      <div className="relative w-full rounded-2xl overflow-hidden shadow-xl bg-black ring-1 ring-orange-500/20">
+                        <video
+                          src={s.video}
+                          poster={s.poster}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="auto"
+                          className="w-full h-[240px] sm:h-[340px] object-cover object-center"
+                        />
+                      </div>
+                    </div>
+
                     {/* Narrative Description */}
-                    <p className="text-sm sm:text-base text-[#52525B] leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-normal">
                       {s.description}
                     </p>
 
                     {/* Spec Stats Pill Grid */}
-                    <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3.5 pt-0.5">
                       {s.specs.map((spec, sIdx) => (
                         <div
                           key={sIdx}
-                          className="rounded-2xl border border-orange-100 bg-white p-3 text-center shadow-2xs hover:border-orange-300 transition-colors"
+                          className="rounded-xl sm:rounded-2xl border border-orange-100 bg-white p-2 sm:p-3 text-center shadow-2xs hover:border-orange-300 transition-colors"
                         >
-                          <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-[#A1A1AA]">
+                          <p className="text-[8.5px] sm:text-[10px] font-black uppercase tracking-wider text-[#A1A1AA]">
                             {spec.label}
                           </p>
-                          <p className="text-xs sm:text-sm font-black text-[#18181B] mt-0.5 truncate">
+                          <p className="text-[11px] sm:text-sm font-black text-[#18181B] mt-0.5 truncate">
                             {spec.value}
                           </p>
                         </div>
@@ -452,30 +482,30 @@ export default function LandingPage() {
                     </div>
 
                     {/* Feature Checkpoints */}
-                    <ul className="space-y-2.5 pt-1 text-xs sm:text-sm font-semibold text-[#18181B]">
+                    <ul className="space-y-1.5 sm:space-y-2.5 pt-0.5 text-xs sm:text-sm font-semibold text-[#18181B]">
                       {s.bullets.map((b, bIdx) => (
-                        <li key={bIdx} className="flex items-center gap-2.5">
-                          <span className="h-5 w-5 rounded-full bg-[#FF7F02] text-white text-[10px] font-black grid place-items-center shrink-0 shadow-xs">
+                        <li key={bIdx} className="flex items-center gap-2">
+                          <span className="h-4.5 w-4.5 sm:h-5 sm:w-5 rounded-full bg-[#FF7F02] text-white text-[9px] sm:text-[10px] font-black grid place-items-center shrink-0 shadow-xs">
                             ✓
                           </span>
-                          <span>{b}</span>
+                          <span className="text-xs sm:text-sm">{b}</span>
                         </li>
                       ))}
                     </ul>
 
                     {/* Single Download Button if on Overview or Final Section */}
                     {s.hasDownloadBtn && (
-                      <div className="pt-3 flex flex-wrap items-center gap-4">
+                      <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
                         <a
                           href="#download"
                           onClick={scrollToDownload}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-8 py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
                         >
                           <span>Download App</span>
-                          <span className="text-base">⬇</span>
+                          <span className="text-sm sm:text-base">⬇</span>
                         </a>
 
-                        <span className="text-xs font-bold text-[#71717A] flex items-center gap-1.5">
+                        <span className="text-[11px] sm:text-xs font-bold text-[#71717A] flex items-center gap-1.5">
                           <span className="h-2 w-2 rounded-full bg-[#FF7F02] animate-pulse" />
                           <span>Mobile App exclusively for Android & iOS</span>
                         </span>
@@ -483,14 +513,14 @@ export default function LandingPage() {
                     )}
                   </div>
 
-                  {/* ── Frameless Clean Cinematic Video ── */}
+                  {/* ── DESKTOP VIDEO COLUMN (Hidden on mobile since mobile shows it directly inline) ── */}
                   <div
                     className={cn(
-                      "lg:col-span-6 flex justify-center",
+                      "hidden lg:flex lg:col-span-6 justify-center",
                       isTextLeft ? "order-2" : "order-2 lg:order-1"
                     )}
                   >
-                    <div className="relative w-full max-w-[340px] sm:max-w-md lg:max-w-[460px] rounded-3xl sm:rounded-[36px] overflow-hidden shadow-2xl bg-black group ring-1 ring-orange-500/20">
+                    <div className="relative w-full max-w-[440px] rounded-[36px] overflow-hidden shadow-2xl bg-black group ring-1 ring-orange-500/20">
                       <video
                         src={s.video}
                         poster={s.poster}
@@ -499,7 +529,7 @@ export default function LandingPage() {
                         muted
                         playsInline
                         preload="auto"
-                        className="w-full h-[480px] sm:h-[580px] md:h-[640px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                        className="w-full h-[540px] xl:h-[600px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
                       />
                     </div>
                   </div>
@@ -511,46 +541,46 @@ export default function LandingPage() {
       </main>
 
       {/* ── DIRECT OFFICIAL DOWNLOAD HUB ── */}
-      <section id="download" className="py-20 sm:py-28 border-t border-orange-100 bg-[#FFFBF7]">
+      <section id="download" className="py-14 sm:py-24 border-t border-orange-100 bg-[#FFFBF7]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="rounded-full bg-[#FF7F02] text-white px-4 py-1 text-[10px] font-black uppercase tracking-widest shadow-xs">
+            <span className="rounded-full bg-[#FF7F02] text-white px-3.5 py-1 text-[10px] font-black uppercase tracking-widest shadow-xs">
               OFFICIAL APPLICATION BUILDS
             </span>
-            <h2 className="mt-3 text-3xl sm:text-5xl font-black text-[#18181B] tracking-tight">
+            <h2 className="mt-3 text-2xl sm:text-4xl font-black text-[#18181B] tracking-tight">
               Get ፍሬ (Firie) on Your Phone
             </h2>
-            <p className="mt-2 text-xs sm:text-sm text-[#71717A]">
+            <p className="mt-1.5 text-xs sm:text-sm text-[#71717A]">
               Direct downloads for Android and iPhone — no ads, no tracking, no store approval wait.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
             {/* Android Card */}
-            <div className="rounded-3xl border border-orange-100 bg-white p-6 sm:p-8 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#FF7F02] transition-all">
+            <div className="rounded-3xl border border-orange-100 bg-white p-5 sm:p-8 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#FF7F02] transition-all">
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#FF7F02] text-2xl text-white shadow-md shadow-orange-500/25">
+                  <span className="grid h-11 w-11 sm:h-12 sm:w-12 place-items-center rounded-2xl bg-[#FF7F02] text-xl sm:text-2xl text-white shadow-md shadow-orange-500/25">
                     🤖
                   </span>
                   <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 text-[10px] font-black text-orange-900">
                     Direct APK · Fast Install
                   </span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black text-[#18181B]">Android Direct APK</h3>
-                <p className="mt-2 text-xs leading-relaxed text-[#71717A]">
+                <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">Android Direct APK</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#71717A]">
                   Official Android application package with adaptive orange launcher icon, camera pose guidance, and desktop widgets.
                 </p>
-                <ul className="mt-4 space-y-2 text-xs text-[#18181B] font-medium">
+                <ul className="mt-3 sm:mt-4 space-y-1.5 text-xs text-[#18181B] font-medium">
                   <li className="flex items-center gap-2">✓ Compatible with Android 10, 11, 12, 13, 14 & 15</li>
                   <li className="flex items-center gap-2">✓ Local background AI image isolation</li>
                   <li className="flex items-center gap-2">✓ Offline wardrobe storage & real weather</li>
                 </ul>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-orange-100">
+              <div className="mt-6 sm:mt-8 pt-4 border-t border-orange-100">
                 <a
-                  href="/FITLY.apk"
+                  href={apkDownloadUrl}
                   download="FITLY.apk"
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
                 >
@@ -563,21 +593,21 @@ export default function LandingPage() {
             </div>
 
             {/* iOS Card */}
-            <div className="rounded-3xl border border-orange-100 bg-white p-6 sm:p-8 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#FF7F02] transition-all">
+            <div className="rounded-3xl border border-orange-100 bg-white p-5 sm:p-8 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#FF7F02] transition-all">
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#FF7F02] text-2xl text-white shadow-md shadow-orange-500/25">
+                  <span className="grid h-11 w-11 sm:h-12 sm:w-12 place-items-center rounded-2xl bg-[#FF7F02] text-xl sm:text-2xl text-white shadow-md shadow-orange-500/25">
                     
                   </span>
                   <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 text-[10px] font-black text-orange-900">
                     IPA & 1-Tap Safari
                   </span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black text-[#18181B]">Apple iOS (iPhone / iPad)</h3>
-                <p className="mt-2 text-xs leading-relaxed text-[#71717A]">
+                <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">Apple iOS (iPhone / iPad)</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#71717A]">
                   Install ፍሬ (Firie) on your iPhone in 5 seconds via Safari with zero extra software, or download the compiled IPA package.
                 </p>
-                <div className="mt-4 rounded-2xl bg-[#FFFBF7] border border-orange-100 p-3.5 text-xs text-[#18181B] space-y-1">
+                <div className="mt-3.5 rounded-2xl bg-[#FFFBF7] border border-orange-100 p-3 sm:p-3.5 text-xs text-[#18181B] space-y-1">
                   <p className="font-black text-[#18181B] flex items-center gap-1.5">
                     <span>💡</span>
                     <span>1-Tap Instant Install on iPhone:</span>
@@ -594,9 +624,9 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-orange-100 flex flex-col gap-2">
+              <div className="mt-5 sm:mt-6 pt-4 border-t border-orange-100 flex flex-col gap-2">
                 <a
-                  href="/FITLY.ipa"
+                  href={ipaDownloadUrl}
                   download="FITLY.ipa"
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
                 >
@@ -612,20 +642,20 @@ export default function LandingPage() {
       </section>
 
       {/* ── Pricing & Plans ── */}
-      <section id="pricing" className="py-20 sm:py-28 border-t border-orange-100 bg-white">
+      <section id="pricing" className="py-14 sm:py-24 border-t border-orange-100 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-xs font-black uppercase tracking-widest text-[#FF7F02]">HONEST TRANSPARENCY</p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-black text-[#18181B]">Invest in How You Present Yourself</h2>
-            <p className="mt-2 text-xs sm:text-sm text-[#71717A]">
+            <h2 className="mt-2 text-2xl sm:text-4xl font-black text-[#18181B]">Invest in How You Present Yourself</h2>
+            <p className="mt-1.5 text-xs sm:text-sm text-[#71717A]">
               Start free with one fresh look a day, or unlock unlimited outfits, Date Spots and photo tools with Pro.
             </p>
 
-            <div className="mt-6 inline-flex rounded-full bg-[#FFFBF7] p-1 border border-orange-200 shadow-xs">
+            <div className="mt-5 inline-flex rounded-full bg-[#FFFBF7] p-1 border border-orange-200 shadow-xs">
               <button
                 onClick={() => setBillingCycle("monthly")}
                 className={cn(
-                  "rounded-full px-5 py-2 text-xs font-bold transition-all",
+                  "rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-bold transition-all",
                   billingCycle === "monthly" ? "bg-[#FF7F02] text-white shadow-xs" : "text-[#71717A]"
                 )}
               >
@@ -634,7 +664,7 @@ export default function LandingPage() {
               <button
                 onClick={() => setBillingCycle("yearly")}
                 className={cn(
-                  "rounded-full px-5 py-2 text-xs font-bold transition-all flex items-center gap-1.5",
+                  "rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-bold transition-all flex items-center gap-1.5",
                   billingCycle === "yearly" ? "bg-[#FF7F02] text-white shadow-xs" : "text-[#71717A]"
                 )}
               >
@@ -646,20 +676,20 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
             {/* Free Plan */}
-            <div className="rounded-3xl border border-orange-100 bg-[#FFFBF7] p-7 sm:p-8 flex flex-col justify-between shadow-sm">
+            <div className="rounded-3xl border border-orange-100 bg-[#FFFBF7] p-6 sm:p-8 flex flex-col justify-between shadow-sm">
               <div>
                 <span className="rounded-full bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#71717A] border border-orange-200">
                   Free Tier
                 </span>
                 <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-[#18181B]">0 ETB</span>
+                  <span className="text-3xl sm:text-4xl font-black text-[#18181B]">0 ETB</span>
                   <span className="text-xs text-[#71717A]">/ forever</span>
                 </div>
-                <p className="mt-2 text-xs text-[#71717A]">Everything you need to dress better — every day, at no cost.</p>
+                <p className="mt-1.5 text-xs text-[#71717A]">Everything you need to dress better — every day, at no cost.</p>
 
-                <ul className="mt-6 space-y-2.5 text-xs text-[#18181B]">
+                <ul className="mt-5 space-y-2 text-xs text-[#18181B]">
                   <li className="flex items-center gap-2">✓ 1 fresh outfit look per day (3 per week)</li>
                   <li className="flex items-center gap-2">✓ Real-time weather-aware styling</li>
                   <li className="flex items-center gap-2">✓ Up to 30 closet pieces with AI background removal</li>
@@ -673,7 +703,7 @@ export default function LandingPage() {
               <a
                 href="#download"
                 onClick={scrollToDownload}
-                className="mt-8 h-12 w-full rounded-2xl border border-orange-200 bg-white text-xs font-black text-[#FF7F02] hover:bg-orange-50 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="mt-6 sm:mt-8 h-12 w-full rounded-2xl border border-orange-200 bg-white text-xs font-black text-[#FF7F02] hover:bg-orange-50 active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <span>Download Free App</span>
                 <span>⬇</span>
@@ -681,7 +711,7 @@ export default function LandingPage() {
             </div>
 
             {/* Pro Plan */}
-            <div className="rounded-3xl border-2 border-[#FF7F02] bg-white p-7 sm:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+            <div className="rounded-3xl border-2 border-[#FF7F02] bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
               <div className="absolute right-4 top-4 rounded-full bg-amber-400 text-black px-3 py-0.5 text-[10px] font-black shadow-xs">
                 ⭐ 40% OFF ANNUAL
               </div>
@@ -690,18 +720,18 @@ export default function LandingPage() {
                   ፍሬ Pro
                 </span>
                 <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-[#18181B]">
+                  <span className="text-3xl sm:text-4xl font-black text-[#18181B]">
                     {billingCycle === "yearly" ? "360 ETB" : "600 ETB"}
                   </span>
                   <span className="text-xs text-[#71717A]">/ month</span>
                 </div>
-                <p className="mt-2 text-xs text-[#71717A]">
+                <p className="mt-1.5 text-xs text-[#71717A]">
                   {billingCycle === "yearly"
                     ? "Billed annually at 4,320 ETB/year (Save 40% · 2,880 ETB off)"
                     : "Billed monthly at 600 ETB, cancel anytime"}
                 </p>
 
-                <ul className="mt-6 space-y-2.5 text-xs text-[#18181B] font-semibold">
+                <ul className="mt-5 space-y-2 text-xs text-[#18181B] font-semibold">
                   <li className="flex items-center gap-2">✓ <b>Unlimited</b> outfit looks, every day</li>
                   <li className="flex items-center gap-2">✓ <b>Unlimited</b> closet pieces & AI background removal</li>
                   <li className="flex items-center gap-2">✓ <b>Date Spots:</b> venues, verified prices & date plans</li>
@@ -716,7 +746,7 @@ export default function LandingPage() {
               <a
                 href="#download"
                 onClick={scrollToDownload}
-                className="mt-8 h-12 w-full rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-xs font-black text-white shadow-lg shadow-orange-500/25 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="mt-6 sm:mt-8 h-12 w-full rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-xs font-black text-white shadow-lg shadow-orange-500/25 active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <span>Get Pro on Mobile App 👑</span>
                 <span>⬇</span>
@@ -727,14 +757,14 @@ export default function LandingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="py-20 sm:py-28 border-t border-orange-100 bg-[#FFFBF7]">
+      <section id="faq" className="py-14 sm:py-24 border-t border-orange-100 bg-[#FFFBF7]">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-xs font-black uppercase tracking-widest text-[#FF7F02]">FREQUENTLY ASKED QUESTIONS</p>
-            <h2 className="mt-2 text-3xl font-black text-[#18181B]">Everything You Need to Know</h2>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-black text-[#18181B]">Everything You Need to Know</h2>
           </div>
 
-          <div className="mt-10 space-y-3">
+          <div className="mt-8 space-y-2.5">
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
@@ -748,7 +778,7 @@ export default function LandingPage() {
                   <span className="text-base text-[#FF7F02]">{activeFaq === idx ? "−" : "+"}</span>
                 </button>
                 {activeFaq === idx && (
-                  <div className="px-4 pb-5 sm:px-5 text-xs text-[#71717A] leading-relaxed border-t border-orange-50 pt-3 animate-fade">
+                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs text-[#71717A] leading-relaxed border-t border-orange-50 pt-2.5 animate-fade">
                     {faq.a}
                   </div>
                 )}
@@ -759,27 +789,27 @@ export default function LandingPage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-orange-100 bg-white py-12 text-xs text-[#71717A]">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2.5">
-            <div className="grid h-8 w-8 place-items-center rounded-xl bg-white p-1 shadow-sm border border-orange-200">
+      <footer className="border-t border-orange-100 bg-white py-10 text-xs text-[#71717A]">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-5">
+          <div className="flex items-center gap-2">
+            <div className="grid h-7 w-7 sm:h-8 sm:w-8 place-items-center rounded-xl bg-white p-1 shadow-sm border border-orange-200">
               <img src="/logo/firie-logo.png" alt="ፍሬ (Firie)" className="h-full w-full object-contain" />
             </div>
             <span className="text-sm font-black text-[#18181B]">ፍሬ (Firie).</span>
-            <span>· What to wear today</span>
+            <span className="text-[11px]">· What to wear today</span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#71717A] font-semibold">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-[#71717A] font-semibold">
             <button onClick={() => setShowPrivacyModal(true)} className="hover:text-[#FF7F02] transition-colors">
               Privacy Policy
             </button>
             <button onClick={() => setShowTermsModal(true)} className="hover:text-[#FF7F02] transition-colors">
               Terms of Service
             </button>
-            <a href="/FITLY.apk" download="FITLY.apk" className="hover:text-[#FF7F02] transition-colors">
+            <a href={apkDownloadUrl} download="FITLY.apk" className="hover:text-[#FF7F02] transition-colors">
               Android APK
             </a>
-            <a href="/FITLY.ipa" download="FITLY.ipa" className="hover:text-[#FF7F02] transition-colors">
+            <a href={ipaDownloadUrl} download="FITLY.ipa" className="hover:text-[#FF7F02] transition-colors">
               iOS Package
             </a>
             <button onClick={() => navigate("/")} className="hover:text-[#FF7F02] transition-colors">
