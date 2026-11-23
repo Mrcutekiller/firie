@@ -33,10 +33,10 @@ export default function LandingPage() {
 
   const apkDownloadUrl = isLocal
     ? "/FITLY.apk"
-    : "https://github.com/Mrcutekiller/FITLY/raw/main/public/FITLY.apk";
+    : "https://github.com/Mrcutekiller/firie/raw/main/public/FITLY.apk";
   const ipaDownloadUrl = isLocal
     ? "/FITLY.ipa"
-    : "https://github.com/Mrcutekiller/FITLY/raw/main/public/FITLY.ipa";
+    : "https://github.com/Mrcutekiller/firie/raw/main/public/FITLY.ipa";
 
   const scrollToDownload = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
