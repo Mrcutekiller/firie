@@ -5,6 +5,7 @@ import { Button, Card, ProBadge, Spinner } from "../components/ui";
 import { analyzeItemImage } from "../lib/ai";
 import { compressImage, readFileAsDataUrl, removeBackground } from "../lib/image";
 import { useApp } from "../lib/store";
+import { validateImageFile, sanitizeXSS } from "../lib/security";
 
 type Step = "capture" | "camera" | "processing" | "review";
 
@@ -113,6 +114,11 @@ export default function AddItemScreen() {
   const onFile = useCallback(
     async (file: File | undefined) => {
       if (!file) return;
+      const validation = validateImageFile(file);
+      if (!validation.valid) {
+        alert(validation.error || "Invalid image file.");
+        return;
+      }
       const dataUrl = await readFileAsDataUrl(file);
       void runPipeline(dataUrl);
     },
@@ -124,7 +130,7 @@ export default function AddItemScreen() {
     setSaving(true);
     const created = addItem({
       imageUrl: cleanImage || rawImage,
-      name: values.name.trim() || "Untitled item",
+      name: sanitizeXSS(values.name.trim()) || "Untitled item",
       category: values.category,
       slot: values.slot,
       color: values.color,
@@ -132,7 +138,7 @@ export default function AddItemScreen() {
       isNeutral: values.isNeutral,
       style: values.style,
       season: values.season,
-      tags: values.tags,
+      tags: values.tags.map(sanitizeXSS),
     });
     setSaving(false);
     if (created) navigate("/closet");

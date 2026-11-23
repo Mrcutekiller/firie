@@ -11,6 +11,7 @@ import {
 import { buildSeedCloset, buildSeedHistory } from "./seed";
 import { generateOutfits, seasonForDate } from "./engine";
 import { getWeather } from "./weather";
+import { sanitizeProfileInput } from "./security";
 import { clearState, loadState, saveState, todayKey, weekKey } from "./storage";
 import type { PlaceReport } from "./places";
 import {
@@ -580,7 +581,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   /* ------------------------------- profile ------------------------------- */
   const setProfile = useCallback((patch: Partial<UserProfile>) => {
-    setProfileState((p) => ({ ...p, ...patch }));
+    const cleanPatch = sanitizeProfileInput(patch);
+    setProfileState((p) => ({ ...p, ...cleanPatch }));
   }, []);
 
   const upgradeToPro = useCallback((cycle: "monthly" | "yearly" = "monthly") => {

@@ -5,6 +5,7 @@ import GarmentImage from "../components/GarmentImage";
 import PlaceMap from "../components/PlaceMap";
 import { Button, Chip, EmptyState, ProLock } from "../components/ui";
 import { calculateBudget, lineFromMenuItem, outfitsForPlace } from "../lib/dateSpots";
+import { sanitizeEntityId, sanitizeQuantity } from "../lib/security";
 import {
   getPlace,
   PLACE_CATEGORY_LABELS,
@@ -24,8 +25,9 @@ import { useApp } from "../lib/store";
  */
 export default function PlaceDetailScreen() {
   const { id } = useParams();
+  const safeId = sanitizeEntityId(id);
   const navigate = useNavigate();
-  const place = id ? getPlace(id) : undefined;
+  const place = safeId ? getPlace(safeId) : undefined;
 
   const {
     closet,
@@ -84,7 +86,7 @@ export default function PlaceDetailScreen() {
     if (!place) return null;
     return calculateBudget({
       budget: 0,
-      people,
+      people: sanitizeQuantity(people, 1, 50),
       lines: budgetLines,
       extras: extrasNum,
       currency: place.menu?.items[0]?.currency ?? "ETB",

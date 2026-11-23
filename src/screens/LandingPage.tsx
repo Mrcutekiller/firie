@@ -2,6 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "../components/ui";
 
+const NAV_MENU_ITEMS = [
+  { id: "overview", label: "Wardrobe Overview", chapter: "01", icon: "✨", desc: "Digital closet & color science" },
+  { id: "curation-swiper", label: "AI Outfit Swiper", chapter: "02", icon: "⚡", desc: "Pass or wear daily flat-lays" },
+  { id: "silhouette-harmony", label: "Proportions & Drape", chapter: "03", icon: "📐", desc: "Boxy cuts & fluid leg lines" },
+  { id: "climate-layering", label: "Live Weather Sync", chapter: "04", icon: "⛅", desc: "Addis Ababa temperature alerts" },
+  { id: "venue-spots", label: "Venues & Dress Codes", chapter: "05", icon: "📍", desc: "Curated spots & ETB budgets" },
+  { id: "kinetic-motion", label: "Fabric & Movement", chapter: "06", icon: "🌊", desc: "Heavyweight cotton in motion" },
+  { id: "ai-studio", label: "Studio Cutouts", chapter: "07", icon: "📸", desc: "Instant background removal" },
+  { id: "daily-look", label: "Ready to Wear", chapter: "08", icon: "🧥", desc: "Zero morning decision fatigue" },
+];
+
 export default function LandingPage() {
   const navigate = useNavigate();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
@@ -27,8 +38,8 @@ export default function LandingPage() {
     ? "/FITLY.ipa"
     : "https://github.com/Mrcutekiller/FITLY/raw/main/public/FITLY.ipa";
 
-  const scrollToDownload = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const scrollToDownload = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
     const el = document.getElementById("download");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -360,22 +371,81 @@ export default function LandingPage() {
 
         {/* Mobile Dropdown Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-b border-orange-100 bg-white/98 backdrop-blur-xl px-4 py-4 space-y-2 animate-fade">
-            <div className="grid grid-cols-2 gap-2 text-xs font-bold text-[#71717A]">
-              {sections.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => scrollToSection(s.id)}
-                  className="rounded-xl border border-orange-100 bg-[#FFFBF7] p-2.5 text-left hover:bg-[#FF7F02] hover:text-white transition-all truncate"
+          <div className="lg:hidden fixed inset-x-0 top-14 sm:top-16 bottom-0 z-50 bg-white/98 backdrop-blur-2xl px-4 py-5 overflow-y-auto animate-fade shadow-2xl flex flex-col justify-between border-t border-orange-100">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b border-orange-100/80">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#FF7F02]">
+                  Lookbook Chapters
+                </span>
+                <span className="text-[10px] font-bold text-zinc-400">8 Curated Sections</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {NAV_MENU_ITEMS.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      scrollToSection(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center justify-between rounded-2xl border border-orange-100/80 bg-[#FFFBF7] p-3 text-left hover:border-orange-300 hover:bg-orange-50/50 transition-all active:scale-98 group"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-base shrink-0 p-1.5 rounded-xl bg-white border border-orange-100 shadow-2xs">
+                        {item.icon}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[9px] font-mono font-black text-[#FF7F02]">{item.chapter}</span>
+                          <span className="text-xs font-black text-[#18181B] truncate">{item.label}</span>
+                        </div>
+                        <p className="text-[10px] text-zinc-400 truncate mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                    <span className="text-zinc-300 group-hover:text-[#FF7F02] text-xs font-bold pl-2">›</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="pt-2 border-t border-orange-100 grid grid-cols-2 gap-2 text-xs font-black">
+                <a
+                  href="#pricing"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-2xl border border-orange-200 bg-orange-50/70 p-3 text-center text-[#FF7F02] hover:bg-orange-100 active:scale-98 transition-all"
                 >
-                  {s.badge}
-                </button>
-              ))}
+                  Plans &amp; Pricing (600 ETB)
+                </a>
+                <a
+                  href="#faq"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-2xl border border-zinc-200 bg-white p-3 text-center text-[#18181B] hover:bg-zinc-50 active:scale-98 transition-all"
+                >
+                  FAQ &amp; Guide
+                </a>
+              </div>
             </div>
-            <div className="flex justify-between pt-3 border-t border-orange-100 text-xs font-bold text-[#18181B]">
-              <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:text-[#FF7F02]">Plans & Pricing</a>
-              <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:text-[#FF7F02]">FAQ</a>
-              <button onClick={() => navigate("/")} className="p-2 text-[#FF7F02]">Launch Web App ›</button>
+
+            <div className="pt-5 pb-3 space-y-2 border-t border-orange-100 mt-5">
+              <a
+                href="#download"
+                onClick={() => {
+                  scrollToDownload();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all"
+              >
+                <span>Download ፍሬ (Firie) Mobile App</span>
+                <span>⬇</span>
+              </a>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigate("/");
+                }}
+                className="w-full text-center text-[11px] font-bold text-[#71717A] py-1 hover:text-[#FF7F02]"
+              >
+                Launch Web Studio in browser ›
+              </button>
             </div>
           </div>
         )}

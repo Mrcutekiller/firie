@@ -78,6 +78,10 @@ export default function App() {
         <Route path="/datespots" element={isPro ? <DateSpotsScreen /> : <ProGateScreen />} />
         <Route path="/datespots/:id" element={isPro ? <PlaceDetailScreen /> : <ProGateScreen />} />
       </Route>
+      {/* ── SECURITY: Explicit /admin block (Defense #1) ── */}
+      <Route path="/admin" element={<Navigate to="/" replace />} />
+      <Route path="/admin/*" element={<Navigate to="/" replace />} />
+
       <Route path="/welcome" element={<OnboardingScreen onDone={handleFinishOnboarding} />} />
       <Route path="/onboarding" element={<OnboardingScreen onDone={handleFinishOnboarding} />} />
       <Route path="/add" element={<AddItemScreen />} />

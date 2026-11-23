@@ -1,5 +1,6 @@
 import { detectDominantColor, guessSeasonFromName, guessStyleFromName } from "./image";
 import type { Category, Season, Slot, Style } from "./types";
+import { sanitizeAiPrompt } from "./security";
 
 /**
  * AI service layer.
@@ -135,7 +136,8 @@ export async function analyzeItemImage(
 ): Promise<AiItemAnalysis> {
   const colorInfo = await detectDominantColor(imageDataUrl);
 
-  const heuristicName = opts.hintName?.trim() || "New item";
+  const cleanHint = sanitizeAiPrompt(opts.hintName?.trim() || "");
+  const heuristicName = cleanHint || "New item";
   let base: AiItemAnalysis = {
     name: heuristicName,
     category: opts.hintCategory ?? "tops",
@@ -151,7 +153,7 @@ export async function analyzeItemImage(
 
   const prompt =
     "Item hint: " +
-    (opts.hintName || "(none)") +
+    (cleanHint || "(none)") +
     ". On-device dominant colour detected: " +
     colorInfo.color +
     ".";

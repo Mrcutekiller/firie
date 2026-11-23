@@ -117,37 +117,8 @@ export default function OnboardingScreen({ onDone }: Props) {
         <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/60 to-transparent" />
       </div>
 
-      {/* ── TOP EDITORIAL APP BAR (No video toggle, clean and minimal) ── */}
-      <header className="relative z-20 flex h-14 items-center justify-between px-4 pt-3 max-w-lg mx-auto w-full">
-        {step !== "welcome" ? (
-          <button
-            onClick={() => {
-              if (step === "why") setStep("welcome");
-              else if (step === "how") setStep("why");
-              else if (step === "profile") setStep("how");
-            }}
-            aria-label="Back"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-lg font-bold text-white shadow-md active:scale-90 transition-transform"
-          >
-            ‹
-          </button>
-        ) : (
-          <div className="w-9" />
-        )}
-
-        {/* Center Brand Identity */}
-        <div className="flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3.5 py-1 border border-white/20 shadow-sm">
-          <BrandLogo size={22} rounded="rounded-lg" />
-          <span className="text-xs font-black tracking-wider text-white">ፍሬ (Firie)</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#FF7F02] animate-pulse" />
-        </div>
-
-        {/* Swipe Hint Pill */}
-        <div className="flex items-center gap-1 text-[10px] font-bold text-white/70 uppercase tracking-wider bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-          <span>Swipe</span>
-          <span>⟷</span>
-        </div>
-      </header>
+      {/* Top area left clean and unobstructed per user request */}
+      <div className="pt-4" />
 
       {/* ── BOTTOM DOCKED CONTROLS (Appears immediately, video fully visible, swipe enabled) ── */}
       <main className="relative z-10 mx-auto w-full max-w-md px-4 pb-2 mt-auto animate-fade">
@@ -216,13 +187,23 @@ export default function OnboardingScreen({ onDone }: Props) {
         {/* ── STEP 2: WHY CHOOSE US SCREEN ── */}
         {step === "why" && (
           <div className="rounded-3xl bg-black/40 backdrop-blur-xl p-5 border border-white/20 shadow-2xl text-left space-y-3">
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-orange-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                ● THE ፍሬ (FIRIE) ADVANTAGE
-              </span>
-              <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                Why Choose ፍሬ (Firie)?
-              </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-orange-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                  ● THE ፍሬ (FIRIE) ADVANTAGE
+                </span>
+                <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  Why Choose ፍሬ (Firie)?
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setStep("welcome")}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 border border-white/20 text-sm font-bold text-white shadow-xs active:scale-90 transition-transform"
+                title="Go back"
+              >
+                ‹
+              </button>
             </div>
 
             <div className="space-y-2">
@@ -264,13 +245,23 @@ export default function OnboardingScreen({ onDone }: Props) {
         {/* ── STEP 3: HOW IT WORKS SCREEN ── */}
         {step === "how" && (
           <div className="rounded-3xl bg-black/40 backdrop-blur-xl p-5 border border-white/20 shadow-2xl text-left space-y-3">
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-orange-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                ● SIMPLE 3-STEP ROUTINE
-              </span>
-              <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                How ፍሬ Works
-              </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-orange-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                  ● SIMPLE 3-STEP ROUTINE
+                </span>
+                <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  How ፍሬ Works
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setStep("why")}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 border border-white/20 text-sm font-bold text-white shadow-xs active:scale-90 transition-transform"
+                title="Go back"
+              >
+                ‹
+              </button>
             </div>
 
             <div className="space-y-2">
@@ -318,13 +309,23 @@ export default function OnboardingScreen({ onDone }: Props) {
         {/* ── STEP 4: PROFILE & STYLE SELECTION SCREEN ── */}
         {step === "profile" && (
           <div className="rounded-3xl bg-black/45 backdrop-blur-xl p-5 border border-white/20 shadow-2xl text-left space-y-2.5">
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                ● TAILOR YOUR STYLE
-              </span>
-              <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                Make It Yours
-              </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                  ● TAILOR YOUR STYLE
+                </span>
+                <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  Make It Yours
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setStep("how")}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 border border-white/20 text-sm font-bold text-white shadow-xs active:scale-90 transition-transform"
+                title="Go back"
+              >
+                ‹
+              </button>
             </div>
 
             <form onSubmit={submit} className="space-y-2.5">
@@ -434,27 +435,8 @@ export default function OnboardingScreen({ onDone }: Props) {
         )}
       </main>
 
-      {/* ── BOTTOM NAVIGATION & STEP INDICATOR DOCK ── */}
-      <footer className="relative z-20 px-4 pb-4 max-w-lg mx-auto w-full">
-        <div className="flex items-center justify-between rounded-full bg-black/40 backdrop-blur-md px-3.5 py-1.5 border border-white/15 shadow-sm">
-          <div className="flex items-center gap-2">
-            {(["welcome", "why", "how", "profile"] as Step[]).map((s, idx) => (
-              <button
-                key={s}
-                onClick={() => setStep(s)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  s === step ? "w-6 bg-[#FF7F02]" : "w-2 bg-white/30 hover:bg-white/60"
-                }`}
-                title={`Jump to step ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-          <div className="text-[10px] font-mono text-white/80">
-            PAGE {Object.keys(STEP_VIDEOS).indexOf(step) + 1} OF 4
-          </div>
-        </div>
-      </footer>
+      {/* Bottom padding */}
+      <div className="pb-4" />
     </div>
   );
 }
