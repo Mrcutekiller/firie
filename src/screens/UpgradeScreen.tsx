@@ -204,7 +204,7 @@ export default function UpgradeScreen() {
               <div>
                 <p className="text-xs font-bold text-[#18181B] dark:text-white">Billing Email</p>
                 <p className="text-[11px] text-[#71717A] truncate max-w-[200px]">
-                  {profile.email || "biruk13r@gmail.com"}
+                  {profile.email || "firieapp@gmail.com"}
                 </p>
               </div>
               <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">

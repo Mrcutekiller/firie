@@ -81,13 +81,6 @@ export default function InsightsScreen() {
             Style Insights
           </h1>
         </div>
-        <button
-          onClick={() => navigate("/widgets")}
-          className="flex items-center gap-1.5 rounded-full bg-[#EAF0F8] dark:bg-[#1E293B] px-3.5 py-1.5 text-xs font-bold text-[#18181B] dark:text-white shadow-xs active:scale-95 transition-transform"
-        >
-          <span>📱</span>
-          <span>Home Widgets</span>
-        </button>
       </section>
 
       {/* Hero Analytics Card */}
@@ -154,25 +147,6 @@ export default function InsightsScreen() {
 
       {/* Quick Action Rows */}
       <section className="space-y-2 pt-1">
-        <button
-          onClick={() => navigate("/widgets")}
-          className="flex w-full items-center justify-between rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] px-4 py-3.5 text-left shadow-sm transition-transform active:scale-98"
-        >
-          <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-50 dark:bg-blue-950/40 text-lg">
-              📱
-            </span>
-            <div>
-              <b className="block text-xs text-[#18181B] dark:text-white">
-                FigCraft Home Screen Widgets
-              </b>
-              <span className="text-[10.5px] text-[#73819A]">
-                Customize 4 widget sizes for your home screen.
-              </span>
-            </div>
-          </div>
-          <span className="text-xs font-bold text-[#73819A]">›</span>
-        </button>
 
         <button
           onClick={shareLook}

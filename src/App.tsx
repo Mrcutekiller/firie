@@ -15,7 +15,6 @@ import PlaceDetailScreen from "./screens/PlaceDetailScreen";
 import PhotoStyleCameraScreen from "./screens/PhotoStyleCameraScreen";
 import InsightsScreen from "./screens/InsightsScreen";
 import PackingScreen from "./screens/PackingScreen";
-import HomeWidgetsScreen from "./screens/HomeWidgetsScreen";
 import LandingPage from "./screens/LandingPage";
 import ProGateScreen from "./components/ProGateScreen";
 import { useApp } from "./lib/store";
@@ -74,7 +73,6 @@ export default function App() {
         <Route path="/billing" element={<UpgradeScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/insights" element={<InsightsScreen />} />
-        <Route path="/widgets" element={<HomeWidgetsScreen />} />
         <Route path="/datespots" element={isPro ? <DateSpotsScreen /> : <ProGateScreen />} />
         <Route path="/datespots/:id" element={isPro ? <PlaceDetailScreen /> : <ProGateScreen />} />
       </Route>

@@ -163,16 +163,7 @@ export default function PhotoStyleCameraScreen() {
     } catch (err) {
       console.error("Failed to load gallery", err);
     }
-    return [
-      {
-        id: "demo-photo-1",
-        dataUrl: REALISTIC_BG_PATIO,
-        createdAt: Date.now() - 2 * 24 * 60 * 60 * 1000,
-        poseName: "Cool Look",
-        filterName: "Natural",
-        contextTag: "Cafe Patio",
-      },
-    ];
+    return [];
   });
 
   const handleDeleteGalleryPhoto = (id: string) => {
@@ -206,7 +197,7 @@ export default function PhotoStyleCameraScreen() {
       return updated;
     });
     setLastSavedThumbnail(dataUrl);
-    setCaptureToast("✓ Photo imported to FITLY Gallery!");
+    setCaptureToast("✓ Photo imported to ፍሬ Gallery!");
     setTimeout(() => setCaptureToast(null), 3000);
   };
 
@@ -403,7 +394,7 @@ export default function PhotoStyleCameraScreen() {
       return updated;
     });
 
-    setCaptureToast("📸 Photo saved to FITLY Gallery! Tap gallery to save to device");
+    setCaptureToast("📸 Photo saved to ፍሬ Gallery! Tap gallery to save to device");
     setTimeout(() => setCaptureToast(null), 3500);
 
     // Record pose usage & note free quota
@@ -472,7 +463,7 @@ export default function PhotoStyleCameraScreen() {
     if (!capturedPhoto) return;
     const a = document.createElement("a");
     a.href = capturedPhoto;
-    a.download = `FITLY_${activePose.id}_${Date.now()}.jpg`;
+    a.download = `Firie_${activePose.id}_${Date.now()}.jpg`;
     a.click();
     setShareFeedback("Saved to device gallery!");
     setTimeout(() => setShareFeedback(null), 2500);
@@ -484,12 +475,12 @@ export default function PhotoStyleCameraScreen() {
       const nav = typeof window !== "undefined" ? window.navigator : undefined;
       const res = await fetch(capturedPhoto);
       const blob = await res.blob();
-      const file = new File([blob], `FITLY_look.jpg`, { type: "image/jpeg" });
+      const file = new File([blob], `Firie_look.jpg`, { type: "image/jpeg" });
 
       if (nav && "share" in nav && typeof nav.share === "function") {
         await nav.share({
-          title: "My FITLY Look",
-          text: `Wearing my look with FITLY Photo Style Camera (${activePose.name})!`,
+          title: "My ፍሬ Look",
+          text: `Wearing my look with ፍሬ (Firie) Photo Style Camera (${activePose.name})!`,
           files: [file],
         });
         setShareFeedback("Shared successfully!");
@@ -703,10 +694,10 @@ export default function PhotoStyleCameraScreen() {
               </svg>
             </button>
 
-            {/* FITLY Wordmark — Centered, spaced typography */}
-            <div className="flex items-center">
-              <span className="text-[17px] font-semibold tracking-[0.25em] text-white drop-shadow-md pl-1">
-                FITLY
+            {/* Firie Wordmark — Centered, spaced typography */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[16px] font-black tracking-wider text-white drop-shadow-md">
+                ፍሬ <span className="text-[#FF7F02] text-xs font-bold tracking-normal">Firie</span>
               </span>
             </div>
 
@@ -768,13 +759,14 @@ export default function PhotoStyleCameraScreen() {
                 )}
               />
             ) : (
-              <div className="absolute inset-0 h-full w-full">
-                <img
-                  src={REALISTIC_BG_PATIO}
-                  alt="Cafe background"
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/25" />
+              <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-zinc-900 via-black to-zinc-900 flex flex-col items-center justify-center text-center p-6 select-none">
+                <div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center border border-white/20 mb-3 shadow-inner">
+                  <span className="text-2xl animate-pulse">📸</span>
+                </div>
+                <p className="text-xs font-bold text-white/90">Starting Camera Viewfinder…</p>
+                <p className="text-[10px] text-zinc-400 mt-1 max-w-[220px]">
+                  Align your pose with the silhouette guide overlay
+                </p>
               </div>
             )}
 
@@ -925,19 +917,14 @@ export default function PhotoStyleCameraScreen() {
                     key={p.id}
                     onClick={() => setActivePoseId(p.id)}
                     className={cn(
-                      "relative h-[96px] flex-1 min-w-[76px] rounded-2xl overflow-hidden transition-all duration-150 active:scale-95",
+                      "relative h-[96px] flex-1 min-w-[76px] rounded-2xl overflow-hidden transition-all duration-150 active:scale-95 shadow-md",
                       isSelected
-                        ? "border-2 border-white ring-2 ring-white/50 shadow-xl scale-[1.02]"
+                        ? "border-2 border-[#FF7F02] ring-2 ring-orange-500/50 shadow-orange-500/25 scale-[1.03]"
                         : "border border-white/15 opacity-75 hover:opacity-100"
                     )}
                   >
-                    {/* Thumbnail Backdrop */}
-                    <img
-                      src={REALISTIC_BG_PATIO}
-                      alt={p.name}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/35" />
+                    {/* Thumbnail Studio Backdrop */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-zinc-800 to-zinc-950" />
 
                     {/* Mini Pose Vector in Center */}
                     <div className="absolute inset-0 flex items-center justify-center p-1">
@@ -947,8 +934,13 @@ export default function PhotoStyleCameraScreen() {
                     </div>
 
                     {/* Bottom Label Badge */}
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent py-1 text-center">
-                      <span className="text-[10px] font-bold text-white drop-shadow-sm whitespace-nowrap">
+                    <div className={cn(
+                      "absolute inset-x-0 bottom-0 py-1 text-center transition-colors",
+                      isSelected
+                        ? "bg-[#FF7F02] text-white"
+                        : "bg-black/75 text-zinc-300"
+                    )}>
+                      <span className="text-[10px] font-bold drop-shadow-sm whitespace-nowrap block truncate px-1">
                         {p.displayTitle}
                       </span>
                     </div>
@@ -964,25 +956,25 @@ export default function PhotoStyleCameraScreen() {
             <button
               type="button"
               onClick={() => setShowGalleryModal(true)}
-              aria-label="Open FITLY photo gallery"
-              className="relative flex h-13 w-13 cursor-pointer items-center justify-center rounded-2xl bg-[#0f2142]/90 text-white border border-white/20 shadow-lg active:scale-90 transition-transform overflow-hidden group"
-              title="Open FITLY Gallery"
+              aria-label="Open photo gallery"
+              className="relative flex h-13 w-13 cursor-pointer items-center justify-center rounded-2xl bg-zinc-900/90 text-white border border-white/20 shadow-lg active:scale-90 transition-transform overflow-hidden group"
+              title="Open Photo Gallery"
             >
-              {lastSavedThumbnail || galleryPhotos[0]?.dataUrl ? (
+              {lastSavedThumbnail ? (
                 <img
-                  src={lastSavedThumbnail || galleryPhotos[0]?.dataUrl}
+                  src={lastSavedThumbnail}
                   alt="Gallery thumbnail"
                   className="h-full w-full object-cover transition-transform group-hover:scale-105"
                 />
               ) : (
-                <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <svg viewBox="0 0 24 24" className="h-6 w-6 text-white/90" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <rect x="3" y="3" width="18" height="18" rx="3" />
                   <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
                   <polyline points="21 15 16 10 5 21" />
                 </svg>
               )}
               {galleryPhotos.length > 0 && (
-                <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-emerald-400 ring-1 ring-black" />
+                <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[#FF7F02] ring-1 ring-black" />
               )}
             </button>
 

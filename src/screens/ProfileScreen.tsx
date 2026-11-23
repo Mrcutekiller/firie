@@ -173,7 +173,7 @@ export default function ProfileScreen() {
               {profile.name || "Biruk Fikru"}
             </h2>
             <p className="mt-0.5 truncate text-xs text-[#73819A]">
-              {profile.email || "biruk13r@gmail.com"}
+              {profile.email || "firieapp@gmail.com"}
             </p>
           </button>
         </div>
@@ -290,12 +290,6 @@ export default function ProfileScreen() {
             label="Style insights & analytics"
             value="Wardrobe Recap"
             onClick={() => navigate("/insights")}
-          />
-          <Row
-            icon="📱"
-            label="Home Screen Widgets"
-            value="FigCraft · 4 Sizes"
-            onClick={() => navigate("/widgets")}
           />
           <Row
             icon="🗓️"

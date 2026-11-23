@@ -365,7 +365,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="biruk13r@gmail.com"
+                  placeholder="firieapp@gmail.com"
                   className="w-full rounded-xl border border-white/30 bg-black/40 px-3 py-2 text-xs font-bold text-white placeholder-white/50 outline-none focus:border-white focus:bg-black/60 shadow-xs"
                 />
               </div>

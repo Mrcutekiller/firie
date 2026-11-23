@@ -135,6 +135,13 @@ export default function ClosetScreen() {
 
         <div className="flex items-center gap-2">
           {isPro && <ProBadge />}
+          <button
+            onClick={() => navigate("/add")}
+            className="flex items-center gap-1 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-3 py-1.5 text-xs font-bold text-white shadow-xs active:scale-95 transition-all"
+          >
+            <span>+</span>
+            <span>Add Piece</span>
+          </button>
         </div>
       </div>
 
@@ -514,16 +521,7 @@ export default function ClosetScreen() {
         </div>
       )}
 
-      {/* ── Floating "+ Add Clothes" Pill Button (Matching Reference Image 4) ── */}
-      <div className="fixed bottom-24 left-1/2 z-30 -translate-x-1/2">
-        <button
-          onClick={() => navigate("/add")}
-          className="flex items-center gap-2 rounded-full bg-[#FF7F02] dark:bg-white px-6 py-3 text-xs font-bold text-white dark:text-[#18181B] shadow-xl hover:scale-105 transition-transform active:scale-95"
-        >
-          <span className="text-base leading-none">＋</span>
-          <span>Add Clothes</span>
-        </button>
-      </div>
+      {/* Floating buttons removed per user request for a clean view */}
 
       {/* ── Item Detail & Utilization Analytics Bottom Sheet ── */}
       {selected && (
@@ -618,14 +616,6 @@ export default function ClosetScreen() {
           </div>
         </div>
       )}
-      {/* ── Floating Add Clothes Button (Matching Reference Screen 2) ── */}
-      <button
-        onClick={() => navigate("/add")}
-        aria-label="Add clothes"
-        className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#FF7F02] text-white shadow-2xl transition-transform active:scale-90 hover:scale-105 border border-white/20"
-      >
-        <span className="text-2xl font-light leading-none">+</span>
-      </button>
     </div>
   );
 }

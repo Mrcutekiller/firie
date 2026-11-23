@@ -340,16 +340,6 @@ return (
 
         {/* Right action controls */}
         <div className="flex items-center gap-1.5">
-          {/* Home Widgets Studio (FigCraft) */}
-          <button
-            onClick={() => navigate("/widgets")}
-            aria-label="Home Screen Widgets"
-            title="Home Screen Widgets (FigCraft)"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#18181B] dark:text-white shadow-sm transition-transform active:scale-95"
-          >
-            📱
-          </button>
-
           {/* Occasion filter */}
           <button
             onClick={() => setShowOccasionModal(true)}

@@ -86,19 +86,14 @@ export default function LandingPage() {
       title: "Your Wardrobe, Digitized.",
       subtitle: "Precision daily styling built from the clothes you already own.",
       description:
-        "Stop guessing what goes together every morning. ፍሬ (Firie) digitizes your real clothing, scores color harmony across the full palette, and assembles ready-to-wear outfits adapted to your live weather.",
+        "Stop guessing what goes together every morning. ፍሬ (Firie) digitizes your real clothing, matches colors with color science, and assembles ready-to-wear outfits adapted to your live weather.",
       video: "/videos/page-1.mp4",
       poster: "/images/page_previews/page_1.jpg",
       hasDownloadBtn: true,
-      specs: [
-        { label: "Vision AI", value: "Sub-Second" },
-        { label: "Weather Sync", value: "21°C Addis" },
-        { label: "Harmony Score", value: "98% Match" },
-      ],
       bullets: [
-        "Instant background isolation for all closet pieces",
-        "Calibrated to live weather and humidity",
-        "Personalized outfit suggestions in under 3 seconds",
+        "Take a photo anywhere — auto background removal isolates your clothes",
+        "Curated daily outfits assembled exclusively from your real closet",
+        "Calibrated to live Addis Ababa weather, temperature, and occasion",
       ],
       align: "text-left",
     },
@@ -114,15 +109,10 @@ export default function LandingPage() {
       video: "/videos/page-2.mp4",
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: false,
-      specs: [
-        { label: "Interaction", value: "Fluid Swiper" },
-        { label: "Color Theory", value: "12-Hue Wheel" },
-        { label: "Calendar", value: "Auto-Logged" },
-      ],
       bullets: [
         "Fluid swipe gestures (✕ Pass, ♥ Wear)",
-        "Automatic color harmony scoring (96%+ matches)",
-        "Monthly visual outfit calendar & rotation tracker (Pro)",
+        "Automatic color harmony scoring across 12 hues",
+        "Visual outfit history and calendar tracking",
       ],
       align: "video-left",
     },
@@ -138,15 +128,10 @@ export default function LandingPage() {
       video: "/videos/page-3.mp4",
       poster: "/images/page_previews/page_3.jpg",
       hasDownloadBtn: false,
-      specs: [
-        { label: "Top Cut", value: "Boxy Drop-Shoulder" },
-        { label: "Bottom Cut", value: "Wide Fluid Leg" },
-        { label: "Balance", value: "97% Proportion" },
-      ],
       bullets: [
-        "Heavyweight cotton terry & knitwear balancing",
-        "Sleeve break & drop-shoulder proportion calibration",
-        "Smart footwear pairing based on trouser hem cut",
+        "Tops and bottoms calibrated by fabric weight and cut",
+        "Drop-shoulder and relaxed silhouette pairing",
+        "Smart footwear pairing based on trouser hem",
       ],
       align: "text-left",
     },
@@ -162,11 +147,6 @@ export default function LandingPage() {
       video: "/videos/page-4.mp4",
       poster: "/images/page_previews/page_4.jpg",
       hasDownloadBtn: false,
-      specs: [
-        { label: "Live City", value: "Addis Ababa" },
-        { label: "Temperature", value: "21°C Mild" },
-        { label: "Protection", value: "Wind & Sun" },
-      ],
       bullets: [
         "Real-time temperature and precipitation forecast sync",
         "Smart zip-hoodie and light outerwear layering alerts",
@@ -186,15 +166,10 @@ export default function LandingPage() {
       video: "/videos/page-5.mp4",
       poster: "/images/page_previews/page_5.jpg",
       hasDownloadBtn: false,
-      specs: [
-        { label: "Venues", value: "50+ Curated Spots" },
-        { label: "Dress Code", value: "Smart Casual" },
-        { label: "Ambiance", value: "Lounge & Sunset" },
-      ],
       bullets: [
-        "Curated rooftop, lounge, café and restaurant database",
+        "Curated rooftop, lounge, café and restaurant database in Addis",
         "Dress-code guidance for every venue",
-        "Verified menu prices and party budget estimates (Pro)",
+        "Verified menu prices and party budget estimates in ETB (Pro)",
       ],
       align: "text-left",
     },
@@ -210,11 +185,6 @@ export default function LandingPage() {
       video: "/videos/page-6.mp4",
       poster: "/images/page_previews/page_6.jpg",
       hasDownloadBtn: false,
-      specs: [
-        { label: "Stride Test", value: "24 FPS Fluid" },
-        { label: "Crease Lines", value: "Anti-Pinch" },
-        { label: "Flexibility", value: "Full Range" },
-      ],
       bullets: [
         "Fluid motion testing and drape integrity",
         "Natural crease behavior and posture harmony",
@@ -234,14 +204,9 @@ export default function LandingPage() {
       video: "/videos/page-7.mp4",
       poster: "/images/page_previews/page_7.jpg",
       hasDownloadBtn: false,
-      specs: [
-        { label: "Cutout Speed", value: "< 250 ms" },
-        { label: "Edge Accuracy", value: "Sub-Pixel" },
-        { label: "Privacy", value: "100% On-Device" },
-      ],
       bullets: [
-        "Sub-second AI background cutout on device",
-        "Automatic color palette & fabric classification",
+        "Automatic background cutout on your device",
+        "Color palette & category classification (Tops, Bottoms, Shoes)",
         "100% private: photos never leave your device",
       ],
       align: "text-left",
@@ -258,15 +223,10 @@ export default function LandingPage() {
       video: "/videos/page-8.mp4",
       poster: "/images/page_previews/page_8.jpg",
       hasDownloadBtn: true,
-      specs: [
-        { label: "Time Saved", value: "15 min / day" },
-        { label: "Free Plan", value: "0 ETB" },
-        { label: "Platforms", value: "Android & iOS" },
-      ],
       bullets: [
-        "Direct install for Android (APK) and iPhone (IPA)",
-        "Free plan: one fresh look a day, three a week",
-        "Pro adds unlimited looks, Date Spots, widgets & history",
+        "Direct install for Android (APK) and iPhone (iOS)",
+        "Free plan: one fresh look a day, three a week (up to 30 items)",
+        "Pro plan: unlimited looks, complete Date Spots & outfit history (600 ETB/mo)",
       ],
       align: "video-left",
     },
@@ -291,7 +251,7 @@ export default function LandingPage() {
     },
     {
       q: "What is the difference between Free and Pro?",
-      a: "Free includes one fresh outfit look per day (up to three per week) for a wardrobe of up to 30 pieces, plus one photo style pose guide per day. Pro (600 ETB/month, or 360 ETB/month billed yearly with 40% OFF) unlocks unlimited outfit looks, unlimited wardrobe pieces, the complete Date Spots planner with verified menu prices, home screen widgets, full outfit history and monthly outfit calendars.",
+      a: "Free includes one fresh outfit look per day (up to three per week) for a wardrobe of up to 30 pieces, plus one photo style pose guide per day. Pro (600 ETB/month, or 360 ETB/month billed yearly with 40% OFF) unlocks unlimited outfit looks, unlimited wardrobe pieces, the complete Date Spots planner with verified menu prices, full outfit history and monthly outfit calendars.",
     },
   ];
 
@@ -523,7 +483,7 @@ export default function LandingPage() {
                           loop
                           muted
                           playsInline
-                          preload="auto"
+                          preload={index === 0 ? "metadata" : "none"}
                           className="w-full h-[240px] sm:h-[340px] object-cover object-center"
                         />
                       </div>
@@ -533,23 +493,6 @@ export default function LandingPage() {
                     <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-normal">
                       {s.description}
                     </p>
-
-                    {/* Spec Stats Pill Grid */}
-                    <div className="grid grid-cols-3 gap-2 sm:gap-3.5 pt-0.5">
-                      {s.specs.map((spec, sIdx) => (
-                        <div
-                          key={sIdx}
-                          className="rounded-xl sm:rounded-2xl border border-orange-100 bg-white p-2 sm:p-3 text-center shadow-2xs hover:border-orange-300 transition-colors"
-                        >
-                          <p className="text-[8.5px] sm:text-[10px] font-black uppercase tracking-wider text-[#A1A1AA]">
-                            {spec.label}
-                          </p>
-                          <p className="text-[11px] sm:text-sm font-black text-[#18181B] mt-0.5 truncate">
-                            {spec.value}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
 
                     {/* Feature Checkpoints */}
                     <ul className="space-y-1.5 sm:space-y-2.5 pt-0.5 text-xs sm:text-sm font-semibold text-[#18181B]">
@@ -598,7 +541,7 @@ export default function LandingPage() {
                         loop
                         muted
                         playsInline
-                        preload="auto"
+                        preload={index === 0 ? "metadata" : "none"}
                         className="w-full h-[540px] xl:h-[600px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
                       />
                     </div>
@@ -806,7 +749,7 @@ export default function LandingPage() {
                   <li className="flex items-center gap-2">✓ <b>Unlimited</b> closet pieces & AI background removal</li>
                   <li className="flex items-center gap-2">✓ <b>Date Spots:</b> venues, verified prices & date plans</li>
                   <li className="flex items-center gap-2">✓ <b>Unlimited</b> photo poses, tilt angles & camera filters</li>
-                  <li className="flex items-center gap-2">✓ Interactive FigCraft Home Widgets with "Quick Style Me"</li>
+                  <li className="flex items-center gap-2">✓ Priority support at firieapp@gmail.com</li>
                   <li className="flex items-center gap-2">✓ Full monthly visual outfit calendar & history</li>
                   <li className="flex items-center gap-2">✓ Packing Capsule Wardrobe trip planner</li>
                   <li className="flex items-center gap-2">✓ Telebirr, CBE & card payments supported</li>
@@ -870,6 +813,9 @@ export default function LandingPage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-[#71717A] font-semibold">
+            <a href="mailto:firieapp@gmail.com" className="hover:text-[#FF7F02] transition-colors">
+              Support (firieapp@gmail.com)
+            </a>
             <button onClick={() => setShowPrivacyModal(true)} className="hover:text-[#FF7F02] transition-colors">
               Privacy Policy
             </button>
