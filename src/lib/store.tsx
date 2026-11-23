@@ -14,7 +14,9 @@ import { getWeather } from "./weather";
 import { clearState, loadState, saveState, todayKey, weekKey } from "./storage";
 import type { PlaceReport } from "./places";
 import {
+  FREE_DAILY_OUTFIT_LIMIT,
   FREE_DAILY_PHOTO_STYLE_LIMIT,
+  FREE_WEEKLY_OUTFIT_LIMIT,
   FREE_WEEKLY_PHOTO_STYLE_LIMIT,
   FREE_DATE_PLAN_LIMIT,
   FREE_FAVORITE_LIMIT,
@@ -27,6 +29,7 @@ import {
   type NewItemDraft,
   type Outfit,
   type OutfitLog,
+  type OutfitUsage,
   type PhotoUsage,
   type PoseUse,
   type UserProfile,
@@ -64,6 +67,7 @@ interface PersistedV1 {
   favoriteOutfits?: Outfit[];
   /* Feature slices added in v1 — optional so older saves keep loading. */
   photoUsage?: PhotoUsage;
+  outfitUsage?: OutfitUsage;
   styleUsage?: StyleUsage;
   recentPoses?: PoseUse[];
   datePlans?: DatePlan[];
@@ -86,7 +90,15 @@ interface AppContextValue {
   isPro: boolean;
   freeLimitReached: boolean;
 
-  generateFor: (event?: EventType) => void;
+  /* --------------------- Free plan outfit allowance ----------------------- */
+  /** Fresh looks left today for Free users; null = unlimited (Pro). */
+  outfitsLeftToday: number | null;
+  /** Fresh looks left this week for Free users; null = unlimited (Pro). */
+  outfitsLeftThisWeek: number | null;
+  /** True when the Free plan's daily (1) or weekly (3) look allowance is spent. */
+  outfitLimitReached: boolean;
+
+  generateFor: (event?: EventType) => boolean;
   nextOutfit: () => void;
   setOutfitIndex: (i: number) => void;
   currentOutfit: Outfit | null;
@@ -178,6 +190,7 @@ function loadInitial(): PersistedV1 {
       currentOutfitDate: null,
       favoriteOutfits: [],
       photoUsage: { date: weekKey(), count: 0 },
+      outfitUsage: { today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 },
       styleUsage: { today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 },
       recentPoses: [],
       datePlans: [],
@@ -196,6 +209,7 @@ function loadInitial(): PersistedV1 {
       currentOutfitDate: saved.currentOutfitDate ?? null,
       favoriteOutfits: saved.favoriteOutfits ?? [],
       photoUsage: saved.photoUsage ?? { date: weekKey(), count: 0 },
+      outfitUsage: saved.outfitUsage ?? { today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 },
       styleUsage: saved.styleUsage ?? { today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 },
       recentPoses: saved.recentPoses ?? [],
       datePlans: (saved.datePlans ?? []).map((p) => ({
@@ -234,6 +248,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const [photoUsage, setPhotoUsage] = useState<PhotoUsage>(
     initial.current.photoUsage ?? { date: todayKey(), count: 0 }
+  );
+  const [outfitUsage, setOutfitUsage] = useState<OutfitUsage>(
+    initial.current.outfitUsage ?? { today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 }
   );
   const [styleUsage] = useState<StyleUsage>(() => {
     const today = todayKey();
@@ -306,6 +323,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         currentOutfitDate: lockedOutfit ? todayKey() : null,
         favoriteOutfits,
         photoUsage,
+        outfitUsage,
         styleUsage,
         recentPoses,
         datePlans,
@@ -322,6 +340,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     lockedOutfit,
     favoriteOutfits,
     photoUsage,
+    outfitUsage,
     styleUsage,
     recentPoses,
     datePlans,
@@ -332,6 +351,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   /* ------------------------------- derived ------------------------------- */
   const isPro = profile.plan === "pro";
+
+  /* Free plan outfit allowance — 1 fresh look per day, up to 3 per week. */
+  const outfitUsageValid: OutfitUsage = {
+    today: outfitUsage.today === todayKey() ? outfitUsage.today : todayKey(),
+    dailyCount: outfitUsage.today === todayKey() ? (outfitUsage.dailyCount ?? 0) : 0,
+    week: outfitUsage.week === weekKey() ? outfitUsage.week : weekKey(),
+    weeklyCount: outfitUsage.week === weekKey() ? outfitUsage.weeklyCount : 0,
+  };
+
+  const outfitsLeftToday = isPro
+    ? null
+    : Math.max(0, FREE_DAILY_OUTFIT_LIMIT - outfitUsageValid.dailyCount);
+  const outfitsLeftThisWeek = isPro
+    ? null
+    : Math.max(0, FREE_WEEKLY_OUTFIT_LIMIT - outfitUsageValid.weeklyCount);
+  const outfitLimitReached = !isPro && (outfitsLeftToday === 0 || outfitsLeftThisWeek === 0);
 
   const recentItemIds = useMemo(() => {
     const cutoff = Date.now() - 6 * DAY;
@@ -384,7 +419,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         season: seasonForDate(),
         seed: seedToUse,
       });
-      setOutfits(result.outfits);
+      // Free plan: one fresh look at a time (1/day, 3/week). Pro gets the full deck.
+      setOutfits(
+        profile.plan === "free" ? result.outfits.slice(0, FREE_DAILY_OUTFIT_LIMIT) : result.outfits
+      );
       setOutfitIndex(0);
       setGenerating(false);
     },
@@ -392,14 +430,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const generateFor = useCallback(
-    (evt?: EventType) => {
+    (evt?: EventType): boolean => {
       const next = evt ?? event;
+      // Free plan: a fresh look spends one daily slot — 1/day, max 3/week.
+      if (profile.plan === "free") {
+        const today = todayKey();
+        const week = weekKey();
+        const daily = outfitUsage.today === today ? outfitUsage.dailyCount ?? 0 : 0;
+        const weekly = outfitUsage.week === week ? outfitUsage.weeklyCount ?? 0 : 0;
+        if (daily >= FREE_DAILY_OUTFIT_LIMIT || weekly >= FREE_WEEKLY_OUTFIT_LIMIT) {
+          return false; // allowance spent — the caller shows the upgrade prompt
+        }
+        setOutfitUsage({ today, dailyCount: daily + 1, week, weeklyCount: weekly + 1 });
+      }
       setEvent(next);
       setLockedOutfit(null); // a new occasion means a fresh look
       setStyleVariation((v) => v + 1);
       generate(next, Date.now() + Math.floor(Math.random() * 88888));
+      return true;
     },
-    [event, generate]
+    [event, generate, profile.plan, outfitUsage]
   );
 
   const nextOutfit = useCallback(() => {
@@ -425,6 +475,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Generate on first load / when closet or plan changes or real-time weather arrives.
   useEffect(() => {
+    // Free plan: the day's look is granted once per day (max 3 per week). Once the
+    // weekly allowance is spent no fresh look is generated until the next week.
+    if (profile.plan === "free") {
+      const alreadyGrantedToday = outfitUsageValid.dailyCount > 0;
+      if (!alreadyGrantedToday && outfitUsageValid.weeklyCount >= FREE_WEEKLY_OUTFIT_LIMIT) {
+        setOutfits([]);
+        setOutfitIndex(0);
+        return;
+      }
+      if (!alreadyGrantedToday) {
+        setOutfitUsage((prev) => {
+          const today = todayKey();
+          const week = weekKey();
+          const daily = prev.today === today ? prev.dailyCount ?? 0 : 0;
+          const weekly = prev.week === week ? prev.weeklyCount ?? 0 : 0;
+          if (daily > 0 || weekly >= FREE_WEEKLY_OUTFIT_LIMIT) return prev;
+          return { today, dailyCount: 1, week, weeklyCount: weekly + 1 };
+        });
+      }
+    }
     generate(event);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [closet, profile.plan, profile.avoidRecentlyWorn, weather]);
@@ -533,6 +603,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCloset(buildSeedCloset());
     setHistory([]);
     setLockedOutfit(null);
+    setOutfitUsage({ today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 });
     setProfileState((p) => ({ ...p, plan: "free" }));
   }, []);
 
@@ -548,6 +619,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setLockedOutfit(null);
     setFavoriteOutfits([]);
     setPhotoUsage({ date: weekKey(), count: 0 });
+    setOutfitUsage({ today: todayKey(), dailyCount: 0, week: weekKey(), weeklyCount: 0 });
     setRecentPoses([]);
     setDatePlans([]);
     setFavoritePlaces([]);
@@ -689,6 +761,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     itemById,
     isPro,
     freeLimitReached: profile.plan === "free" && closet.length >= FREE_ITEM_LIMIT,
+    outfitsLeftToday,
+    outfitsLeftThisWeek,
+    outfitLimitReached,
     generateFor,
     nextOutfit,
     setOutfitIndex: setOutfitIndexSafe,

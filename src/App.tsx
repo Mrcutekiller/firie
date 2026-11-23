@@ -17,6 +17,7 @@ import InsightsScreen from "./screens/InsightsScreen";
 import PackingScreen from "./screens/PackingScreen";
 import HomeWidgetsScreen from "./screens/HomeWidgetsScreen";
 import LandingPage from "./screens/LandingPage";
+import ProGateScreen from "./components/ProGateScreen";
 import { useApp } from "./lib/store";
 
 export default function App() {
@@ -27,7 +28,7 @@ export default function App() {
   const [hasOnboarded, setHasOnboarded] = useState(
     () => localStorage.getItem("fitly_onboarded") === "1"
   );
-  const { setProfile } = useApp();
+  const { setProfile, isPro } = useApp();
 
   const handleFinishOnboarding = (name: string, city: string, email: string, gender: "men" | "women") => {
     setProfile({ name, city, email, gender });
@@ -72,8 +73,8 @@ export default function App() {
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/insights" element={<InsightsScreen />} />
         <Route path="/widgets" element={<HomeWidgetsScreen />} />
-        <Route path="/datespots" element={<DateSpotsScreen />} />
-        <Route path="/datespots/:id" element={<PlaceDetailScreen />} />
+        <Route path="/datespots" element={isPro ? <DateSpotsScreen /> : <ProGateScreen />} />
+        <Route path="/datespots/:id" element={isPro ? <PlaceDetailScreen /> : <ProGateScreen />} />
       </Route>
       <Route path="/welcome" element={<OnboardingScreen onDone={handleFinishOnboarding} />} />
       <Route path="/onboarding" element={<OnboardingScreen onDone={handleFinishOnboarding} />} />

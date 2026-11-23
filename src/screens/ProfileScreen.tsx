@@ -192,12 +192,12 @@ export default function ProfileScreen() {
           </div>
           <div>
             <h3 className="text-xs font-extrabold leading-tight">
-              {isPro ? "FITLY Pro Active" : "FITLY Pro Member"}
+              {isPro ? "FITLY Pro Active" : "Upgrade to FITLY Pro"}
             </h3>
             <p className="mt-0.5 text-[10.5px] text-white/70">
               {isPro
                 ? `Renews ${formattedExpiry} · ${daysLeft} days left`
-                : "Unlock unlimited photo styling, full wardrobe & VIP perks."}
+                : "Unlimited looks, wardrobe and Date Spots from 600 ETB/month."}
             </p>
           </div>
         </div>
@@ -304,6 +304,12 @@ export default function ProfileScreen() {
             onClick={() => navigate("/history")}
           />
           <Row
+            icon="✨"
+            label="Daily outfit looks"
+            value={isPro ? "Unlimited" : "1 per day · 3 per week"}
+            onClick={() => navigate("/upgrade")}
+          />
+          <Row
             icon="👔"
             label="Closet capacity"
             value={isPro ? `${closet.length} items · Unlimited` : `${closet.length} of 30`}
@@ -312,7 +318,7 @@ export default function ProfileScreen() {
           <Row
             icon="💳"
             label="Billing & Subscription"
-            value={isPro ? `Pro · Expires ${formattedExpiry}` : "Free Tier · Upgrade"}
+            value={isPro ? `Pro · Expires ${formattedExpiry}` : "Free plan · Upgrade"}
             onClick={() => navigate("/billing")}
           />
         </div>

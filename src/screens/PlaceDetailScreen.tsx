@@ -104,6 +104,35 @@ export default function PlaceDetailScreen() {
     );
   }
 
+  if (!isPro) {
+    return (
+      <div className="space-y-5 pt-3 pb-12 animate-fade max-w-md mx-auto">
+        <button
+          onClick={() => navigate("/datespots")}
+          className="flex items-center gap-1.5 text-xs font-bold text-[#64748B] hover:text-[#0B1F4B]"
+        >
+          <span>← Back to Date Spots</span>
+        </button>
+        <div className="rounded-3xl border-2 border-[#0B1F4B] dark:border-blue-500 bg-gradient-to-br from-[#0B1F4B] to-[#163568] p-6 text-white text-center shadow-2xl space-y-4">
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl shadow-inner">
+            🔒
+          </div>
+          <h2 className="text-xl font-black text-white">Pro Exclusive Venue Details</h2>
+          <p className="text-xs text-slate-200">
+            Verified menu budgets, dress codes, and custom closet pairing for <b>{place.name}</b> are exclusive to FITLY Pro members.
+          </p>
+          <button
+            onClick={() => navigate("/upgrade")}
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs font-black shadow-xl hover:bg-slate-100 transition-all"
+          >
+            <span>Upgrade to Pro · 600 ETB / month</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const gallery = [place.image, ...place.gallery];
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`;
 

@@ -269,6 +269,111 @@ export default function DateSpotsScreen() {
     );
   };
 
+  if (!isPro) {
+    return (
+      <div className="space-y-5 pt-2 pb-14 animate-fade max-w-md mx-auto">
+        {/* Header */}
+        <section className="flex items-start justify-between gap-2">
+          <div>
+            <span className="rounded-full bg-amber-400/20 text-amber-700 dark:text-amber-300 border border-amber-400/30 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider">
+              👑 PRO EXCLUSIVE
+            </span>
+            <h1 className="mt-1.5 text-2xl sm:text-3xl font-black leading-tight text-[#0B1F4B] dark:text-white tracking-tight">
+              Date Spots &amp; Venues
+            </h1>
+            <p className="mt-0.5 text-xs text-[#64748B] dark:text-[#94A3B8]">
+              Where should you go — and what should you wear?
+            </p>
+          </div>
+          <button
+            onClick={() => navigate("/profile")}
+            aria-label="Open profile"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#e5ebf3] text-[11px] font-bold text-[#27466c]"
+          >
+            {profile.name.trim().split(/\s+/).map((p) => p[0]?.toUpperCase()).slice(0, 2).join("") || "A"}
+          </button>
+        </section>
+
+        {/* Pro Lock Hero Card */}
+        <div className="rounded-3xl border-2 border-[#0B1F4B] dark:border-blue-500 bg-gradient-to-br from-[#0B1F4B] to-[#163568] p-6 text-white shadow-2xl relative overflow-hidden">
+          <div className="absolute -right-6 -top-6 h-36 w-36 rounded-full bg-blue-500/20 blur-2xl pointer-events-none" />
+          <div className="relative z-10 space-y-4">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-2xl shadow-inner">
+              🔒
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black tracking-tight text-white">
+                Date Suggestions are Exclusive to Pro
+              </h2>
+              <p className="mt-1.5 text-xs text-slate-200 leading-relaxed font-normal">
+                Never feel underdressed or guess the bill. <b>FITLY Pro</b> curates top Addis Ababa cafes, romantic rooftops, and dinner spots with verified menu budgets in ETB and custom outfit pairing.
+              </p>
+            </div>
+
+            {/* Feature Perks */}
+            <div className="space-y-2 pt-1 text-xs text-white/95 font-medium">
+              <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5 border border-white/10 backdrop-blur-sm">
+                <span className="text-base">🍷</span>
+                <span><b>Curated Addis Venues:</b> Cafes, rooftops &amp; romantic dinners</span>
+              </div>
+              <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5 border border-white/10 backdrop-blur-sm">
+                <span className="text-base">👗</span>
+                <span><b>Automatic Closet Styling:</b> Looks matched to venue ambiance</span>
+              </div>
+              <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5 border border-white/10 backdrop-blur-sm">
+                <span className="text-base">💳</span>
+                <span><b>Verified Menu Budgets:</b> Honest prices in ETB</span>
+              </div>
+              <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5 border border-white/10 backdrop-blur-sm">
+                <span className="text-base">📸</span>
+                <span><b>Photo Spots:</b> Best lighting angles &amp; picture locations</span>
+              </div>
+            </div>
+
+            {/* Upgrade CTA */}
+            <div className="pt-2">
+              <button
+                onClick={() => navigate("/upgrade")}
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs sm:text-sm font-black shadow-xl hover:bg-slate-100 active:scale-98 transition-all"
+              >
+                <span>Upgrade to Pro · 600 ETB / month</span>
+                <span className="text-base">→</span>
+              </button>
+              <p className="mt-2 text-center text-[10px] text-white/70">
+                Supported with Telebirr, CBE &amp; Cards · Cancel anytime
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Blurred Teaser Preview */}
+        <div className="space-y-3 opacity-60 pointer-events-none filter blur-[1px]">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#73819A]">
+            Popular Addis Venues Included in Pro:
+          </p>
+          <div className="space-y-2">
+            {[
+              { name: "Kuriftu Entoto Mountain", type: "Rooftop & Nature · 2,500 ETB" },
+              { name: "Mama's Kitchen Bole", type: "Romantic Dinner & Live Music · 1,800 ETB" },
+              { name: "Tomoca Coffee Piazza", type: "Classic Italian Coffee Date · 400 ETB" },
+            ].map((spot, i) => (
+              <div key={i} className="flex items-center justify-between rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-3 shadow-xs">
+                <div>
+                  <p className="text-xs font-black text-[#0B1F4B] dark:text-white">{spot.name}</p>
+                  <p className="text-[10px] text-[#73819A]">{spot.type}</p>
+                </div>
+                <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-[10px] font-bold text-[#0B1F4B] dark:text-white">
+                  🔒 Pro
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4 pb-6">
       {/* ------------------------------ Header ------------------------------ */}

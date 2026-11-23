@@ -5,7 +5,7 @@ import OutfitCalendarModal from "../components/OutfitCalendarModal";
 import TripCapsuleModal from "../components/TripCapsuleModal";
 import { cn } from "../components/ui";
 import { useApp } from "../lib/store";
-import { type ClosetItem, type EventType, type Slot } from "../lib/types";
+import { FREE_WEEKLY_OUTFIT_LIMIT, type ClosetItem, type EventType, type Slot } from "../lib/types";
 
 const SLOT_POSITION_FLATLAY: Record<Slot, string> = {
   cap: "left-[24px] top-4 z-[4] h-[52px] w-[76px] -rotate-6",
@@ -20,6 +20,7 @@ export default function HomeScreen() {
   const navigate = useNavigate();
   const {
     profile,
+    isPro,
     closet,
     outfits,
     outfitIndex,
@@ -34,6 +35,9 @@ export default function HomeScreen() {
     weather,
     refreshWeather,
     generateFor,
+    outfitLimitReached,
+    outfitsLeftToday,
+    outfitsLeftThisWeek,
     confirmOutfit,
     isConfirmedToday,
     theme,
@@ -52,6 +56,7 @@ export default function HomeScreen() {
   const [lockCelebration, setLockCelebration] = useState<boolean>(false);
   const [showCalendarModal, setShowCalendarModal] = useState<boolean>(false);
   const [showCapsuleModal, setShowCapsuleModal] = useState<boolean>(false);
+  const [showLookLimitModal, setShowLookLimitModal] = useState<boolean>(false);
 
   // ── Tinder-Style Outfit Swiper Gesture & Physics State ──
   const [flyState, setFlyState] = useState<"idle" | "fly-left" | "fly-right" | "fly-rewind">("idle");
@@ -68,8 +73,9 @@ export default function HomeScreen() {
       const newIdx = (outfitIndex + 1) % outfits.length;
       setOutfitIndex(newIdx);
       localStorage.setItem("fitly_last_outfit_index", String(newIdx));
-    } else {
-      generateFor(selectedOccasion);
+    } else if (!generateFor(selectedOccasion)) {
+      // Free plan daily/weekly allowance spent — offer Pro instead.
+      setShowLookLimitModal(true);
     }
   };
 
@@ -81,8 +87,8 @@ export default function HomeScreen() {
       const newIdx = (outfitIndex - 1 + outfits.length) % outfits.length;
       setOutfitIndex(newIdx);
       localStorage.setItem("fitly_last_outfit_index", String(newIdx));
-    } else {
-      generateFor(selectedOccasion);
+    } else if (!generateFor(selectedOccasion)) {
+      setShowLookLimitModal(true);
     }
   };
 
@@ -92,7 +98,8 @@ export default function HomeScreen() {
       unlockOutfit();
     }
     setFlyState("fly-left");
-    setSwipeToast("✕ Passed: Next outfit coming up");
+    // Free plan allowance spent → no new look is coming, the upgrade sheet opens instead.
+    if (!outfitLimitReached) setSwipeToast("✕ Passed: Next outfit coming up");
     setTimeout(() => {
       next();
       setFlyState("idle");
@@ -124,7 +131,7 @@ export default function HomeScreen() {
     if (flyState !== "idle") return;
     prev();
     setFlyState("fly-rewind");
-    setSwipeToast("↺ Rewound to previous look");
+    if (!outfitLimitReached) setSwipeToast("↺ Rewound to previous look");
     setTimeout(() => {
       setFlyState("idle");
       setTimeout(() => setSwipeToast(null), 1000);
@@ -271,19 +278,31 @@ export default function HomeScreen() {
 };
 
 const handleSelectOccasion = (occ: EventType) => {
+  setShowOccasionModal(false);
+  // A new occasion requests a fresh look, so it spends a Free plan slot.
+  if (!generateFor(occ)) {
+    setShowLookLimitModal(true);
+    return;
+  }
   setSelectedOccasion(occ);
   localStorage.setItem("fitly_selected_occasion", occ);
   localStorage.setItem("fitly_has_requested_outfit", "true");
-  setShowOccasionModal(false);
-  generateFor(occ);
 };
 
 const occasionLabel =
   selectedOccasion === "date"
     ? "Date Night 🍷"
     : selectedOccasion === "party"
-      ? "Party 庆祝 🎉"
-      : "Normal Day ☕";
+      ? "Party 🎉"
+      : selectedOccasion === "work"
+        ? "Work 👔"
+        : selectedOccasion === "wedding"
+          ? "Wedding 💍"
+          : selectedOccasion === "church"
+            ? "Church ⛪"
+            : selectedOccasion === "casual-outing"
+              ? "Casual Outing 🚶"
+              : "Everyday ☕";
 
 return (
     <div className="mx-auto flex min-h-[calc(100dvh-105px)] max-w-[430px] flex-col pb-3 text-[#102642] dark:text-[#f8fafc] transition-colors">
@@ -437,6 +456,36 @@ return (
               className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#0B1F4B] active:scale-95"
             >
               <span>✨ Load Sample Wardrobe (Test)</span>
+            </button>
+          </div>
+        </div>
+      ) : outfitLimitReached && outfits.length === 0 && !isLocked ? (
+        /* ── CASE 0B: FREE PLAN WEEKLY ALLOWANCE SPENT ── */
+        <div className="my-auto flex flex-col items-center justify-center rounded-3xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-7 text-center shadow-lg transition-all mt-4">
+          <div className="grid h-16 w-16 place-items-center rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-3xl shadow-inner">
+            👑
+          </div>
+          <h2 className="mt-4 text-[20px] font-black text-[#0B1F4B] dark:text-white">
+            Your 3 free looks are used this week
+          </h2>
+          <p className="mt-2 text-xs leading-relaxed text-[#64748B] dark:text-[#94A3B8] max-w-[280px]">
+            Free members get one fresh look a day, up to {FREE_WEEKLY_OUTFIT_LIMIT} a week. Your
+            allowance resets next week — or go Pro for unlimited outfits, every day.
+          </p>
+
+          <div className="mt-6 flex w-full max-w-[260px] flex-col gap-2">
+            <button
+              onClick={() => navigate("/upgrade")}
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] dark:bg-white text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md transition-transform active:scale-95"
+            >
+              <span>👑 Upgrade to Pro</span>
+            </button>
+
+            <button
+              onClick={() => navigate("/closet")}
+              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#0B1F4B] active:scale-95"
+            >
+              <span>Browse My Closet</span>
             </button>
           </div>
         </div>
@@ -699,6 +748,17 @@ return (
               </div>
             </section>
           </div>
+
+          {/* ── Free Plan Allowance Note ── */}
+          {!isPro && outfitLimitReached && (
+            <button
+              onClick={() => navigate("/upgrade")}
+              className="mx-auto mt-3 flex max-w-[300px] items-center justify-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3.5 py-1.5 text-[10px] font-black text-amber-700 shadow-xs transition-transform active:scale-95 dark:border-amber-700/50 dark:bg-amber-950/40 dark:text-amber-300"
+            >
+              <span>👑</span>
+              <span>Free plan · 1 look a day, {FREE_WEEKLY_OUTFIT_LIMIT} a week — Pro is unlimited</span>
+            </button>
+          )}
 
           {/* ── Floating 3-Button Action Bar (Directly below card, Matching Reference Image) ── */}
           <div className="mx-auto mt-4 mb-2 flex items-center justify-center gap-4 rounded-full bg-[#162744]/90 dark:bg-[#0B1527]/90 px-7 py-2.5 backdrop-blur-xl border border-white/15 dark:border-white/10 shadow-xl max-w-[290px] w-full">
@@ -1062,6 +1122,51 @@ return (
                     Bold statement styling, standout silhouettes & flair
                   </p>
                 </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Free Plan Look Limit Modal (1 look/day · 3 per week) ── */}
+      {showLookLimitModal && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 text-center shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-2xl">
+              👑
+            </div>
+            <h3 className="mt-4 text-lg font-black tracking-tight">
+              {outfitsLeftThisWeek === 0
+                ? `That's all ${FREE_WEEKLY_OUTFIT_LIMIT} free looks for this week`
+                : "That's today's free look"}
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-[#64748B] dark:text-[#94A3B8]">
+              {outfitsLeftThisWeek === 0
+                ? `Free members get one fresh look a day, up to ${FREE_WEEKLY_OUTFIT_LIMIT} a week — and yours are spent. Your allowance resets next week.`
+                : "Free members get one fresh look a day. Come back tomorrow for a new one, or go Pro for unlimited outfits."}
+            </p>
+
+            <p className="mt-4 rounded-2xl bg-[#F8FAFC] px-3.5 py-2.5 text-[11px] font-black text-[#0B1F4B] dark:bg-[#1E293B] dark:text-white">
+              {(outfitsLeftThisWeek ?? 0)} of {FREE_WEEKLY_OUTFIT_LIMIT} free looks left this week
+              {(outfitsLeftThisWeek ?? 0) > 0 && outfitsLeftToday === 0 ? " · next one tomorrow" : ""}
+            </p>
+
+            <div className="mt-5 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setShowLookLimitModal(false);
+                  navigate("/upgrade");
+                }}
+                className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0B1F4B] text-xs font-black text-white shadow-md active:scale-95 dark:bg-white dark:text-[#0B1F4B]"
+              >
+                <span>👑</span>
+                <span>Upgrade to Pro</span>
+              </button>
+              <button
+                onClick={() => setShowLookLimitModal(false)}
+                className="flex h-11 w-full items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-xs font-bold text-[#0B1F4B] active:scale-95 dark:border-[#334155] dark:bg-[#1E293B] dark:text-white"
+              >
+                Maybe later
               </button>
             </div>
           </div>

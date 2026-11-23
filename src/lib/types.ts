@@ -138,6 +138,18 @@ export interface PhotoUsage {
   count: number;
 }
 
+/** Daily (1/day) and Weekly (3/week) outfit look usage for the Free plan. */
+export interface OutfitUsage {
+  /** ISO date of the last granted look, YYYY-MM-DD. */
+  today: string;
+  /** Looks granted today (0 or 1 on the Free plan). */
+  dailyCount: number;
+  /** ISO week key of the last granted look. */
+  week: string;
+  /** Looks granted this week. */
+  weeklyCount: number;
+}
+
 /** A pose the user actually shot with — damped so poses don't repeat. */
 export interface PoseUse {
   poseId: string;
@@ -198,6 +210,8 @@ export interface FavoriteMenuItem {
 }
 
 /** Free plan limits */
+export const FREE_DAILY_OUTFIT_LIMIT = 1;
+export const FREE_WEEKLY_OUTFIT_LIMIT = 3;
 export const FREE_DAILY_PHOTO_STYLE_LIMIT = 1;
 export const FREE_WEEKLY_PHOTO_STYLE_LIMIT = 4;
 export const FREE_FAVORITE_LIMIT = 10;

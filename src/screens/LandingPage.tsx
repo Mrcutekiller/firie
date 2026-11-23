@@ -58,10 +58,10 @@ export default function LandingPage() {
       badge: "DIGITAL WARDROBE INTELLIGENCE",
       badgeColor: "bg-[#FF5722] text-white",
       tagline: "STILLNESS COLLECTION · ADDIS ABABA",
-      title: "The Wardrobe is the Measure.",
-      subtitle: "Precision-built daily outfit styling tailored to your real closet.",
+      title: "Your Wardrobe, Digitized.",
+      subtitle: "Precision daily styling built from the clothes you already own.",
       description:
-        "Stop guessing what goes together every morning. FITLY digitizes your physical clothing items, calculates color harmony science across all 12 hues, and assembles ready-to-wear flat-lay outfits adapted to real-time weather.",
+        "Stop guessing what goes together every morning. FITLY digitizes your real clothing, scores color harmony across the full palette, and assembles ready-to-wear outfits adapted to your live weather.",
       video: "/videos/page-1.mp4",
       poster: "/images/page_previews/page_1.jpg",
       hasDownloadBtn: true,
@@ -73,7 +73,7 @@ export default function LandingPage() {
       bullets: [
         "Instant background isolation for all closet pieces",
         "Calibrated to live weather and humidity",
-        "Curated personalized outfits in under 3 seconds",
+        "Personalized outfit suggestions in under 3 seconds",
       ],
       align: "text-left",
     },
@@ -82,10 +82,10 @@ export default function LandingPage() {
       badge: "AI OUTFIT DISCOVERY",
       badgeColor: "bg-[#3B82F6] text-white",
       tagline: "EFFORTLESS MORNING ROUTINE",
-      title: "Swipe Right to Wear. Swipe Left to Pass.",
+      title: "Swipe Through Today's Looks.",
       subtitle: "Magazine-quality flat-lay outfits assembled from what you own.",
       description:
-        "Every morning, FITLY presents ready-to-wear combinations assembled exclusively from your closet. Swipe right to log the look in your visual calendar, or swipe left to skip to another tailored curation instantly.",
+        "Every morning, FITLY presents ready-to-wear combinations built exclusively from your closet. Swipe right to wear the look, or swipe left to pass to the next suggestion.",
       video: "/videos/page-2.mp4",
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: false,
@@ -95,9 +95,9 @@ export default function LandingPage() {
         { label: "Calendar", value: "Auto-Logged" },
       ],
       bullets: [
-        "Tinder-style fluid swipe gestures (✕ Pass, ♥ Wear)",
+        "Fluid swipe gestures (✕ Pass, ♥ Wear)",
         "Automatic color harmony scoring (96%+ matches)",
-        "Monthly visual outfit calendar & rotation tracker",
+        "Monthly visual outfit calendar & rotation tracker (Pro)",
       ],
       align: "video-left",
     },
@@ -106,10 +106,10 @@ export default function LandingPage() {
       badge: "SILHOUETTE & PROPORTION ARCHITECTURE",
       badgeColor: "bg-[#10B981] text-white",
       tagline: "TAILORED CUTS & DRAPE",
-      title: "Tactile Textures & Fluid Drape.",
-      subtitle: "Balancing proportions from headwear to footwear.",
+      title: "Balanced Proportions, Every Time.",
+      subtitle: "From headwear to footwear, the whole silhouette is considered.",
       description:
-        "A great outfit is more than just matching colors. FITLY evaluates drape, fabric weight, and silhouette balance—pairing relaxed oversized cut-and-sew pieces with structured bottoms for an effortless contemporary look.",
+        "A great outfit is more than matching colors. FITLY evaluates drape, fabric weight, and silhouette balance — pairing relaxed oversized pieces with structured bottoms for an effortless contemporary line.",
       video: "/videos/page-3.mp4",
       poster: "/images/page_previews/page_3.jpg",
       hasDownloadBtn: false,
@@ -130,10 +130,10 @@ export default function LandingPage() {
       badge: "REAL-TIME CLIMATE LAYERING",
       badgeColor: "bg-[#F59E0B] text-white",
       tagline: "LIVE METEOROLOGY SYNC",
-      title: "Engineered for Changing City Temperatures.",
-      subtitle: "Thermal comfort from morning chill to evening breeze.",
+      title: "Dressed for the Weather Outside.",
+      subtitle: "Thermal comfort from the morning chill to the evening breeze.",
       description:
-        "Connected to live meteorological data for your city. Whether transitioning from 16°C morning shadows to 24°C afternoon sunshine in Addis Ababa, FITLY selects outer layers you can wear or stow effortlessly.",
+        "FITLY reads live weather data for your city. Whether it moves from 16°C in the morning to 24°C by afternoon in Addis Ababa, it selects the outer layers you can wear or stow without a second thought.",
       video: "/videos/page-4.mp4",
       poster: "/images/page_previews/page_4.jpg",
       hasDownloadBtn: false,
@@ -145,7 +145,7 @@ export default function LandingPage() {
       bullets: [
         "Real-time temperature and precipitation forecast sync",
         "Smart zip-hoodie and light outerwear layering alerts",
-        "Zero carrying excess jackets you won't need",
+        "Never carry a jacket you won't need",
       ],
       align: "video-left",
     },
@@ -154,10 +154,10 @@ export default function LandingPage() {
       badge: "CURATED VENUE DRESS CODES",
       badgeColor: "bg-[#8B5CF6] text-white",
       tagline: "CITY EXPLORATION & NIGHTLIFE",
-      title: "Liquid Chrome & Curated Venues.",
-      subtitle: "Dress code guidance for romantic rooftops, cafes, and lounges.",
+      title: "Venues, Dress Codes & Budgets.",
+      subtitle: "Know where to go — and what to wear — before you leave.",
       description:
-        "Heading out for coffee, a sunset rooftop, or a weekend celebration? FITLY matches your outfit with curated spots in Addis Ababa and beyond, ensuring you match the vibe and dress code with zero awkwardness.",
+        "Heading out for coffee, a rooftop sunset or a weekend celebration? FITLY matches your outfit to curated spots in Addis Ababa and beyond, with verified menu prices and a budget calculator in ETB. Included with FITLY Pro.",
       video: "/videos/page-5.mp4",
       poster: "/images/page_previews/page_5.jpg",
       hasDownloadBtn: false,
@@ -167,9 +167,9 @@ export default function LandingPage() {
         { label: "Ambiance", value: "Lounge & Sunset" },
       ],
       bullets: [
-        "Curated rooftop, lounge, and café database",
-        "Target dress codes (Smart Casual, High-Street, Formal)",
-        "Estimated ambiance, pricing, and photo opportunities",
+        "Curated rooftop, lounge, café and restaurant database",
+        "Dress-code guidance for every venue",
+        "Verified menu prices and party budget estimates (Pro)",
       ],
       align: "text-left",
     },
@@ -178,10 +178,10 @@ export default function LandingPage() {
       badge: "KINETIC DRAPE & MOVEMENT",
       badgeColor: "bg-[#EC4899] text-white",
       tagline: "ERGONOMICS IN MOTION",
-      title: "Clothes That Move With Your Day.",
-      subtitle: "Tested in motion so you look confident at every angle.",
+      title: "Clothes That Move With You.",
+      subtitle: "Tested in motion, so you look confident from every angle.",
       description:
-        "Garments shouldn't just look good hanging on a rack or lying flat on a bed. FITLY evaluates movement ergonomics and piping contours so your clothes feel as good as they look while you walk.",
+        "Garments should not only look good on a hanger or lying flat on a bed. FITLY evaluates movement and drape so your clothes feel as good as they look while you walk.",
       video: "/videos/page-6.mp4",
       poster: "/images/page_previews/page_6.jpg",
       hasDownloadBtn: false,
@@ -202,10 +202,10 @@ export default function LandingPage() {
       badge: "INSTANT WARDROBE DIGITIZATION",
       badgeColor: "bg-[#06B6D4] text-white",
       tagline: "DIGITAL CLOSET EDITORIAL",
-      title: "360° Studio Wardrobe Isolation.",
-      subtitle: "Turn ordinary closet photos into luxury digital assets.",
+      title: "Studio-Quality Cutouts, Instantly.",
+      subtitle: "Turn ordinary closet photos into clean digital assets.",
       description:
-        "Snap a photo of your hoodie, jacket, or shoes anywhere—on a hanger, bed, or carpet. FITLY isolates the garment in milliseconds with surgical edge precision, turning your closet into an editorial magazine.",
+        "Photograph your hoodie, jacket or shoes anywhere — on a hanger, a bed or the carpet. FITLY isolates the garment in milliseconds with precise edges, and every photo stays on your device.",
       video: "/videos/page-7.mp4",
       poster: "/images/page_previews/page_7.jpg",
       hasDownloadBtn: false,
@@ -226,22 +226,22 @@ export default function LandingPage() {
       badge: "EFFORTLESS DAILY CONFIDENCE",
       badgeColor: "bg-[#10B981] text-white",
       tagline: "READY TO WEAR",
-      title: "Your Daily Look is Curated.",
-      subtitle: "Zero morning decision fatigue. Ready in 3 seconds.",
+      title: "Your Daily Look, Ready to Wear.",
+      subtitle: "No morning decision fatigue. Ready in seconds.",
       description:
-        "Reclaim your mornings. FITLY eliminates the daily stress of 'what should I wear today?' so you start every day looking sharp, put-together, and authentically yourself.",
+        "Reclaim your mornings. FITLY removes the daily stress of “what should I wear today?” so you start every day looking sharp, put-together, and authentically yourself.",
       video: "/videos/page-8.mp4",
       poster: "/images/page_previews/page_8.jpg",
       hasDownloadBtn: true,
       specs: [
         { label: "Time Saved", value: "15 min / day" },
-        { label: "Free Tier", value: "0 ETB Free" },
+        { label: "Free Plan", value: "0 ETB" },
         { label: "Platforms", value: "Android & iOS" },
       ],
       bullets: [
-        "Android APK and Apple iOS direct install",
-        "Completely free to start with unlimited daily looks",
-        "Optional Pro tier with FigCraft home widgets & capsule packing",
+        "Direct install for Android (APK) and iPhone (IPA)",
+        "Free plan: one fresh look a day, three a week",
+        "Pro adds unlimited looks, Date Spots, widgets & history",
       ],
       align: "video-left",
     },
@@ -266,7 +266,7 @@ export default function LandingPage() {
     },
     {
       q: "What is the difference between Free and Pro?",
-      a: "Free provides unlimited AI flat-lay outfit recommendations for up to 30 closet items and daily photo guides. Pro (1,200 ETB/mo, or 720 ETB/mo billed yearly with 40% OFF) unlocks unlimited wardrobe storage, interactive home screen widgets with 'Quick Style Me', unlimited pose guides, and monthly outfit calendars.",
+      a: "Free includes one fresh outfit look per day (up to three per week) for a wardrobe of up to 30 pieces, plus one photo style pose guide per day. Pro (600 ETB/month, or 360 ETB/month billed yearly with 40% OFF) unlocks unlimited outfit looks, unlimited wardrobe pieces, the complete Date Spots planner with verified menu prices, home screen widgets, full outfit history and monthly outfit calendars.",
     },
   ];
 
@@ -515,7 +515,7 @@ export default function LandingPage() {
               Get FITLY on Your Phone
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#64748B]">
-              Direct downloads for Android and iPhone with zero ads, tracking, or software hurdles.
+              Direct downloads for Android and iPhone — no ads, no tracking, no store approval wait.
             </p>
           </div>
 
@@ -612,7 +612,7 @@ export default function LandingPage() {
             <p className="text-xs font-black uppercase tracking-widest text-[#3B82F6]">HONEST TRANSPARENCY</p>
             <h2 className="mt-2 text-3xl sm:text-4xl font-black text-[#0B1F4B]">Invest in How You Present Yourself</h2>
             <p className="mt-2 text-xs sm:text-sm text-[#64748B]">
-              Start completely free, or unlock unlimited photo poses and capsule tools with Pro.
+              Start free with one fresh look a day, or unlock unlimited outfits, Date Spots and photo tools with Pro.
             </p>
 
             <div className="mt-6 inline-flex rounded-full bg-[#F8FAFC] p-1 border border-[#E2E8F0] shadow-xs">
@@ -623,7 +623,7 @@ export default function LandingPage() {
                   billingCycle === "monthly" ? "bg-[#0B1F4B] text-white shadow-xs" : "text-[#73819A]"
                 )}
               >
-                Monthly (1,200 ETB)
+                Monthly (600 ETB)
               </button>
               <button
                 onClick={() => setBillingCycle("yearly")}
@@ -632,7 +632,7 @@ export default function LandingPage() {
                   billingCycle === "yearly" ? "bg-[#0B1F4B] text-white shadow-xs" : "text-[#73819A]"
                 )}
               >
-                <span>Yearly (720 ETB/mo)</span>
+                <span>Yearly (360 ETB/mo)</span>
                 <span className="rounded-full bg-amber-400 text-[#0B1F4B] px-1.5 py-0.5 text-[9px] font-black">
                   40% OFF
                 </span>
@@ -651,14 +651,16 @@ export default function LandingPage() {
                   <span className="text-4xl font-black text-[#0B1F4B]">0 ETB</span>
                   <span className="text-xs text-[#73819A]">/ forever</span>
                 </div>
-                <p className="mt-2 text-xs text-[#64748B]">Everything you need to dress better everyday.</p>
+                <p className="mt-2 text-xs text-[#64748B]">Everything you need to dress better — every day, at no cost.</p>
 
                 <ul className="mt-6 space-y-2.5 text-xs text-[#0B1F4B]">
-                  <li className="flex items-center gap-2">✓ Unlimited AI flat-lay outfit generation</li>
-                  <li className="flex items-center gap-2">✓ Real-time weather adaptation</li>
+                  <li className="flex items-center gap-2">✓ 1 fresh outfit look per day (3 per week)</li>
+                  <li className="flex items-center gap-2">✓ Real-time weather-aware styling</li>
                   <li className="flex items-center gap-2">✓ Up to 30 closet pieces with AI background removal</li>
-                  <li className="flex items-center gap-2">✓ 1 photo style pose guide per day (4 per week)</li>
-                  <li className="flex items-center gap-2">✓ Date & venue recommendations</li>
+                  <li className="flex items-center gap-2">✓ 1 photo style pose guide per day (3 per week)</li>
+                  <li className="flex items-center gap-2">✓ Swipe, save and wear your daily look</li>
+                  <li className="flex items-center gap-2 text-[#94A3B8]">🔒 Date Spots venues, prices & plans (Pro Only)</li>
+                  <li className="flex items-center gap-2 text-[#94A3B8]">🔒 Outfit history & home screen widgets</li>
                 </ul>
               </div>
 
@@ -683,23 +685,25 @@ export default function LandingPage() {
                 </span>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="text-4xl font-black text-[#0B1F4B]">
-                    {billingCycle === "yearly" ? "720 ETB" : "1,200 ETB"}
+                    {billingCycle === "yearly" ? "360 ETB" : "600 ETB"}
                   </span>
                   <span className="text-xs text-[#73819A]">/ month</span>
                 </div>
                 <p className="mt-2 text-xs text-[#64748B]">
                   {billingCycle === "yearly"
-                    ? "Billed annually at 8,640 ETB/year (Save 40% · 5,760 ETB off)"
-                    : "Billed monthly at 1,200 ETB, cancel anytime"}
+                    ? "Billed annually at 4,320 ETB/year (Save 40% · 2,880 ETB off)"
+                    : "Billed monthly at 600 ETB, cancel anytime"}
                 </p>
 
                 <ul className="mt-6 space-y-2.5 text-xs text-[#0B1F4B] font-semibold">
+                  <li className="flex items-center gap-2">✓ <b>Unlimited</b> outfit looks, every day</li>
                   <li className="flex items-center gap-2">✓ <b>Unlimited</b> closet pieces & AI background removal</li>
+                  <li className="flex items-center gap-2">✓ <b>Date Spots:</b> venues, verified prices & date plans</li>
                   <li className="flex items-center gap-2">✓ <b>Unlimited</b> photo poses, tilt angles & camera filters</li>
                   <li className="flex items-center gap-2">✓ Interactive FigCraft Home Widgets with "Quick Style Me"</li>
                   <li className="flex items-center gap-2">✓ Full monthly visual outfit calendar & history</li>
                   <li className="flex items-center gap-2">✓ Packing Capsule Wardrobe trip planner</li>
-                  <li className="flex items-center gap-2">✓ Telebirr, CBE & Local payments supported</li>
+                  <li className="flex items-center gap-2">✓ Telebirr, CBE & card payments supported</li>
                 </ul>
               </div>
 

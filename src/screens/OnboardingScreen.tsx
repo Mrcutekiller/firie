@@ -246,7 +246,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                 <span className="text-base">📍</span>
                 <div>
                   <h3 className="text-xs font-black text-white">Addis Spots & Weather Sync</h3>
-                  <p className="text-[10px] text-slate-200">Curated looks for local cafes, rooftops & dinners</p>
+                  <p className="text-[10px] text-slate-200">Venue matches & budgets — included with Pro</p>
                 </div>
               </div>
             </div>
@@ -290,7 +290,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                 </span>
                 <div>
                   <h3 className="text-xs font-black text-white">Get Curated AI Looks</h3>
-                  <p className="text-[10px] text-slate-200">Daily flat-lays adapted to live Addis weather</p>
+                  <p className="text-[10px] text-slate-200">One fresh look a day, adapted to live Addis weather</p>
                 </div>
               </div>
 

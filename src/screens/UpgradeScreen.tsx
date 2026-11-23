@@ -5,12 +5,17 @@ import { cn } from "../components/ui";
 
 const PRO_PERKS = [
   {
+    icon: "👗",
+    title: "Unlimited Outfit Looks",
+    desc: "Free members get one fresh look a day, up to three a week. Pro generates unlimited outfits, every day.",
+  },
+  {
     icon: "📸",
     title: "Unlimited Photo Style Camera",
     desc: "Infinite AI pose guides, low-angle alignment, and silhouette guides without daily or weekly caps.",
   },
   {
-    icon: "👗",
+    icon: "🧥",
     title: "Unlimited Digital Wardrobe",
     desc: "Add hundreds of tops, bottoms, shoes, and traditional Habesha pieces with AI background removal.",
   },
@@ -21,8 +26,8 @@ const PRO_PERKS = [
   },
   {
     icon: "📍",
-    title: "VIP Date Spots & Price Transparency",
-    desc: "Unlimited date planning with verified honest menu prices and budget calculation in ETB.",
+    title: "Date Spots — Pro Only",
+    desc: "Venue discovery, verified menu prices, budget planning in ETB and an outfit matched to every spot.",
   },
   {
     icon: "✨",
@@ -166,7 +171,7 @@ export default function UpgradeScreen() {
               <div>
                 <p className="text-xs font-bold text-[#0B1F4B] dark:text-white">Subscription Rate</p>
                 <p className="text-[11px] text-[#73819A]">
-                  {profile.billingCycle === "yearly" ? "$29.99 / year (Save 37%)" : "$3.99 / month"}
+                  {profile.billingCycle === "yearly" ? "4,320 ETB / year (Save 40%)" : "600 ETB / month"}
                 </p>
               </div>
               <button
@@ -222,7 +227,7 @@ export default function UpgradeScreen() {
                 </div>
                 <div className="text-right">
                   <span className="font-black text-[#0B1F4B] dark:text-white">
-                    {profile.billingCycle === "yearly" ? "$29.99" : "$3.99"}
+                    {profile.billingCycle === "yearly" ? "4,320 ETB" : "600 ETB"}
                   </span>
                   <p className="text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">Paid ✓</p>
                 </div>
@@ -234,7 +239,7 @@ export default function UpgradeScreen() {
                   <p className="text-[10px] text-[#73819A]">Oct 22, 2026 · Subscription renewal</p>
                 </div>
                 <div className="text-right">
-                  <span className="font-black text-[#0B1F4B] dark:text-white">$3.99</span>
+                  <span className="font-black text-[#0B1F4B] dark:text-white">600 ETB</span>
                   <p className="text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">Paid ✓</p>
                 </div>
               </div>
@@ -275,7 +280,7 @@ export default function UpgradeScreen() {
               Unlock Your Complete<br />Wardrobe &amp; AI Studio
             </h2>
             <p className="mt-2 text-xs text-white/80 max-w-[280px] mx-auto">
-              Get unlimited photo style camera poses, infinite closet pieces, and verified date spot reservations.
+              Unlimited outfit looks, an unlimited wardrobe, the full Photo Style camera toolkit and the complete Date Spots planner.
             </p>
           </section>
 
@@ -313,12 +318,12 @@ export default function UpgradeScreen() {
               <div>
                 <b className="text-sm font-black text-[#0B1F4B] dark:text-white">FITLY Pro Plan</b>
                 <p className="text-[10px] text-[#73819A]">
-                  {cycle === "monthly" ? "Billed 1,200 ETB/month" : "Billed 8,640 ETB/year (Save 40%)"}
+                  {cycle === "monthly" ? "Billed 600 ETB/month" : "Billed 4,320 ETB/year (Save 40%)"}
                 </p>
               </div>
               <div className="text-right">
                 <span className="text-2xl font-black text-[#0B1F4B] dark:text-white">
-                  {cycle === "monthly" ? "1,200 ETB" : "720 ETB"}
+                  {cycle === "monthly" ? "600 ETB" : "360 ETB"}
                 </span>
                 <span className="text-xs text-[#73819A]">/mo</span>
               </div>
@@ -403,7 +408,7 @@ export default function UpgradeScreen() {
               onClick={() => handleUpgrade(cycle)}
               className="flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] dark:bg-white text-sm font-black text-white dark:text-[#0B1F4B] shadow-xl transition-transform active:scale-98"
             >
-              <span>Unlock FITLY Pro · {cycle === "monthly" ? "1,200 ETB/mo" : "8,640 ETB/yr (40% OFF)"}</span>
+              <span>Unlock FITLY Pro · {cycle === "monthly" ? "600 ETB/mo" : "4,320 ETB/yr (40% OFF)"}</span>
               <span>→</span>
             </button>
 
@@ -427,7 +432,7 @@ export default function UpgradeScreen() {
               Cancel Pro Membership?
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-[#73819A]">
-              You will lose unlimited photo camera poses and full wardrobe capacity after your current period ends on{" "}
+              You will lose unlimited outfit looks, photo camera poses, full wardrobe capacity and Date Spots when your current period ends on{" "}
               <b>{formattedExpiry || "the end of this billing cycle"}</b>.
             </p>
 
