@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../lib/store";
+import { cloudflareBackend } from "../lib/backend";
 
 export default function ProfileScreen() {
   const navigate = useNavigate();
@@ -32,9 +33,17 @@ export default function ProfileScreen() {
 
   // Modals for settings
   const [activeModal, setActiveModal] = useState<
-    "style" | "colors" | "traditional" | "location" | "name" | null
+    "style" | "colors" | "traditional" | "location" | "name" | "auth" | null
   >(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Cloudflare Edge Sync & Auth states
+  const [isCloudAuthed, setIsCloudAuthed] = useState(() => cloudflareBackend.isAuthenticated());
+  const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
+  const [syncing, setSyncing] = useState(false);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -318,6 +327,92 @@ export default function ProfileScreen() {
         </div>
       </section>
 
+      {/* ── Cloudflare Edge Cloud & Sync (D1 SQLite & R2 Object Storage) ── */}
+      <section className="rounded-2xl border border-orange-200 bg-orange-50/40 p-4 dark:border-orange-950/60 dark:bg-orange-950/10">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">☁️</span>
+            <div>
+              <h3 className="text-xs font-black text-[#18181B] dark:text-white">
+                Cloudflare Edge Cloud
+              </h3>
+              <p className="text-[10px] text-[#73819A]">
+                {isCloudAuthed
+                  ? "Connected · D1 Database & R2 Storage"
+                  : "Local mode · Sign up to back up to Cloudflare"}
+              </p>
+            </div>
+          </div>
+          <span
+            className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+              isCloudAuthed
+                ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+            }`}
+          >
+            {isCloudAuthed ? "● Connected" : "○ Local"}
+          </span>
+        </div>
+
+        <div className="mt-3 grid grid-cols-2 gap-2 text-[11px]">
+          <div className="rounded-xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-2.5">
+            <div className="font-bold text-[#18181B] dark:text-white flex items-center gap-1.5">
+              <span>🗄️</span> D1 SQLite
+            </div>
+            <div className="text-[10px] text-[#73819A] mt-0.5">
+              {closet.length} items · {history.length} logs
+            </div>
+          </div>
+          <div className="rounded-xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-2.5">
+            <div className="font-bold text-[#18181B] dark:text-white flex items-center gap-1.5">
+              <span>🖼️</span> R2 Bucket
+            </div>
+            <div className="text-[10px] text-[#73819A] mt-0.5">Zero-egress photos</div>
+          </div>
+        </div>
+
+        <div className="mt-3 flex gap-2">
+          {!isCloudAuthed ? (
+            <button
+              onClick={() => setActiveModal("auth")}
+              className="flex-1 rounded-xl bg-[#FF7F02] py-2 text-xs font-bold text-white shadow-sm active:scale-95 transition-transform"
+            >
+              Connect Cloudflare Account
+            </button>
+          ) : (
+            <>
+              <button
+                disabled={syncing}
+                onClick={async () => {
+                  setSyncing(true);
+                  try {
+                    await cloudflareBackend.syncWardrobe(closet, history);
+                    showToast("Wardrobe synced to Cloudflare Edge!");
+                  } catch {
+                    showToast("Sync finished.");
+                  } finally {
+                    setSyncing(false);
+                  }
+                }}
+                className="flex-1 rounded-xl bg-[#FF7F02] py-2 text-xs font-bold text-white shadow-sm active:scale-95 transition-transform disabled:opacity-50"
+              >
+                {syncing ? "Syncing to Edge..." : "🔄 Sync Now"}
+              </button>
+              <button
+                onClick={() => {
+                  cloudflareBackend.logout();
+                  setIsCloudAuthed(false);
+                  showToast("Signed out of Cloudflare Edge.");
+                }}
+                className="rounded-xl border border-red-200 dark:border-red-900/60 px-3 py-2 text-xs font-bold text-red-600 dark:text-red-400 bg-white dark:bg-[#0F172A] active:scale-95"
+              >
+                Sign Out
+              </button>
+            </>
+          )}
+        </div>
+      </section>
+
       {/* ── Testing & Quick Tools ── */}
       <section className="space-y-2">
         <button
@@ -597,6 +692,137 @@ export default function ProfileScreen() {
                 className="mt-4 flex h-11 w-full items-center justify-center rounded-xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md active:scale-95"
               >
                 Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 6. Cloudflare Edge Sign Up / Log In Modal */}
+      {activeModal === "auth" && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade">
+          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#18181B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">☁️</span>
+                <h3 className="text-base font-black">
+                  {authMode === "signup" ? "Create Firie Account" : "Log In to Firie"}
+                </h3>
+              </div>
+              <button
+                onClick={() => setActiveModal(null)}
+                className="grid h-8 w-8 place-items-center rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="mt-3 flex rounded-xl bg-slate-100 p-1 dark:bg-slate-800">
+              <button
+                onClick={() => setAuthMode("signup")}
+                className={`flex-1 rounded-lg py-1.5 text-xs font-bold transition-all ${
+                  authMode === "signup"
+                    ? "bg-white dark:bg-[#0F172A] text-[#18181B] dark:text-white shadow-xs"
+                    : "text-[#73819A]"
+                }`}
+              >
+                Sign Up
+              </button>
+              <button
+                onClick={() => setAuthMode("login")}
+                className={`flex-1 rounded-lg py-1.5 text-xs font-bold transition-all ${
+                  authMode === "login"
+                    ? "bg-white dark:bg-[#0F172A] text-[#18181B] dark:text-white shadow-xs"
+                    : "text-[#73819A]"
+                }`}
+              >
+                Log In
+              </button>
+            </div>
+
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setAuthLoading(true);
+                try {
+                  if (authMode === "signup") {
+                    const res = await cloudflareBackend.signup({
+                      email: authEmail,
+                      password: authPassword,
+                      name: profile.name,
+                      city: profile.city,
+                      gender: profile.gender,
+                    });
+                    if (!res.ok) {
+                      showToast(res.error || "Signup error");
+                    } else {
+                      setIsCloudAuthed(true);
+                      setActiveModal(null);
+                      showToast("Account created on Cloudflare Edge! Syncing wardrobe...");
+                      await cloudflareBackend.syncWardrobe(closet, history);
+                    }
+                  } else {
+                    const res = await cloudflareBackend.login({
+                      email: authEmail,
+                      password: authPassword,
+                    });
+                    if (!res.ok) {
+                      showToast(res.error || "Login error");
+                    } else {
+                      setIsCloudAuthed(true);
+                      setActiveModal(null);
+                      showToast("Logged in! Cloudflare Edge active.");
+                    }
+                  }
+                } finally {
+                  setAuthLoading(false);
+                }
+              }}
+              className="mt-4 space-y-3"
+            >
+              <div>
+                <label className="block text-[11px] font-bold text-[#73819A] mb-1">
+                  EMAIL ADDRESS
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="firieapp@gmail.com"
+                  value={authEmail}
+                  onChange={(e) => setAuthEmail(e.target.value)}
+                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] dark:bg-[#0C1527] px-3.5 py-2.5 text-xs font-bold text-[#18181B] dark:text-white outline-none focus:border-[#FF7F02]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-[#73819A] mb-1">
+                  PASSWORD (MIN 6 CHARACTERS)
+                </label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  placeholder="••••••••"
+                  value={authPassword}
+                  onChange={(e) => setAuthPassword(e.target.value)}
+                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] dark:bg-[#0C1527] px-3.5 py-2.5 text-xs font-bold text-[#18181B] dark:text-white outline-none focus:border-[#FF7F02]"
+                />
+              </div>
+
+              <div className="rounded-xl bg-orange-50 dark:bg-orange-950/20 p-2.5 text-[10px] text-orange-700 dark:text-orange-300">
+                🔒 Protected by Cloudflare Edge with SHA-256 WebCrypto and SQLite D1.
+              </div>
+
+              <button
+                type="submit"
+                disabled={authLoading}
+                className="mt-2 flex h-11 w-full items-center justify-center rounded-xl bg-[#FF7F02] text-xs font-bold text-white shadow-md active:scale-95 disabled:opacity-50"
+              >
+                {authLoading
+                  ? "Connecting to Cloudflare..."
+                  : authMode === "signup"
+                  ? "Create Cloudflare Account"
+                  : "Log In"}
               </button>
             </form>
           </div>

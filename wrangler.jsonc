@@ -1,12 +1,28 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "firie",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-11-23",
   "observability": {
     "enabled": true
   },
   "assets": {
     "directory": "dist",
-    "not_found_handling": "single-page-application"
+    "not_found_handling": "single-page-application",
+    "binding": "ASSETS"
   }
+  // To connect Cloudflare D1 Database & R2 Storage once created in your Cloudflare dashboard:
+  // "d1_databases": [
+  //   {
+  //     "binding": "DB",
+  //     "database_name": "firie-db",
+  //     "database_id": "<YOUR-D1-DATABASE-ID>"
+  //   }
+  // ],
+  // "r2_buckets": [
+  //   {
+  //     "binding": "PHOTOS",
+  //     "bucket_name": "firie-photos"
+  //   }
+  // ]
 }

@@ -24,3 +24,7 @@ build-ipa-temp/
 # Root duplicate binaries (public/ has the live distribution packages)
 /FITLY.apk
 /FITLY.ipa
+
+# Intermediate design video assets
+design/**/*.mp4
+design/*.mp4
