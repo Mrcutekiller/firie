@@ -271,7 +271,7 @@ export default function ClosetScreen() {
                 {categoryTab === "all" ? "Your closet is empty" : `No ${CATEGORY_LABELS[categoryTab as Category]} yet`}
               </h3>
               <p className="mt-1.5 text-xs text-[#64748B] dark:text-[#94A3B8] max-w-xs mx-auto leading-relaxed">
-                Add a photo of your clothes and ፍሬ (Firie) will automatically remove the background and categorize each piece.
+                Add a photo of your clothes and Firie will automatically remove the background and categorize each piece.
               </p>
               <div className="mt-5 flex flex-col gap-2 max-w-[220px] mx-auto">
                 <button

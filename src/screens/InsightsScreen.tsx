@@ -50,15 +50,15 @@ export default function InsightsScreen() {
         .map(itemById)
         .filter(Boolean)
         .map((item) => item?.name)
-        .join(" · ") || "Your ፍሬ (Firie) look"
+        .join(" · ") || "Your Firie look"
     : "No outfit selected yet";
 
   async function shareLook() {
-    const text = `Today's ፍሬ (Firie) look: ${outfitText}. Styled with ፍሬ (Firie).`;
+    const text = `Today's Firie look: ${outfitText}. Styled with Firie.`;
     const browserNavigator = navigator as Navigator & { share?: (data: ShareData) => Promise<void> };
     try {
       if (typeof browserNavigator.share === "function") {
-        await browserNavigator.share({ title: "Today's ፍሬ (Firie) look", text });
+        await browserNavigator.share({ title: "Today's Firie look", text });
       } else {
         await navigator.clipboard.writeText(text);
       }

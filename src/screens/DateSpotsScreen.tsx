@@ -177,7 +177,7 @@ export default function DateSpotsScreen() {
     if (res.results.length > 0) return res.results;
     return placeSections(near)[0].places.map((p) => ({
       place: p,
-      reason: "Recently added to ፍሬ (Firie)",
+      reason: "Recently added to Firie",
       score: 0,
       estTotalForPeople: null,
       distanceKm: null,
@@ -307,7 +307,7 @@ export default function DateSpotsScreen() {
                 Date Suggestions are Exclusive to Pro
               </h2>
               <p className="mt-1.5 text-xs text-slate-200 leading-relaxed font-normal">
-                Never feel underdressed or guess the bill. <b>ፍሬ Pro</b> curates top Addis Ababa cafes, romantic rooftops, and dinner spots with verified menu budgets in ETB and custom outfit pairing.
+                Never feel underdressed or guess the bill. <b>Firie Pro</b> curates top Addis Ababa cafes, romantic rooftops, and dinner spots with verified menu budgets in ETB and custom outfit pairing.
               </p>
             </div>
 
@@ -337,7 +337,7 @@ export default function DateSpotsScreen() {
                 onClick={() => navigate("/upgrade")}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#FF7F02] text-xs sm:text-sm font-black shadow-xl hover:bg-orange-50 active:scale-98 transition-all"
               >
-                <span>Upgrade to ፍሬ Pro · 600 ETB / month</span>
+                <span>Upgrade to Firie Pro · 600 ETB / month</span>
                 <span className="text-base">→</span>
               </button>
               <p className="mt-2 text-center text-[10px] text-white/70">
@@ -487,7 +487,7 @@ export default function DateSpotsScreen() {
             className="flex w-full items-center justify-between rounded-[15px] border border-[#dce5f0] bg-[#eef3fa] px-4 py-3 text-left dark:border-[#1E293B] dark:bg-[#16213b]"
           >
             <span>
-              <b className="block text-xs text-[#17375d] dark:text-[#DCE5F2]">Ask ፍሬ (Firie) for a spot</b>
+              <b className="block text-xs text-[#17375d] dark:text-[#DCE5F2]">Ask Firie for a spot</b>
               <span className="mt-0.5 block text-[10px] text-[#5f7396] dark:text-[#94A3B8]">
                 “Find me a romantic cafe for two under 1,500 ETB”
               </span>
@@ -607,7 +607,7 @@ export default function DateSpotsScreen() {
                 Ready for Your Real Locations
               </h3>
               <p className="mt-1.5 text-xs text-[#64748B] dark:text-[#94A3B8] max-w-sm mx-auto leading-relaxed">
-                All previous demo spots have been cleared. Send your locations, their real menus, and prices, and ፍሬ (Firie) will display them here with the interactive budget calculator and outfit matching!
+                All previous demo spots have been cleared. Send your locations, their real menus, and prices, and Firie will display them here with the interactive budget calculator and outfit matching!
               </p>
             </div>
           ) : (
@@ -714,14 +714,14 @@ export default function DateSpotsScreen() {
         <div className="space-y-4">
           {/* AI ask */}
           <div className="rounded-[15px] border border-[#e7ebf0] bg-white dark:border-[#1E293B] dark:bg-[#0F172A] p-3">
-            <label className="text-[10px] font-bold uppercase tracking-wider text-[#8392a7]">Ask ፍሬ (Firie)</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-[#8392a7]">Ask Firie</label>
             <div className="mt-1.5 flex gap-2">
               <input
                 value={askText}
                 onChange={(e) => setAskText(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && runAsk()}
                 placeholder="Romantic cafe for two under 1,500 ETB…"
-                aria-label="Ask ፍሬ (Firie) for a place"
+                aria-label="Ask Firie for a place"
                 className="min-w-0 flex-1 rounded-xl border border-[#e2e8ef] px-3 py-2.5 text-xs outline-none focus:border-[#7892b4]"
               />
               <Button onClick={runAsk} disabled={askBusy} className="px-3 py-2.5 text-xs">
@@ -843,7 +843,7 @@ export default function DateSpotsScreen() {
               <EmptyState
                 icon="🍽"
                 title="No listed place matches yet"
-                body="Try a wider budget or clear a filter. ፍሬ (Firie) only shows real, listed venues — it never invents restaurants."
+                body="Try a wider budget or clear a filter. Firie only shows real, listed venues — it never invents restaurants."
                 action={<Button variant="secondary" onClick={() => { setText(""); setMaxBudget(null); setMaxDistance(null); setCuisines([]); setTags([]); }}>Clear filters</Button>}
               />
             ) : (
@@ -1032,7 +1032,7 @@ export default function DateSpotsScreen() {
             <EmptyState
               icon="♡"
               title={collection === "All" ? "Nothing saved yet" : `Nothing in ${collection} yet`}
-              body="Tap the heart on any restaurant or cafe to keep it here — favourites stay with your ፍሬ (Firie) account."
+              body="Tap the heart on any restaurant or cafe to keep it here — favourites stay with your Firie account."
               action={<Button onClick={() => setTab("discover")}>Browse places</Button>}
             />
           ) : (
@@ -1190,7 +1190,7 @@ export default function DateSpotsScreen() {
             {closet.length === 0 ? (
               <div className="mt-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#1E293B] p-5 text-center">
                 <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
-                  Your closet is empty. Add a few pieces so ፍሬ (Firie) can curate an outfit for this venue.
+                  Your closet is empty. Add a few pieces so Firie can curate an outfit for this venue.
                 </p>
                 <button
                   onClick={() => {

@@ -680,7 +680,7 @@ return (
                   </h2>
                   <span
                     className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#3B82F6] text-white text-[10px] font-black shadow-sm"
-                    title="ፍሬ (Firie) Verified Color Harmony"
+                    title="Firie Verified Color Harmony"
                   >
                     ✓
                   </span>
@@ -950,7 +950,7 @@ return (
             <div className="mt-4 rounded-2xl bg-[#F1F5F9] dark:bg-[#1E293B] p-4 text-xs">
               <p className="font-bold text-[#18181B] dark:text-white flex items-center gap-1.5 mb-1">
                 <span>💡</span>
-                <span>ፍሬ (Firie) Styling Advice</span>
+                <span>Firie Styling Advice</span>
               </p>
               <p className="text-[#475569] dark:text-[#CBD5E1] leading-relaxed">
                 {weather.temperatureC >= 22
@@ -1061,7 +1061,7 @@ return (
               </button>
             </div>
             <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
-              ፍሬ (Firie) curates the best color match, style, and footwear for this event.
+              Firie curates the best color match, style, and footwear for this event.
             </p>
 
             {/* Options */}

@@ -1,6 +1,6 @@
-# ⚡ ፍሬ (Firie) - Complete Cloudflare Backend Architecture & Guide
+# ⚡ Firie - Complete Cloudflare Backend Architecture & Guide
 
-This document explains how **ፍሬ (Firie)** uses Cloudflare to power:
+This document explains how **Firie** uses Cloudflare to power:
 1. **User Sign Up & Login (Edge Authentication)**
 2. **Clothing Photos & Cutouts (Cloudflare R2 Object Storage - $0 Egress)**
 3. **Wardrobe Items, Outfit History & User Data (Cloudflare D1 Serverless SQLite)**
@@ -26,7 +26,7 @@ flowchart TD
 
 ## 1. Cloudflare D1 (Database)
 - **What it is**: Global, serverless SQLite running at the Cloudflare edge.
-- **Why it's used for ፍሬ (Firie)**:
+- **Why it's used for Firie**:
   - Sub-5ms database latency worldwide.
   - Zero server management, ACID transactions.
   - Generous free tier: **5 million reads/day, 100,000 writes/day, 10 GB storage**.
@@ -41,7 +41,7 @@ flowchart TD
 
 ## 2. Cloudflare R2 (Storage for User Photos)
 - **What it is**: S3-compatible object storage with **$0 egress fees** (unlike AWS S3 which charges per gigabyte of image downloads).
-- **Why it's used for ፍሬ (Firie)**:
+- **Why it's used for Firie**:
   - Users take and upload photos of their clothing and studio camera poses.
   - Photos are uploaded directly to R2 bucket `firie-photos`.
   - Photos are delivered through the Cloudflare Worker with aggressive CDN caching (`Cache-Control: public, max-age=31536000, immutable`).

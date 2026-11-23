@@ -197,7 +197,7 @@ export default function PhotoStyleCameraScreen() {
       return updated;
     });
     setLastSavedThumbnail(dataUrl);
-    setCaptureToast("✓ Photo imported to ፍሬ Gallery!");
+    setCaptureToast("✓ Photo imported to Firie Gallery!");
     setTimeout(() => setCaptureToast(null), 3000);
   };
 
@@ -394,7 +394,7 @@ export default function PhotoStyleCameraScreen() {
       return updated;
     });
 
-    setCaptureToast("📸 Photo saved to ፍሬ Gallery! Tap gallery to save to device");
+    setCaptureToast("📸 Photo saved to Firie Gallery! Tap gallery to save to device");
     setTimeout(() => setCaptureToast(null), 3500);
 
     // Record pose usage & note free quota
@@ -479,8 +479,8 @@ export default function PhotoStyleCameraScreen() {
 
       if (nav && "share" in nav && typeof nav.share === "function") {
         await nav.share({
-          title: "My ፍሬ Look",
-          text: `Wearing my look with ፍሬ (Firie) Photo Style Camera (${activePose.name})!`,
+          title: "My Firie Look",
+          text: `Wearing my look with Firie Photo Style Camera (${activePose.name})!`,
           files: [file],
         });
         setShareFeedback("Shared successfully!");
@@ -697,7 +697,7 @@ export default function PhotoStyleCameraScreen() {
             {/* Firie Wordmark — Centered, spaced typography */}
             <div className="flex items-center gap-1.5">
               <span className="text-[16px] font-black tracking-wider text-white drop-shadow-md">
-                ፍሬ <span className="text-[#FF7F02] text-xs font-bold tracking-normal">Firie</span>
+                Firie <span className="text-[#FF7F02] text-xs font-bold tracking-normal">Firie</span>
               </span>
             </div>
 

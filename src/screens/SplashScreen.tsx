@@ -53,20 +53,18 @@ export default function SplashScreen({ onDone }: Props) {
         </span>
       </div>
 
-      {/* Center Opening Hero: App Logo and Name */}
+      {/* Center Opening Hero: App Logo and Name (Clean Floating Emblem without Box) */}
       <div className="relative z-10 flex flex-col items-center justify-center px-6 text-center my-auto">
-        <div className="relative mb-6">
-          <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#FF7F02] to-[#FFA24C] opacity-40 blur-xl animate-pulse" />
-          <div className="relative flex h-24 w-24 items-center justify-center rounded-3xl bg-white shadow-2xl p-3 border-2 border-orange-200">
-            <BrandLogo size={76} rounded="rounded-2xl" />
-          </div>
+        <div className="relative mb-5 flex items-center justify-center">
+          <div className="absolute -inset-6 rounded-full bg-[#FF7F02] opacity-40 blur-2xl animate-pulse" />
+          <BrandLogo size={96} className="relative drop-shadow-[0_8px_28px_rgba(255,127,2,0.6)]" />
         </div>
 
-        <h1 className="text-4xl font-black tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-          ፍሬ <span className="text-[#FF7F02] text-3xl font-extrabold">(Firie)</span>
+        <h1 className="text-5xl font-black tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+          Firie
         </h1>
 
-        <p className="mt-2 text-xs font-bold tracking-widest uppercase text-orange-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <p className="mt-2 text-xs font-bold tracking-widest uppercase text-orange-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           Precision Wardrobe Intelligence
         </p>
 

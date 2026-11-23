@@ -29,7 +29,7 @@ const PERKS = [
  */
 export default function ProGateScreen({
   title = "Date Spots is a Pro feature",
-  description = "Discover venues, check verified menu prices, plan your dates and match an outfit to every spot — all included with ፍሬ (Firie) Pro.",
+  description = "Discover venues, check verified menu prices, plan your dates and match an outfit to every spot — all included with Firie Pro.",
 }: {
   title?: string;
   description?: string;
@@ -77,7 +77,7 @@ export default function ProGateScreen({
 
       <div className="mt-6 w-full rounded-2xl border border-orange-200 bg-orange-50/60 p-3.5 dark:border-zinc-800 dark:bg-zinc-900/60">
         <p className="text-[10px] font-black uppercase tracking-wider text-[#FF7F02]">
-          ፍሬ (Firie) Pro
+          Firie Pro
         </p>
         <p className="mt-1 text-sm font-black text-[#18181B] dark:text-white">
           600 ETB <span className="text-xs font-bold text-[#71717A]">/ month</span>
@@ -91,7 +91,7 @@ export default function ProGateScreen({
         onClick={() => navigate("/upgrade")}
         className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-xs font-black text-white shadow-xl shadow-orange-500/25 transition-transform active:scale-98"
       >
-        <span>Upgrade to ፍሬ Pro</span>
+        <span>Upgrade to Firie Pro</span>
         <span>→</span>
       </button>
 

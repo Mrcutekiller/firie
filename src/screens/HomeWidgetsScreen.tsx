@@ -66,7 +66,7 @@ export default function HomeWidgetsScreen() {
 
   const handleCopyTokens = () => {
     const spec = {
-      app: "ፍሬ (Firie) Mobile",
+      app: "Firie Mobile",
       widget: `FigCraft Interactive Widget (${size.toUpperCase()})`,
       interactiveIntent: "QuickStyleIntent (Runs in background without app launch)",
       theme: widgetTheme,
@@ -370,7 +370,7 @@ export default function HomeWidgetsScreen() {
               {/* Header with Quick Style Me */}
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-black tracking-wider text-[#3B82F6]">ፍሬ (Firie)</span>
+                  <span className="text-xs font-black tracking-wider text-[#3B82F6]">Firie</span>
                   <span className="text-[10px] opacity-75">· {profile.city}</span>
                 </div>
                 <button
@@ -492,7 +492,7 @@ export default function HomeWidgetsScreen() {
             <div className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-600 text-white text-base shadow-sm">
               F
             </div>
-            <span>ፍሬ (Firie)</span>
+            <span>Firie</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <div className="grid h-11 w-11 place-items-center rounded-2xl bg-rose-500 text-white text-base shadow-sm">
@@ -556,7 +556,7 @@ export default function HomeWidgetsScreen() {
                 In-Widget Interactive Execution
               </h3>
               <p className="text-[10.5px] text-[#73819A]">
-                Runs in the background without launching the ፍሬ (Firie) app
+                Runs in the background without launching the Firie app
               </p>
             </div>
           </div>
@@ -588,7 +588,7 @@ export default function HomeWidgetsScreen() {
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
           <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-3">
-              <h3 className="text-base font-black tracking-tight">Add ፍሬ (Firie) to Home Screen</h3>
+              <h3 className="text-base font-black tracking-tight">Add Firie to Home Screen</h3>
               <button
                 onClick={() => setShowInstallHelp(false)}
                 className="grid h-8 w-8 place-items-center rounded-full bg-black/5 dark:bg-white/10 text-sm font-bold"
@@ -637,7 +637,7 @@ export default function HomeWidgetsScreen() {
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 dark:bg-blue-900/60 text-[10px] font-black text-blue-700 dark:text-blue-300">
                       2
                     </span>
-                    <p>Tap the <b>+</b> button in the top corner and search for <b>ፍሬ (Firie)</b>.</p>
+                    <p>Tap the <b>+</b> button in the top corner and search for <b>Firie</b>.</p>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 dark:bg-blue-900/60 text-[10px] font-black text-blue-700 dark:text-blue-300">
@@ -649,7 +649,7 @@ export default function HomeWidgetsScreen() {
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-amber-100 dark:bg-amber-900/60 text-[10px] font-black text-amber-700 dark:text-amber-300">
                       ✨
                     </span>
-                    <p>Tap <b>"Quick Style Me"</b> directly on your Home Screen anytime to get a new look without launching ፍሬ (Firie)!</p>
+                    <p>Tap <b>"Quick Style Me"</b> directly on your Home Screen anytime to get a new look without launching Firie!</p>
                   </div>
                 </>
               ) : (
@@ -664,7 +664,7 @@ export default function HomeWidgetsScreen() {
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-[10px] font-black text-emerald-700 dark:text-emerald-300">
                       2
                     </span>
-                    <p>Tap <b>Widgets</b> and scroll down to the <b>ፍሬ (Firie)</b> category.</p>
+                    <p>Tap <b>Widgets</b> and scroll down to the <b>Firie</b> category.</p>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-[10px] font-black text-emerald-700 dark:text-emerald-300">

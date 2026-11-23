@@ -9,7 +9,7 @@ import type { DatePlan, DatePlanOrderLine } from "../lib/types";
  * Bottom sheet to create or edit a date plan (§3.8).
  *
  * Everything here is honest by construction:
- *  - outfits are picked from the user's own closet (ፍሬ (Firie) never suggests items they don't own),
+ *  - outfits are picked from the user's own closet (Firie never suggests items they don't own),
  *  - menu order lines keep the venue's verification state (verified / estimate / unavailable),
  *  - the plan limit is enforced in the store; this sheet only surfaces the message.
  */
@@ -104,7 +104,7 @@ export default function DatePlanSheet({ placeId, plan, onClose }: Props) {
     }
     const saved = saveDatePlan(draft);
     if (!saved) {
-      setError("Free ፍሬ (Firie) keeps 3 date plans. Pro keeps unlimited plans with full editing.");
+      setError("Free Firie keeps 3 date plans. Pro keeps unlimited plans with full editing.");
       return;
     }
     onClose();
@@ -209,7 +209,7 @@ export default function DatePlanSheet({ placeId, plan, onClose }: Props) {
           </p>
           {closet.length === 0 ? (
             <p className="mt-1.5 rounded-xl bg-[#f4f6f8] px-3 py-2 text-[10.5px] leading-relaxed text-[#596575]">
-              Your closet is empty — add a few pieces first. ፍሬ (Firie) only styles clothes you own.
+              Your closet is empty — add a few pieces first. Firie only styles clothes you own.
             </p>
           ) : (
             <>

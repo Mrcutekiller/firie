@@ -99,7 +99,7 @@ export default function PlaceDetailScreen() {
         <EmptyState
           icon="📍"
           title="Place not found"
-          body="This venue isn't in ፍሬ (Firie)'s list — it may have been removed. We only keep real, listed places."
+          body="This venue isn't in Firie's list — it may have been removed. We only keep real, listed places."
           action={<Button onClick={() => navigate("/datespots")}>Back to Date Spots</Button>}
         />
       </div>
@@ -121,7 +121,7 @@ export default function PlaceDetailScreen() {
           </div>
           <h2 className="text-xl font-black text-white">Pro Exclusive Venue Details</h2>
           <p className="text-xs text-slate-200">
-            Verified menu budgets, dress codes, and custom closet pairing for <b>{place.name}</b> are exclusive to ፍሬ Pro members.
+            Verified menu budgets, dress codes, and custom closet pairing for <b>{place.name}</b> are exclusive to Firie Pro members.
           </p>
           <button
             onClick={() => navigate("/upgrade")}
@@ -534,7 +534,7 @@ export default function PlaceDetailScreen() {
         {closet.length === 0 ? (
           <div className="space-y-2">
             <p className="text-[11px] leading-relaxed text-[#7186a0]">
-              Your closet is empty. ፍሬ (Firie) only styles clothes you own — add a few pieces first.
+              Your closet is empty. Firie only styles clothes you own — add a few pieces first.
             </p>
             <Button variant="secondary" onClick={() => navigate("/add")} className="text-xs">
               Add closet items
@@ -631,7 +631,7 @@ export default function PlaceDetailScreen() {
                 <p className="text-2xl">✓</p>
                 <p className="mt-1 text-sm font-bold text-navy-900">Report filed</p>
                 <p className="mx-auto mt-1.5 max-w-[300px] text-[11px] leading-relaxed text-[#7186a0]">
-                  Thank you — ፍሬ (Firie) re-checks reports against the listed sources before changing anything. Nothing
+                  Thank you — Firie re-checks reports against the listed sources before changing anything. Nothing
                   on this page is edited automatically.
                 </p>
                 <Button className="mt-4" onClick={() => setReportOpen(false)}>

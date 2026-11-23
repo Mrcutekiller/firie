@@ -1,21 +1,28 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "firie",
-  "main": "worker/index.ts",
-  "compatibility_date": "2026-11-23",
-  "observability": {
-    "enabled": true
-  },
-  "assets": {
-    "directory": "dist",
-    "not_found_handling": "single-page-application",
-    "binding": "ASSETS"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "firie-db",
-      "database_id": "bfa66a87-51ba-4175-8679-7162e4af4cdf"
-    }
-  ]
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "firie",
+	"main": "worker/index.ts",
+	"compatibility_date": "2026-11-23",
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": "dist",
+		"not_found_handling": "single-page-application",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "firie-db",
+			"database_id": "bfa66a87-51ba-4175-8679-7162e4af4cdf"
+		}
+	],
+	"r2_buckets": [
+		{
+			"bucket_name": "firie-photos",
+			"binding": "firie_photos",
+			"remote": true
+		}
+	]
 }

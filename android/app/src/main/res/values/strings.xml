@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">ፍሬ (Firie)</string>
-    <string name="title_activity_main">ፍሬ (Firie)</string>
+    <string name="app_name">Firie</string>
+    <string name="title_activity_main">Firie</string>
     <string name="package_name">com.fitly.app</string>
     <string name="custom_url_scheme">com.fitly.app</string>
 </resources>

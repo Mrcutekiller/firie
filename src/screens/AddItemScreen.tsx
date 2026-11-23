@@ -206,7 +206,7 @@ export default function AddItemScreen() {
         {step === "capture" && (
           <div className="space-y-4">
             <h1 className="pt-3 text-[27px] font-extrabold tracking-[-.8px] text-[#102642]">Let’s add a piece.</h1>
-            <p className="-mt-3 text-xs text-[#76879c]">A clear photo helps ፍሬ (Firie) understand it.</p>
+            <p className="-mt-3 text-xs text-[#76879c]">A clear photo helps Firie understand it.</p>
             <button onClick={startCamera} className="flex h-[294px] w-full flex-col items-center justify-center rounded-[22px] border border-[#e3e9f0] bg-[#e7edf4] text-center transition-transform active:scale-[.99]">
               <span className="grid h-16 w-16 place-items-center rounded-full bg-[#d8e2ed] text-3xl text-[#526f94]">⌖</span>
               <span className="mt-4 text-sm font-semibold text-[#304a69]">Take a photo of your item</span>
@@ -261,7 +261,7 @@ export default function AddItemScreen() {
         {step === "review" && (
           <div className="space-y-4">
             <h1 className="pt-1 text-[27px] font-extrabold tracking-[-.8px] text-[#102642]">Let’s add a piece.</h1>
-            <p className="-mt-3 text-xs text-[#76879c]">A clear photo helps ፍሬ (Firie) understand it.</p>
+            <p className="-mt-3 text-xs text-[#76879c]">A clear photo helps Firie understand it.</p>
             <figure className="relative flex h-[294px] items-center justify-center overflow-hidden rounded-[22px] bg-[#e7edf4]">
               <img src={cleanImage || rawImage} alt="Background removed item" className="h-full w-full object-contain p-5" />
               <figcaption className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e7ebf0] bg-white px-3 py-2 text-[10px] font-semibold text-[#52627a]">✦ &nbsp;Background removed</figcaption>

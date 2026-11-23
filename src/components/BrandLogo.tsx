@@ -3,7 +3,7 @@ import { cn } from "./ui";
 const LOGO_SRC = "/logo/firie-logo.png";
 
 /**
- * Central brand mark for ፍሬ (Firie).
+ * Central brand mark for Firie.
  * Uses the modern orange citrus logo from /public/logo/firie-logo.png.
  */
 export default function BrandLogo({
@@ -18,7 +18,7 @@ export default function BrandLogo({
   return (
     <img
       src={LOGO_SRC}
-      alt="ፍሬ (Firie)"
+      alt="Firie"
       width={size}
       height={size}
       draggable={false}

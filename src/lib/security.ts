@@ -54,7 +54,7 @@ export function maskSecret(secret: string): string {
 export const PRICING_PLANS = Object.freeze({
   free: {
     id: "free",
-    name: "ፍሬ Free",
+    name: "Firie Free",
     monthlyPriceETB: 0,
     yearlyPriceETB: 0,
     outfitQuotaDaily: 1,
@@ -64,7 +64,7 @@ export const PRICING_PLANS = Object.freeze({
   },
   pro: {
     id: "pro",
-    name: "ፍሬ Pro",
+    name: "Firie Pro",
     monthlyPriceETB: 600,
     yearlyPriceETB: 4320, // 360 ETB/mo (40% discount)
     outfitQuotaDaily: Infinity,

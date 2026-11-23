@@ -1,5 +1,5 @@
 /**
- * ፍሬ (Firie) - Cloudflare Edge Worker API
+ * Firie - Cloudflare Edge Worker API
  * Powers Authentication, Serverless D1 SQLite Database, and R2 Object Storage
  */
 
@@ -201,7 +201,7 @@ export default {
     if (url.pathname === "/api/health") {
       return json({
         ok: true,
-        service: "ፍሬ (Firie) Cloudflare Backend",
+        service: "Firie Cloudflare Backend",
         version: "1.0.0",
         d1_active: Boolean(db),
         r2_active: Boolean(photos),

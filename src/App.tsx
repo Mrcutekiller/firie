@@ -56,13 +56,24 @@ export default function App() {
     setHasOnboarded(true);
   };
 
-  // Expose for testing welcome flow directly
+  // Expose for testing welcome flow directly and handle logout state transitions
   useEffect(() => {
+    const handleStorageChange = () => {
+      const onboarded = localStorage.getItem("fitly_onboarded") === "1";
+      setHasOnboarded(onboarded);
+      if (!onboarded) {
+        setShowSplash(false);
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+
     (window as unknown as { fitlyRestartOnboarding: () => void }).fitlyRestartOnboarding = () => {
       localStorage.removeItem("fitly_onboarded");
       setHasOnboarded(false);
       setShowSplash(true);
     };
+
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   // On Native Android / iOS app, show opening splash with page 10 video, then onboarding flow

@@ -13,6 +13,7 @@ import { generateOutfits, seasonForDate } from "./engine";
 import { getWeather } from "./weather";
 import { sanitizeProfileInput } from "./security";
 import { clearState, loadState, saveState, todayKey, weekKey } from "./storage";
+import { cloudflareBackend } from "./backend";
 import type { PlaceReport } from "./places";
 import {
   FREE_DAILY_OUTFIT_LIMIT,
@@ -312,6 +313,32 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [weather, setWeather] = useState<WeatherSnapshot | null>(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
 
+  // Automatically sync with Cloudflare on app mount if user is logged in
+  useEffect(() => {
+    if (cloudflareBackend.isAuthenticated()) {
+      (async () => {
+        try {
+          const [cloudProfile, cloudItems, cloudHistory] = await Promise.all([
+            cloudflareBackend.loadProfile(),
+            cloudflareBackend.listItems(),
+            cloudflareBackend.listHistory(),
+          ]);
+          if (cloudProfile) {
+            setProfileState((prev) => ({ ...prev, ...cloudProfile }));
+          }
+          if (cloudItems && cloudItems.length > 0) {
+            setCloset(cloudItems);
+          }
+          if (cloudHistory && cloudHistory.length > 0) {
+            setHistory(cloudHistory);
+          }
+        } catch (e) {
+          console.warn("Cloudflare auto-sync notice:", e);
+        }
+      })();
+    }
+  }, []);
+
   /* ----------------------------- persistence ----------------------------- */
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -524,17 +551,43 @@ export function AppProvider({ children }: { children: ReactNode }) {
         ...draft,
       };
       setCloset((prev) => [item, ...prev]);
+
+      // Automatically sync photo and item to Cloudflare Edge
+      if (cloudflareBackend.isAuthenticated()) {
+        (async () => {
+          try {
+            if (item.imageUrl && item.imageUrl.startsWith("data:")) {
+              const cloudUrl = await cloudflareBackend.uploadImage(item.imageUrl, item.name);
+              item.imageUrl = cloudUrl;
+            }
+            await cloudflareBackend.upsertItem(item);
+          } catch (e) {
+            console.warn("Cloudflare edge item save notice:", e);
+          }
+        })();
+      }
+
       return item;
     },
     [closet.length, profile.plan]
   );
 
   const updateItem = useCallback((id: string, patch: Partial<ClosetItem>) => {
-    setCloset((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
+    setCloset((prev) => {
+      const next = prev.map((i) => (i.id === id ? { ...i, ...patch } : i));
+      const target = next.find((i) => i.id === id);
+      if (target && cloudflareBackend.isAuthenticated()) {
+        cloudflareBackend.upsertItem(target).catch(console.warn);
+      }
+      return next;
+    });
   }, []);
 
   const deleteItem = useCallback((id: string) => {
     setCloset((prev) => prev.filter((i) => i.id !== id));
+    if (cloudflareBackend.isAuthenticated()) {
+      cloudflareBackend.deleteItem(id).catch(console.warn);
+    }
   }, []);
 
   /* ------------------------------- confirm ------------------------------- */
@@ -554,6 +607,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         createdAt: Date.now(),
       };
       setHistory((prev) => [log, ...prev.filter((h) => h.date !== date)]);
+      if (cloudflareBackend.isAuthenticated()) {
+        cloudflareBackend.addHistoryLog(log).catch(console.warn);
+      }
       setCloset((prev) =>
         prev.map((i) =>
           outfit.itemIds.includes(i.id)
@@ -582,7 +638,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   /* ------------------------------- profile ------------------------------- */
   const setProfile = useCallback((patch: Partial<UserProfile>) => {
     const cleanPatch = sanitizeProfileInput(patch);
-    setProfileState((p) => ({ ...p, ...cleanPatch }));
+    setProfileState((p) => {
+      const next = { ...p, ...cleanPatch };
+      if (cloudflareBackend.isAuthenticated()) {
+        cloudflareBackend.saveProfile(next).catch(console.warn);
+      }
+      return next;
+    });
   }, []);
 
   const upgradeToPro = useCallback((cycle: "monthly" | "yearly" = "monthly") => {

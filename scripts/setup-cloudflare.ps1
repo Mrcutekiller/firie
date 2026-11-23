@@ -1,9 +1,9 @@
-# ==============================================================================
-# ፍሬ (Firie) - Cloudflare Edge Automated Setup Script
+﻿# ==============================================================================
+# Firie - Cloudflare Edge Automated Setup Script
 # Sets up Cloudflare D1 SQLite Database and R2 Zero-Egress Storage
 # ==============================================================================
 
-Write-Host "⚡ Setting up ፍሬ (Firie) Cloudflare Backend Services..." -ForegroundColor Cyan
+Write-Host "⚡ Setting up Firie Cloudflare Backend Services..." -ForegroundColor Cyan
 
 # 1. Login check
 Write-Host "Checking Cloudflare Authentication..." -ForegroundColor Yellow

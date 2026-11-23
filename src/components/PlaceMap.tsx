@@ -6,7 +6,7 @@ import type { Place } from "../lib/places";
 /**
  * Interactive OpenStreetMap map with real coordinates.
  *
- * - markers for the listed venues (navy ፍሬ (Firie) pins via divIcon, so no
+ * - markers for the listed venues (navy Firie pins via divIcon, so no
  *   bundled marker assets are needed)
  * - click a marker → open that place's details
  * - external navigation is offered on the detail screen

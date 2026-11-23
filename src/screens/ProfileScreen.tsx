@@ -15,7 +15,6 @@ export default function ProfileScreen() {
     toggleTheme,
     clearAll,
     refreshWeather,
-    loadDemoCloset,
   } = useApp();
 
   const [notifications, setNotifications] = useState(
@@ -193,7 +192,7 @@ export default function ProfileScreen() {
         </span>
       </section>
 
-      {/* ── ፍሬ Pro Member Banner (Matching Reference Screen 5) ── */}
+      {/* ── Firie Pro Member Banner (Matching Reference Screen 5) ── */}
       <section className="flex items-center justify-between gap-3 rounded-2xl bg-[#FF7F02] p-4 text-white shadow-md">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-xl text-amber-300">
@@ -201,7 +200,7 @@ export default function ProfileScreen() {
           </div>
           <div>
             <h3 className="text-xs font-extrabold leading-tight">
-              {isPro ? "ፍሬ Pro Active" : "Upgrade to ፍሬ Pro"}
+              {isPro ? "Firie Pro Active" : "Upgrade to Firie Pro"}
             </h3>
             <p className="mt-0.5 text-[10.5px] text-white/70">
               {isPro
@@ -402,9 +401,12 @@ export default function ProfileScreen() {
                 onClick={() => {
                   cloudflareBackend.logout();
                   setIsCloudAuthed(false);
-                  showToast("Signed out of Cloudflare Edge.");
+                  localStorage.removeItem("fitly_onboarded");
+                  window.dispatchEvent(new Event("storage"));
+                  showToast("Signed out of Firie.");
+                  navigate("/welcome");
                 }}
-                className="rounded-xl border border-red-200 dark:border-red-900/60 px-3 py-2 text-xs font-bold text-red-600 dark:text-red-400 bg-white dark:bg-[#0F172A] active:scale-95"
+                className="rounded-xl border border-red-200 dark:border-red-900/60 px-4 py-2 text-xs font-bold text-red-600 dark:text-red-400 bg-white dark:bg-[#0F172A] active:scale-95 transition-transform"
               >
                 Sign Out
               </button>
@@ -413,55 +415,27 @@ export default function ProfileScreen() {
         </div>
       </section>
 
-      {/* ── Testing & Quick Tools ── */}
-      <section className="space-y-2">
-        <button
-          onClick={() => {
-            navigate("/landing");
-          }}
-          className="w-full rounded-2xl border border-teal-200 dark:border-teal-900/60 py-3 text-xs font-bold text-teal-600 dark:text-teal-400 bg-teal-50/50 dark:bg-teal-950/20 active:scale-98 transition-transform"
-        >
-          🌐 View Official Landing Page & Downloads
-        </button>
-
-        <button
-          onClick={() => {
-            navigate("/welcome");
-          }}
-          className="w-full rounded-2xl border border-indigo-200 dark:border-indigo-900/60 py-3 text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/20 active:scale-98 transition-transform"
-        >
-          🚀 Re-test Welcome & Onboarding Tour
-        </button>
-
-        <button
-          onClick={() => {
-            loadDemoCloset();
-            showToast("Sample wardrobe loaded with 24 items!");
-          }}
-          className="w-full rounded-2xl border border-blue-200 dark:border-blue-900/60 py-3 text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/20 active:scale-98 transition-transform"
-        >
-          ✨ Load Sample Wardrobe (For Testing)
-        </button>
-
+      {/* ── Account Reset Option (Clean & Professional) ── */}
+      <section>
         <button
           onClick={() => {
             if (
               window.confirm(
-                "Reset your closet to empty? This will clear all items and start fresh."
+                "Reset your closet to empty? This will clear all local pieces."
               )
             ) {
               clearAll();
-              showToast("Wardrobe cleared completely.");
+              showToast("Wardrobe cleared.");
             }
           }}
-          className="w-full rounded-2xl border border-red-200 dark:border-red-900/60 py-3 text-xs font-bold text-red-600 dark:text-red-400 bg-red-50/50 dark:bg-red-950/20 active:scale-98 transition-transform"
+          className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 py-3 text-xs font-bold text-zinc-500 hover:text-red-500 bg-zinc-50 dark:bg-zinc-900/50 active:scale-98 transition-all"
         >
-          Clear local wardrobe data (Start Fresh)
+          Reset Wardrobe Data (Start Fresh)
         </button>
       </section>
 
       <div className="rounded-2xl bg-[#EEF3F8] dark:bg-[#0F172A] p-4 text-[11px] leading-relaxed text-[#73819A]">
-        <b className="text-[#18181B] dark:text-white">Your outfit, your rules.</b> ፍሬ (Firie)
+        <b className="text-[#18181B] dark:text-white">Your outfit, your rules.</b> Firie
         pairs tops, bottoms and shoes, maintains harmonious contrast, and matches your style
         to Addis weather and occasions.
       </div>

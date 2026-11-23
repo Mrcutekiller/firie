@@ -88,7 +88,7 @@ export default function LandingPage() {
       title: "Your Wardrobe, Digitized.",
       subtitle: "Precision daily styling built from the clothes you already own.",
       description:
-        "Stop guessing what goes together every morning. ፍሬ (Firie) digitizes your real clothing, matches colors with color science, and assembles ready-to-wear outfits adapted to your live weather.",
+        "Stop guessing what goes together every morning. Firie digitizes your real clothing, matches colors with color science, and assembles ready-to-wear outfits adapted to your live weather.",
       video: "/videos/page-1.mp4",
       poster: "/images/page_previews/page_1.jpg",
       hasDownloadBtn: true,
@@ -107,7 +107,7 @@ export default function LandingPage() {
       title: "Swipe Through Today's Looks.",
       subtitle: "Magazine-quality flat-lay outfits assembled from what you own.",
       description:
-        "Every morning, ፍሬ (Firie) presents ready-to-wear combinations built exclusively from your closet. Swipe right to wear the look, or swipe left to pass to the next suggestion.",
+        "Every morning, Firie presents ready-to-wear combinations built exclusively from your closet. Swipe right to wear the look, or swipe left to pass to the next suggestion.",
       video: "/videos/page-2.mp4",
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: false,
@@ -126,7 +126,7 @@ export default function LandingPage() {
       title: "Balanced Proportions, Every Time.",
       subtitle: "From headwear to footwear, the whole silhouette is considered.",
       description:
-        "A great outfit is more than matching colors. ፍሬ (Firie) evaluates drape, fabric weight, and silhouette balance — pairing relaxed oversized pieces with structured bottoms for an effortless contemporary line.",
+        "A great outfit is more than matching colors. Firie evaluates drape, fabric weight, and silhouette balance — pairing relaxed oversized pieces with structured bottoms for an effortless contemporary line.",
       video: "/videos/page-3.mp4",
       poster: "/images/page_previews/page_3.jpg",
       hasDownloadBtn: false,
@@ -145,7 +145,7 @@ export default function LandingPage() {
       title: "Dressed for the Weather Outside.",
       subtitle: "Thermal comfort from the morning chill to the evening breeze.",
       description:
-        "ፍሬ (Firie) reads live weather data for your city. Whether it moves from 16°C in the morning to 24°C by afternoon in Addis Ababa, it selects the outer layers you can wear or stow without a second thought.",
+        "Firie reads live weather data for your city. Whether it moves from 16°C in the morning to 24°C by afternoon in Addis Ababa, it selects the outer layers you can wear or stow without a second thought.",
       video: "/videos/page-4.mp4",
       poster: "/images/page_previews/page_4.jpg",
       hasDownloadBtn: false,
@@ -164,7 +164,7 @@ export default function LandingPage() {
       title: "Venues, Dress Codes & Budgets.",
       subtitle: "Know where to go — and what to wear — before you leave.",
       description:
-        "Heading out for coffee, a rooftop sunset or a weekend celebration? ፍሬ (Firie) matches your outfit to curated spots in Addis Ababa and beyond, with verified menu prices and a budget calculator in ETB. Included with ፍሬ Pro.",
+        "Heading out for coffee, a rooftop sunset or a weekend celebration? Firie matches your outfit to curated spots in Addis Ababa and beyond, with verified menu prices and a budget calculator in ETB. Included with Firie Pro.",
       video: "/videos/page-5.mp4",
       poster: "/images/page_previews/page_5.jpg",
       hasDownloadBtn: false,
@@ -183,7 +183,7 @@ export default function LandingPage() {
       title: "Clothes That Move With You.",
       subtitle: "Tested in motion, so you look confident from every angle.",
       description:
-        "Garments should not only look good on a hanger or lying flat on a bed. ፍሬ (Firie) evaluates movement and drape so your clothes feel as good as they look while you walk.",
+        "Garments should not only look good on a hanger or lying flat on a bed. Firie evaluates movement and drape so your clothes feel as good as they look while you walk.",
       video: "/videos/page-6.mp4",
       poster: "/images/page_previews/page_6.jpg",
       hasDownloadBtn: false,
@@ -202,7 +202,7 @@ export default function LandingPage() {
       title: "Studio-Quality Cutouts, Instantly.",
       subtitle: "Turn ordinary closet photos into clean digital assets.",
       description:
-        "Photograph your hoodie, jacket or shoes anywhere — on a hanger, a bed or the carpet. ፍሬ (Firie) isolates the garment in milliseconds with precise edges, and every photo stays on your device.",
+        "Photograph your hoodie, jacket or shoes anywhere — on a hanger, a bed or the carpet. Firie isolates the garment in milliseconds with precise edges, and every photo stays on your device.",
       video: "/videos/page-7.mp4",
       poster: "/images/page_previews/page_7.jpg",
       hasDownloadBtn: false,
@@ -221,7 +221,7 @@ export default function LandingPage() {
       title: "Your Daily Look, Ready to Wear.",
       subtitle: "No morning decision fatigue. Ready in seconds.",
       description:
-        "Reclaim your mornings. ፍሬ (Firie) removes the daily stress of “what should I wear today?” so you start every day looking sharp, put-together, and authentically yourself.",
+        "Reclaim your mornings. Firie removes the daily stress of “what should I wear today?” so you start every day looking sharp, put-together, and authentically yourself.",
       video: "/videos/page-8.mp4",
       poster: "/images/page_previews/page_8.jpg",
       hasDownloadBtn: false,
@@ -240,7 +240,7 @@ export default function LandingPage() {
       title: "Tailored to Your Height, Build & Routine.",
       subtitle: "Personalized recommendations for your exact frame.",
       description:
-        "Whether you prefer clean streetwear or tailored minimalism, ፍሬ (Firie) personalizes your daily looks according to your build, age, comfort zone, and neighborhood vibe.",
+        "Whether you prefer clean streetwear or tailored minimalism, Firie personalizes your daily looks according to your build, age, comfort zone, and neighborhood vibe.",
       video: "/videos/page-9.mp4",
       poster: "/images/page_previews/page_1.jpg",
       hasDownloadBtn: false,
@@ -256,7 +256,7 @@ export default function LandingPage() {
       badge: "NATIVE MOBILE INTELLIGENCE",
       badgeColor: "bg-[#FF7F02] text-white",
       tagline: "IOS & ANDROID SUITE",
-      title: "The Full ፍሬ (Firie) Experience in Your Pocket.",
+      title: "The Full Firie Experience in Your Pocket.",
       subtitle: "Engineered from the ground up for iPhone and Android.",
       description:
         "Fast, fluid, and intuitive. Take high-precision closet photos, swipe through personalized daily outfits, and match your look with Addis Ababa's best spots wherever you go.",
@@ -274,11 +274,11 @@ export default function LandingPage() {
 
   const faqs = [
     {
-      q: "How does ፍሬ (Firie) choose outfits from my real clothes?",
-      a: "Simply take a photo of your garments on a hanger, bed, or floor. ፍሬ (Firie) automatically removes the background in milliseconds, tags each item by tone, category, and fabric, and uses color harmony science to assemble ready-to-wear flat-lay outfits adapted to your real-time local weather.",
+      q: "How does Firie choose outfits from my real clothes?",
+      a: "Simply take a photo of your garments on a hanger, bed, or floor. Firie automatically removes the background in milliseconds, tags each item by tone, category, and fabric, and uses color harmony science to assemble ready-to-wear flat-lay outfits adapted to your real-time local weather.",
     },
     {
-      q: "Can I install ፍሬ (Firie) directly on Android and iPhone without an App Store?",
+      q: "Can I install Firie directly on Android and iPhone without an App Store?",
       a: "Yes! For Android, click the Download button to get FITLY.apk and tap to install immediately. For iPhone, you can download the FITLY.ipa package or open this page in Safari and tap 'Add to Home Screen' for an instant standalone app.",
     },
     {
@@ -302,7 +302,7 @@ export default function LandingPage() {
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <span className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[#FF7F02] animate-ping" />
-            <span className="text-[#FF7F02] font-black">ፍሬ · FIRIE LOOKBOOK</span>
+            <span className="text-[#FF7F02] font-black">FIRIE LOOKBOOK</span>
             <span className="text-zinc-400">· 2026 COLLECTION</span>
           </span>
           <span className="hidden md:inline">DIGITAL WARDROBE INTELLIGENCE IN MOTION</span>
@@ -318,12 +318,12 @@ export default function LandingPage() {
             <div className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-xl sm:rounded-2xl bg-white p-1 shadow-sm border border-orange-200">
               <img
                 src="/logo/firie-logo.png"
-                alt="ፍሬ (Firie) Logo"
+                alt="Firie Logo"
                 className="h-full w-full object-contain"
               />
             </div>
             <span className="text-lg sm:text-xl font-black tracking-tight text-[#18181B]">
-              ፍሬ<span className="text-[#FF7F02]">.</span>
+              Firie<span className="text-[#FF7F02]">.</span>
               <span className="ml-1 text-xs font-bold text-[#FF7F02] tracking-normal">Firie</span>
             </span>
           </Link>
@@ -435,7 +435,7 @@ export default function LandingPage() {
                 }}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all"
               >
-                <span>Download ፍሬ (Firie) Mobile App</span>
+                <span>Download Firie Mobile App</span>
                 <span>⬇</span>
               </a>
               <button
@@ -602,7 +602,7 @@ export default function LandingPage() {
               OFFICIAL APPLICATION BUILDS
             </span>
             <h2 className="mt-3 text-2xl sm:text-4xl font-black text-[#18181B] tracking-tight">
-              Get ፍሬ (Firie) on Your Phone
+              Get Firie on Your Phone
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm text-[#71717A]">
               Direct downloads for Android and iPhone — no ads, no tracking, no store approval wait.
@@ -659,7 +659,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">Apple iOS (iPhone / iPad)</h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-[#71717A]">
-                  Install ፍሬ (Firie) on your iPhone in 5 seconds via Safari with zero extra software, or download the compiled IPA package.
+                  Install Firie on your iPhone in 5 seconds via Safari with zero extra software, or download the compiled IPA package.
                 </p>
                 <div className="mt-3.5 rounded-2xl bg-[#FFFBF7] border border-orange-100 p-3 sm:p-3.5 text-xs text-[#18181B] space-y-1">
                   <p className="font-black text-[#18181B] flex items-center gap-1.5">
@@ -771,7 +771,7 @@ export default function LandingPage() {
               </div>
               <div>
                 <span className="rounded-full bg-orange-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#FF7F02]">
-                  ፍሬ Pro
+                  Firie Pro
                 </span>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="text-3xl sm:text-4xl font-black text-[#18181B]">
@@ -847,9 +847,9 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <div className="grid h-7 w-7 sm:h-8 sm:w-8 place-items-center rounded-xl bg-white p-1 shadow-sm border border-orange-200">
-              <img src="/logo/firie-logo.png" alt="ፍሬ (Firie)" className="h-full w-full object-contain" />
+              <img src="/logo/firie-logo.png" alt="Firie" className="h-full w-full object-contain" />
             </div>
-            <span className="text-sm font-black text-[#18181B]">ፍሬ (Firie).</span>
+            <span className="text-sm font-black text-[#18181B]">Firie.</span>
             <span className="text-[11px]">· What to wear today</span>
           </div>
 
@@ -875,7 +875,7 @@ export default function LandingPage() {
           </div>
 
           <p className="text-[11px] text-[#A1A1AA]">
-            © {new Date().getFullYear()} ፍሬ (Firie) Inc. All rights reserved.
+            © {new Date().getFullYear()} Firie Inc. All rights reserved.
           </p>
         </div>
       </footer>
@@ -885,12 +885,12 @@ export default function LandingPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
           <div className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-3xl border border-orange-100 bg-white p-6 text-[#18181B] shadow-2xl text-xs space-y-3">
             <div className="flex items-center justify-between border-b border-orange-100 pb-3">
-              <h3 className="text-base font-black">ፍሬ (Firie) Privacy Policy</h3>
+              <h3 className="text-base font-black">Firie Privacy Policy</h3>
               <button onClick={() => setShowPrivacyModal(false)} className="text-base font-bold text-[#FF7F02]">✕</button>
             </div>
             <p className="text-[#71717A]"><b>Last updated:</b> November 2026</p>
             <p className="leading-relaxed text-[#52525B]">
-              At ፍሬ (Firie), we respect your privacy. This policy outlines how your data is handled when you use our mobile and web application.
+              At Firie, we respect your privacy. This policy outlines how your data is handled when you use our mobile and web application.
             </p>
             <h4 className="font-bold text-[#18181B] pt-2">1. Information We Collect</h4>
             <p className="leading-relaxed text-[#52525B]">
@@ -920,24 +920,24 @@ export default function LandingPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
           <div className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-3xl border border-orange-100 bg-white p-6 text-[#18181B] shadow-2xl text-xs space-y-3">
             <div className="flex items-center justify-between border-b border-orange-100 pb-3">
-              <h3 className="text-base font-black">ፍሬ (Firie) Terms of Service</h3>
+              <h3 className="text-base font-black">Firie Terms of Service</h3>
               <button onClick={() => setShowTermsModal(false)} className="text-base font-bold text-[#FF7F02]">✕</button>
             </div>
             <p className="text-[#71717A]"><b>Last updated:</b> November 2026</p>
             <p className="leading-relaxed text-[#52525B]">
-              By accessing or downloading ፍሬ (Firie), you agree to be bound by these Terms of Service.
+              By accessing or downloading Firie, you agree to be bound by these Terms of Service.
             </p>
             <h4 className="font-bold text-[#18181B] pt-2">1. Use of Service</h4>
             <p className="leading-relaxed text-[#52525B]">
-              ፍሬ (Firie) provides AI-assisted outfit recommendations and photography pose guidance. You are responsible for ensuring images uploaded belong to you or do not infringe third-party rights.
+              Firie provides AI-assisted outfit recommendations and photography pose guidance. You are responsible for ensuring images uploaded belong to you or do not infringe third-party rights.
             </p>
             <h4 className="font-bold text-[#18181B] pt-2">2. Subscriptions & Billing</h4>
             <p className="leading-relaxed text-[#52525B]">
-              ፍሬ Pro subscriptions renew automatically unless canceled prior to the end of the billing cycle. You may cancel your subscription at any time under App Settings → Billing.
+              Firie Pro subscriptions renew automatically unless canceled prior to the end of the billing cycle. You may cancel your subscription at any time under App Settings → Billing.
             </p>
             <h4 className="font-bold text-[#18181B] pt-2">3. Limitation of Liability</h4>
             <p className="leading-relaxed text-[#52525B]">
-              ፍሬ services are provided on an "as is" and "as available" basis.
+              Firie services are provided on an "as is" and "as available" basis.
             </p>
             <button
               onClick={() => setShowTermsModal(false)}

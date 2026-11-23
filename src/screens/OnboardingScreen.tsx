@@ -182,12 +182,10 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
       {/* Top Header & Brand */}
       <header className="relative z-10 pt-10 px-6 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white p-1.5 shadow-lg border border-orange-200">
-            <BrandLogo size={28} rounded="rounded-lg" />
-          </div>
+          <BrandLogo size={34} className="drop-shadow-md" />
           <div>
-            <span className="text-base font-black tracking-tight text-white leading-none">
-              ፍሬ <span className="text-[#FF7F02] text-sm">(Firie)</span>
+            <span className="text-lg font-black tracking-tight text-white leading-none">
+              Firie
             </span>
             <p className="text-[9px] font-bold text-orange-200 tracking-wider uppercase">
               Addis Ababa · 2026
@@ -283,7 +281,7 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
                 disabled={loading}
                 className="mt-2 flex h-12 w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#FF7F02] to-[#FF9E3B] text-sm font-black text-white shadow-lg shadow-orange-500/30 border border-white/20 active:scale-95 disabled:opacity-50 transition-all"
               >
-                {loading ? "Logging in..." : "Log In to ፍሬ (Firie)"}
+                {loading ? "Logging in..." : "Log In to Firie"}
               </button>
 
               <div className="text-center pt-2">
@@ -646,7 +644,7 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
 
       {/* Subtle bottom note */}
       <footer className="relative z-10 pb-6 text-center text-[10px] text-white/50">
-        ፍሬ (Firie) Digital Wardrobe Intelligence · Addis Ababa
+        Firie Digital Wardrobe Intelligence · Addis Ababa
       </footer>
     </div>
   );

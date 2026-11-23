@@ -1,5 +1,5 @@
 -- ==============================================================================
--- ፍሬ (Firie) - Cloudflare D1 Database Schema
+-- Firie - Cloudflare D1 Database Schema
 -- Distributed Serverless SQLite at the Cloudflare Edge
 -- ==============================================================================
 

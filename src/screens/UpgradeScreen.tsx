@@ -71,7 +71,7 @@ export default function UpgradeScreen() {
 
   const handleUpgrade = (selectedCycle: "monthly" | "yearly") => {
     upgradeToPro(selectedCycle);
-    showToast(`🎉 Upgraded to ፍሬ Pro (${selectedCycle === "yearly" ? "Annual" : "Monthly"})!`);
+    showToast(`🎉 Upgraded to Firie Pro (${selectedCycle === "yearly" ? "Annual" : "Monthly"})!`);
   };
 
   const handleExtend = () => {
@@ -130,7 +130,7 @@ export default function UpgradeScreen() {
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-[11px] font-black text-white border border-white/30 backdrop-blur-xs">
                 <span>👑</span>
-                <span>ፍሬ PRO</span>
+                <span>Firie PRO</span>
               </span>
 
               <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-3 py-1 text-[10px] font-bold text-emerald-200 border border-emerald-400/30">
@@ -274,7 +274,7 @@ export default function UpgradeScreen() {
               👑
             </div>
             <p className="mt-3 text-[10px] font-black uppercase tracking-widest text-white/90">
-              ፍሬ PRO PASS
+              Firie PRO PASS
             </p>
             <h2 className="mt-1 text-2xl font-black tracking-tight leading-tight">
               Unlock Your Complete<br />Wardrobe &amp; AI Studio
@@ -316,7 +316,7 @@ export default function UpgradeScreen() {
 
             <div className="mt-4 flex items-baseline justify-between border-b border-orange-100 dark:border-zinc-800 pb-3">
               <div>
-                <b className="text-sm font-black text-[#18181B] dark:text-white">ፍሬ Pro Plan</b>
+                <b className="text-sm font-black text-[#18181B] dark:text-white">Firie Pro Plan</b>
                 <p className="text-[10px] text-[#71717A]">
                   {cycle === "monthly" ? "Billed 600 ETB/month" : "Billed 4,320 ETB/year (Save 40%)"}
                 </p>
@@ -408,7 +408,7 @@ export default function UpgradeScreen() {
               onClick={() => handleUpgrade(cycle)}
               className="flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-sm font-black text-white shadow-xl shadow-orange-500/25 transition-transform active:scale-98"
             >
-              <span>Unlock ፍሬ Pro · {cycle === "monthly" ? "600 ETB/mo" : "4,320 ETB/yr (40% OFF)"}</span>
+              <span>Unlock Firie Pro · {cycle === "monthly" ? "600 ETB/mo" : "4,320 ETB/yr (40% OFF)"}</span>
               <span>→</span>
             </button>
 

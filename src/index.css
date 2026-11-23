@@ -11,7 +11,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------------------
-   ፍሬ (Firie) theme — White & Orange (#FF7F02)
+   Firie theme — White & Orange (#FF7F02)
    Clean high-fashion white surfaces with vibrant citrus orange brand accents.
    --------------------------------------------------------------------------- */
 @theme {

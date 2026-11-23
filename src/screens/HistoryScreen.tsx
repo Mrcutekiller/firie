@@ -93,14 +93,14 @@ export default function HistoryScreen() {
         <h1 className="text-[27px] font-bold leading-tight tracking-[-.8px]">Outfit history.</h1>
         <p className="-mt-2 text-[11px] text-[#828994]">Swipe through your saved looks by day.</p>
         <div className="mt-3 rounded-[20px] border border-[#eceef1] bg-white p-4">
-          <p className="text-[10px] font-bold tracking-wide text-[#9a7a4d]">ፍሬ PRO</p>
+          <p className="text-[10px] font-bold tracking-wide text-[#9a7a4d]">Firie PRO</p>
           <p className="mt-1 text-sm font-bold text-[#171b22]">A little look back.</p>
           <div className="mt-3 space-y-2 opacity-65 blur-[.4px]">
             {["Navy layers, soft denim", "Warm tones, easy layers"].map((look, index) => <div key={look} className="flex items-center gap-3 rounded-xl bg-[#f4f5f7] p-2.5"><span className={`h-10 w-10 rounded-lg ${index ? "bg-[#bd7958]" : "bg-[#23364d]"}`} /><span className="text-[10px] font-semibold">{look}</span><span className="ml-auto text-[9px] text-[#8a9099]">◷</span></div>)}
           </div>
           <ProLock onUpgrade={() => navigate("/upgrade")} note="Save every outfit by date, swipe through past looks, and revisit the pieces you wore." />
         </div>
-        <p className="text-center text-[10px] leading-relaxed text-[#8a9099]">Your closet and daily outfit suggestions stay free. History is included with ፍሬ Pro.</p>
+        <p className="text-center text-[10px] leading-relaxed text-[#8a9099]">Your closet and daily outfit suggestions stay free. History is included with Firie Pro.</p>
       </div>
     );
   }

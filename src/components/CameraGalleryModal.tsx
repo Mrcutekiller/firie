@@ -36,7 +36,7 @@ export default function CameraGalleryModal({
       const a = document.createElement("a");
       a.href = photo.dataUrl;
       const cleanName = photo.poseName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      a.download = `ፍሬ (Firie)_${cleanName}_${photo.id}.jpg`;
+      a.download = `Firie_${cleanName}_${photo.id}.jpg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -54,12 +54,12 @@ export default function CameraGalleryModal({
       const nav = typeof window !== "undefined" ? window.navigator : undefined;
       const res = await fetch(photo.dataUrl);
       const blob = await res.blob();
-      const file = new File([blob], `ፍሬ (Firie)_${photo.id}.jpg`, { type: "image/jpeg" });
+      const file = new File([blob], `Firie_${photo.id}.jpg`, { type: "image/jpeg" });
 
       if (nav && "share" in nav && typeof nav.share === "function") {
         await nav.share({
-          title: "My ፍሬ (Firie) Look",
-          text: `Styled with ፍሬ (Firie) Camera (${photo.poseName} · ${photo.filterName} filter)`,
+          title: "My Firie Look",
+          text: `Styled with Firie Camera (${photo.poseName} · ${photo.filterName} filter)`,
           files: [file],
         });
         setDownloadFeedback("Shared successfully!");
@@ -178,7 +178,7 @@ export default function CameraGalleryModal({
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-lg">🖼️</span>
-                  <h2 className="text-sm font-black tracking-tight uppercase text-white">ፍሬ (Firie) Gallery</h2>
+                  <h2 className="text-sm font-black tracking-tight uppercase text-white">Firie Gallery</h2>
                 </div>
                 <p className="text-[10px] text-white/60">
                   {photos.length} photo{photos.length === 1 ? "" : "s"} saved in app · Tap to save to device
@@ -220,7 +220,7 @@ export default function CameraGalleryModal({
                   <span className="text-4xl">📸</span>
                   <h3 className="mt-3 text-sm font-bold text-white">No Photos Yet</h3>
                   <p className="mt-1 text-xs text-white/50 max-w-xs">
-                    Snap photos with the ፍሬ (Firie) camera pose guides. All shots save here first, where you can select and save them to your device!
+                    Snap photos with the Firie camera pose guides. All shots save here first, where you can select and save them to your device!
                   </p>
                   <button
                     onClick={onClose}
