@@ -5,7 +5,9 @@
 
 export interface Env {
   DB?: D1Database;
+  firie_db?: D1Database;
   PHOTOS?: R2Bucket;
+  firie_photos?: R2Bucket;
   ASSETS?: Fetcher;
   JWT_SECRET?: string;
 }
@@ -192,6 +194,8 @@ export default {
     }
 
     const secret = env.JWT_SECRET || "firie-edge-secret-key-addis-2026";
+    const db = env.DB || env.firie_db;
+    const photos = env.PHOTOS || env.firie_photos;
 
     // 1. Health check & status
     if (url.pathname === "/api/health") {
@@ -199,19 +203,19 @@ export default {
         ok: true,
         service: "ፍሬ (Firie) Cloudflare Backend",
         version: "1.0.0",
-        d1_active: Boolean(env.DB),
-        r2_active: Boolean(env.PHOTOS),
+        d1_active: Boolean(db),
+        r2_active: Boolean(photos),
         timestamp: new Date().toISOString(),
       });
     }
 
     // 2. Photo Delivery from R2 Object Storage (with edge CDN caching)
     if (url.pathname.startsWith("/api/photo/")) {
-      if (!env.PHOTOS) {
+      if (!photos) {
         return error("R2 storage bucket is not configured", 503);
       }
       const key = decodeURIComponent(url.pathname.replace("/api/photo/", ""));
-      const object = await env.PHOTOS.get(key);
+      const object = await photos.get(key);
       if (!object) {
         return new Response("Photo not found", { status: 404 });
       }
@@ -226,7 +230,7 @@ export default {
 
     // 3. User Sign Up
     if (url.pathname === "/api/auth/signup" && request.method === "POST") {
-      if (!env.DB) return error("D1 Database binding missing in Cloudflare", 503);
+      if (!db) return error("D1 Database binding missing in Cloudflare", 503);
 
       const body = (await request.json().catch(() => ({}))) as {
         email?: string;
@@ -241,7 +245,7 @@ export default {
       }
 
       const email = body.email.trim().toLowerCase();
-      const existing = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
+      const existing = await db.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
       if (existing) {
         return error("An account with this email already exists.", 409);
       }
@@ -251,7 +255,7 @@ export default {
       const passwordHash = await hashPassword(body.password, salt);
       const now = Date.now();
 
-      await env.DB.prepare(
+      await db.prepare(
         `INSERT INTO users (id, email, password_hash, salt, name, city, gender, plan, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, 'free', ?, ?)`
       )
@@ -285,7 +289,7 @@ export default {
 
     // 4. User Login
     if (url.pathname === "/api/auth/login" && request.method === "POST") {
-      if (!env.DB) return error("D1 Database binding missing in Cloudflare", 503);
+      if (!db) return error("D1 Database binding missing in Cloudflare", 503);
 
       const body = (await request.json().catch(() => ({}))) as {
         email?: string;
@@ -297,7 +301,7 @@ export default {
       }
 
       const email = body.email.trim().toLowerCase();
-      const user = await env.DB.prepare("SELECT * FROM users WHERE email = ?")
+      const user = await db.prepare("SELECT * FROM users WHERE email = ?")
         .bind(email)
         .first<UserRow>();
 
@@ -344,8 +348,8 @@ export default {
 
     // 5. Get Current Profile
     if (url.pathname === "/api/auth/me" && request.method === "GET") {
-      if (!env.DB) return error("D1 Database not available", 503);
-      const user = await env.DB.prepare("SELECT * FROM users WHERE id = ?").bind(userId).first<UserRow>();
+      if (!db) return error("D1 Database not available", 503);
+      const user = await db.prepare("SELECT * FROM users WHERE id = ?").bind(userId).first<UserRow>();
       if (!user) return error("User not found", 404);
       return json({
         ok: true,
@@ -366,10 +370,10 @@ export default {
 
     // 6. Update Profile
     if (url.pathname === "/api/auth/profile" && request.method === "PUT") {
-      if (!env.DB) return error("D1 Database not available", 503);
+      if (!db) return error("D1 Database not available", 503);
       const body = (await request.json().catch(() => ({}))) as Partial<UserRow>;
       const now = Date.now();
-      await env.DB.prepare(
+      await db.prepare(
         `UPDATE users SET name = COALESCE(?, name), city = COALESCE(?, city), gender = COALESCE(?, gender),
          plan = COALESCE(?, plan), units = COALESCE(?, units), avoid_recently_worn = COALESCE(?, avoid_recently_worn),
          updated_at = ? WHERE id = ?`
@@ -390,8 +394,8 @@ export default {
 
     // 7. Photo Upload to Cloudflare R2
     if (url.pathname === "/api/upload" && request.method === "POST") {
-      if (!env.PHOTOS) {
-        return error("Cloudflare R2 bucket binding (PHOTOS) is missing", 503);
+      if (!photos) {
+        return error("Cloudflare R2 bucket binding is missing", 503);
       }
 
       const body = (await request.json().catch(() => ({}))) as {
@@ -420,7 +424,7 @@ export default {
       const ext = mimeType.split("/")[1] || "webp";
       const key = `${userId}/${Date.now()}-${generateId().slice(0, 8)}.${ext}`;
 
-      await env.PHOTOS.put(key, bytes, {
+      await photos.put(key, bytes, {
         httpMetadata: {
           contentType: mimeType,
         },
@@ -432,10 +436,10 @@ export default {
 
     // 8. Closet CRUD (D1 Database)
     if (url.pathname === "/api/closet") {
-      if (!env.DB) return error("D1 Database not available", 503);
+      if (!db) return error("D1 Database not available", 503);
 
       if (request.method === "GET") {
-        const rows = await env.DB.prepare(
+        const rows = await db.prepare(
           "SELECT * FROM closet_items WHERE user_id = ? ORDER BY created_at DESC"
         )
           .bind(userId)
@@ -467,7 +471,7 @@ export default {
         const itemId = item.id || generateId();
         const tags = item.tags ? JSON.stringify(item.tags) : "[]";
 
-        await env.DB.prepare(
+        await db.prepare(
           `INSERT INTO closet_items (id, user_id, name, category, slot, color, color_hex, image_url, season, style, tags, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
            ON CONFLICT(id) DO UPDATE SET
@@ -504,9 +508,9 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/closet/") && request.method === "DELETE") {
-      if (!env.DB) return error("D1 Database not available", 503);
+      if (!db) return error("D1 Database not available", 503);
       const itemId = url.pathname.replace("/api/closet/", "");
-      await env.DB.prepare("DELETE FROM closet_items WHERE id = ? AND user_id = ?")
+      await db.prepare("DELETE FROM closet_items WHERE id = ? AND user_id = ?")
         .bind(itemId, userId)
         .run();
       return json({ ok: true });
@@ -514,10 +518,10 @@ export default {
 
     // 9. Outfit History Logs (D1 Database)
     if (url.pathname === "/api/history") {
-      if (!env.DB) return error("D1 Database not available", 503);
+      if (!db) return error("D1 Database not available", 503);
 
       if (request.method === "GET") {
-        const rows = await env.DB.prepare(
+        const rows = await db.prepare(
           "SELECT * FROM outfit_logs WHERE user_id = ? ORDER BY date DESC, created_at DESC"
         )
           .bind(userId)
@@ -540,7 +544,7 @@ export default {
         }
 
         const logId = log.id || generateId();
-        await env.DB.prepare(
+        await db.prepare(
           `INSERT INTO outfit_logs (id, user_id, date, item_ids, reason, weather_summary, created_at)
            VALUES (?, ?, ?, ?, ?, ?, ?)`
         )
@@ -561,7 +565,7 @@ export default {
 
     // 10. Bidirectional Cloud Sync (Synchronize offline state with Cloudflare edge)
     if (url.pathname === "/api/sync" && request.method === "POST") {
-      if (!env.DB) return error("D1 Database not available", 503);
+      if (!db) return error("D1 Database not available", 503);
 
       const body = (await request.json().catch(() => ({}))) as {
         items?: any[];
@@ -574,7 +578,7 @@ export default {
       if (Array.isArray(body.items) && body.items.length > 0) {
         for (const item of body.items) {
           if (!item.id || !item.name) continue;
-          await env.DB.prepare(
+          await db.prepare(
             `INSERT INTO closet_items (id, user_id, name, category, slot, color, color_hex, image_url, season, style, tags, created_at, updated_at)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
              ON CONFLICT(id) DO UPDATE SET
@@ -603,13 +607,13 @@ export default {
       }
 
       // Fetch all authoritative items from D1
-      const dbItems = await env.DB.prepare(
+      const dbItems = await db.prepare(
         "SELECT * FROM closet_items WHERE user_id = ? ORDER BY created_at DESC"
       )
         .bind(userId)
         .all<ClosetRow>();
 
-      const dbHistory = await env.DB.prepare(
+      const dbHistory = await db.prepare(
         "SELECT * FROM outfit_logs WHERE user_id = ? ORDER BY date DESC"
       )
         .bind(userId)

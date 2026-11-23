@@ -105,6 +105,12 @@ export interface UserProfile {
   /** Pro subscription expiry date / next renewal (epoch ms). */
   proExpiresAt?: number | null;
   billingCycle?: "monthly" | "yearly";
+  /** Body and fit styling metadata */
+  height?: string;
+  bodyFit?: string;
+  ageGroup?: string;
+  preferredStyle?: string;
+  traditionalWear?: string;
 }
 
 export interface NewItemDraft {

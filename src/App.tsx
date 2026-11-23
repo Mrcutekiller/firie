@@ -21,16 +21,36 @@ import { useApp } from "./lib/store";
 
 export default function App() {
   const isNative = Capacitor.isNativePlatform();
-  const [showSplash, setShowSplash] = useState(
-    () => isNative && localStorage.getItem("fitly_onboarded") !== "1"
-  );
+  const [showSplash, setShowSplash] = useState(true);
   const [hasOnboarded, setHasOnboarded] = useState(
     () => localStorage.getItem("fitly_onboarded") === "1"
   );
   const { setProfile, isPro } = useApp();
 
-  const handleFinishOnboarding = (name: string, city: string, email: string, gender: "men" | "women") => {
-    setProfile({ name, city, email, gender });
+  const handleFinishOnboarding = (
+    name: string,
+    city: string,
+    email: string,
+    gender: "men" | "women",
+    extra?: {
+      height?: string;
+      bodyFit?: string;
+      ageGroup?: string;
+      preferredStyle?: string;
+      traditionalWear?: string;
+    }
+  ) => {
+    setProfile({
+      name,
+      city,
+      email,
+      gender,
+      height: extra?.height,
+      bodyFit: extra?.bodyFit,
+      ageGroup: extra?.ageGroup,
+      preferredStyle: extra?.preferredStyle,
+      traditionalWear: extra?.traditionalWear,
+    });
     localStorage.setItem("fitly_account_email", email);
     localStorage.setItem("fitly_onboarded", "1");
     setHasOnboarded(true);
@@ -41,10 +61,11 @@ export default function App() {
     (window as unknown as { fitlyRestartOnboarding: () => void }).fitlyRestartOnboarding = () => {
       localStorage.removeItem("fitly_onboarded");
       setHasOnboarded(false);
+      setShowSplash(true);
     };
   }, []);
 
-  // On Native Android / iOS app, show native splash and onboarding flow
+  // On Native Android / iOS app, show opening splash with page 10 video, then onboarding flow
   if (isNative) {
     if (showSplash) {
       return <SplashScreen onDone={() => setShowSplash(false)} />;
@@ -59,6 +80,10 @@ export default function App() {
   // On Native App: Default route `/` is the HomeScreen inside the Layout shell!
   return (
     <Routes>
+      <Route path="/splash" element={<SplashScreen onDone={() => setShowSplash(false)} />} />
+      <Route path="/welcome" element={<OnboardingScreen onDone={handleFinishOnboarding} />} />
+      <Route path="/login" element={<OnboardingScreen onDone={handleFinishOnboarding} initialMode="login" />} />
+      <Route path="/signup" element={<OnboardingScreen onDone={handleFinishOnboarding} initialMode="signup" />} />
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/about" element={<LandingPage />} />
       {!isNative && <Route path="/" element={<LandingPage />} />}

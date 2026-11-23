@@ -11,6 +11,8 @@ const NAV_MENU_ITEMS = [
   { id: "kinetic-motion", label: "Fabric & Movement", chapter: "06", icon: "🌊", desc: "Heavyweight cotton in motion" },
   { id: "ai-studio", label: "Studio Cutouts", chapter: "07", icon: "📸", desc: "Instant background removal" },
   { id: "daily-look", label: "Ready to Wear", chapter: "08", icon: "🧥", desc: "Zero morning decision fatigue" },
+  { id: "tailored-lifestyle", label: "Fit & Proportions", chapter: "09", icon: "📏", desc: "Height, frame & lifestyle" },
+  { id: "mobile-experience", label: "Native Mobile App", chapter: "10", icon: "📱", desc: "iOS & Android in motion" },
 ];
 
 export default function LandingPage() {
@@ -212,7 +214,7 @@ export default function LandingPage() {
       align: "text-left",
     },
     {
-      id: "daily-confidence",
+      id: "daily-look",
       badge: "EFFORTLESS DAILY CONFIDENCE",
       badgeColor: "bg-[#FF7F02] text-white",
       tagline: "READY TO WEAR",
@@ -222,11 +224,49 @@ export default function LandingPage() {
         "Reclaim your mornings. ፍሬ (Firie) removes the daily stress of “what should I wear today?” so you start every day looking sharp, put-together, and authentically yourself.",
       video: "/videos/page-8.mp4",
       poster: "/images/page_previews/page_8.jpg",
-      hasDownloadBtn: true,
+      hasDownloadBtn: false,
       bullets: [
         "Direct install for Android (APK) and iPhone (iOS)",
         "Free plan: one fresh look a day, three a week (up to 30 items)",
         "Pro plan: unlimited looks, complete Date Spots & outfit history (600 ETB/mo)",
+      ],
+      align: "video-left",
+    },
+    {
+      id: "tailored-lifestyle",
+      badge: "INTELLIGENT PROFILE & FIT STYLING",
+      badgeColor: "bg-[#FF7F02] text-white",
+      tagline: "PROPORTION ARCHITECTURE",
+      title: "Tailored to Your Height, Build & Routine.",
+      subtitle: "Personalized recommendations for your exact frame.",
+      description:
+        "Whether you prefer clean streetwear or tailored minimalism, ፍሬ (Firie) personalizes your daily looks according to your build, age, comfort zone, and neighborhood vibe.",
+      video: "/videos/page-9.mp4",
+      poster: "/images/page_previews/page_1.jpg",
+      hasDownloadBtn: false,
+      bullets: [
+        "Proportion mapping tailored to your height and silhouette",
+        "Seamless synchronization with your daily lifestyle",
+        "Culturally rooted contemporary Ethiopian fashion styling",
+      ],
+      align: "text-left",
+    },
+    {
+      id: "mobile-experience",
+      badge: "NATIVE MOBILE INTELLIGENCE",
+      badgeColor: "bg-[#FF7F02] text-white",
+      tagline: "IOS & ANDROID SUITE",
+      title: "The Full ፍሬ (Firie) Experience in Your Pocket.",
+      subtitle: "Engineered from the ground up for iPhone and Android.",
+      description:
+        "Fast, fluid, and intuitive. Take high-precision closet photos, swipe through personalized daily outfits, and match your look with Addis Ababa's best spots wherever you go.",
+      video: "/videos/page-10.mp4",
+      poster: "/images/page_previews/page_2.jpg",
+      hasDownloadBtn: true,
+      bullets: [
+        "Zero load time with local-first on-device intelligence",
+        "Optional Cloudflare edge backup for instant multi-device sync",
+        "Complete wardrobe autonomy and privacy",
       ],
       align: "video-left",
     },
@@ -297,6 +337,7 @@ export default function LandingPage() {
             <a href="#venue-spots" className="hover:text-[#FF7F02] transition-colors">Venues</a>
             <a href="#kinetic-motion" className="hover:text-[#FF7F02] transition-colors">Motion</a>
             <a href="#ai-studio" className="hover:text-[#FF7F02] transition-colors">Studio</a>
+            <a href="#tailored-lifestyle" className="hover:text-[#FF7F02] transition-colors">Lifestyle</a>
             <a href="#pricing" className="hover:text-[#FF7F02] transition-colors">Plans</a>
             <a href="#faq" className="hover:text-[#FF7F02] transition-colors">FAQ</a>
           </nav>
@@ -337,7 +378,7 @@ export default function LandingPage() {
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#FF7F02]">
                   Lookbook Chapters
                 </span>
-                <span className="text-[10px] font-bold text-zinc-400">8 Curated Sections</span>
+                <span className="text-[10px] font-bold text-zinc-400">10 Curated Sections</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
