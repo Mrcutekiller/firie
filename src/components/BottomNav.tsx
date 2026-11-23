@@ -68,7 +68,7 @@ function NavTab({
       end={end}
       className={({ isActive }) =>
         `flex flex-col items-center justify-center gap-[3px] h-[58px] flex-1 transition-all ${
-          isActive ? "text-white" : "text-[#8E9EB5] hover:text-[#DCE5F2]"
+          isActive ? "text-[#FF7F02] font-bold" : "text-[#71717A] hover:text-[#18181B] dark:hover:text-white"
         }`
       }
     >
@@ -76,7 +76,7 @@ function NavTab({
         <>
           <span
             className={`grid h-[32px] w-[32px] place-items-center rounded-xl transition-all ${
-              isActive ? "bg-[#1A2F5D] text-white shadow-sm" : ""
+              isActive ? "bg-orange-50 dark:bg-orange-950/50 text-[#FF7F02] shadow-xs" : ""
             }`}
           >
             <Icon name={icon} />
@@ -96,32 +96,32 @@ export default function BottomNav() {
       aria-label="Main navigation"
       className="fixed inset-x-0 bottom-3 z-30 flex justify-center px-4 pointer-events-none"
     >
-      {/* Floating Pill Nav Bar Container in Deep Navy #0B1F4B */}
-      <div className="relative pointer-events-auto flex h-[66px] w-full max-w-[430px] items-center justify-between rounded-[32px] border border-[#1E3260]/60 bg-[#0B1F4B] px-2 shadow-[0_12px_36px_rgba(11,31,75,0.45)] backdrop-blur-md">
+      {/* Floating Pill Nav Bar Container in Clean White & Orange */}
+      <div className="relative pointer-events-auto flex h-[66px] w-full max-w-[430px] items-center justify-between rounded-[32px] border border-orange-100 dark:border-zinc-800 bg-white/95 dark:bg-[#18181B]/95 px-2 shadow-[0_12px_36px_rgba(255,127,2,0.18)] backdrop-blur-md">
         {/* Tab 1: Outfits */}
         <NavTab to="/" icon="outfits" label="Outfits" end />
 
         {/* Tab 2: Closet */}
         <NavTab to="/closet" icon="closet" label="Closet" />
 
-        {/* Tab 3: Raised Emphasized Center Camera Button */}
+        {/* Tab 3: Raised Emphasized Center Camera Button in Brand Orange */}
         <div className="relative -top-4 flex flex-col items-center justify-center flex-1">
           <NavLink
             to="/camera"
             title="Open Camera Director"
             className={({ isActive }) =>
-              `group relative grid h-[58px] w-[58px] place-items-center rounded-full border-[3px] border-[#F3F6FA] dark:border-[#080D1A] shadow-[0_8px_20px_rgba(11,31,75,0.45)] transition-transform active:scale-95 ${
+              `group relative grid h-[58px] w-[58px] place-items-center rounded-full border-[3px] border-white dark:border-[#18181B] shadow-[0_8px_24px_rgba(255,127,2,0.4)] transition-transform active:scale-95 ${
                 isActive
-                  ? "bg-[#2563EB] text-white"
-                  : "bg-[#0B1F4B] text-white hover:bg-[#1A2F5D]"
+                  ? "bg-[#EA580C] text-white"
+                  : "bg-[#FF7F02] text-white hover:bg-[#EA580C]"
               }`
             }
           >
-            {/* Soft glowing ring */}
-            <span className="absolute -inset-1 rounded-full bg-[#DCE5F2]/25 blur-[4px] -z-10" />
+            {/* Soft glowing orange ring */}
+            <span className="absolute -inset-1 rounded-full bg-orange-500/25 blur-[4px] -z-10" />
             <Icon name="camera" />
           </NavLink>
-          <span className="mt-1 text-[8.5px] font-bold tracking-[.3px] text-[#DCE5F2] uppercase">
+          <span className="mt-1 text-[8.5px] font-bold tracking-[.3px] text-[#FF7F02] dark:text-orange-400 uppercase">
             Camera
           </span>
         </div>

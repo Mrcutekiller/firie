@@ -313,7 +313,7 @@ return (
           onClick={triggerRewind}
           aria-label="Previous outfit / Rewind"
           title="Previous Outfit / Rewind"
-          className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-base text-[#0B1F4B] dark:text-white shadow-sm transition-transform active:scale-95 hover:border-[#CBD5E1]"
+          className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-base text-[#18181B] dark:text-white shadow-sm transition-transform active:scale-95 hover:border-[#CBD5E1]"
         >
           <svg
             viewBox="0 0 24 24"
@@ -330,7 +330,7 @@ return (
 
         {/* Center: Title & Subtitle */}
         <div className="text-center">
-          <h1 className="text-base font-black tracking-tight text-[#0B1F4B] dark:text-white">
+          <h1 className="text-base font-black tracking-tight text-[#18181B] dark:text-white">
             Outfits You May Like
           </h1>
           <p className="text-[10px] font-medium text-[#73819A] dark:text-[#94A3B8]">
@@ -345,7 +345,7 @@ return (
             onClick={() => navigate("/widgets")}
             aria-label="Home Screen Widgets"
             title="Home Screen Widgets (FigCraft)"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#0B1F4B] dark:text-white shadow-sm transition-transform active:scale-95"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#18181B] dark:text-white shadow-sm transition-transform active:scale-95"
           >
             📱
           </button>
@@ -355,7 +355,7 @@ return (
             onClick={() => setShowOccasionModal(true)}
             aria-label="Filter occasion"
             title="Choose Occasion"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#0B1F4B] dark:text-white shadow-sm transition-transform active:scale-95"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#18181B] dark:text-white shadow-sm transition-transform active:scale-95"
           >
             🍸
           </button>
@@ -365,7 +365,7 @@ return (
             onClick={toggleTheme}
             aria-label="Toggle dark mode"
             title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#0B1F4B] dark:text-white shadow-sm transition-transform active:scale-95"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#162744] text-sm text-[#18181B] dark:text-white shadow-sm transition-transform active:scale-95"
           >
             {theme === "dark" ? "☀️" : "🌙"}
           </button>
@@ -383,7 +383,7 @@ return (
               className={cn(
                 "relative flex h-[46px] min-w-[48px] flex-1 flex-col items-center justify-center rounded-2xl transition-all shadow-xs active:scale-95",
                 isSelected
-                  ? "bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] shadow-md font-black"
+                  ? "bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] shadow-md font-black"
                   : "border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] text-[#64748B] dark:text-[#94A3B8]"
               )}
             >
@@ -393,7 +393,7 @@ return (
                 <span
                   className={cn(
                     "absolute bottom-1 h-1 w-1 rounded-full shadow-xs",
-                    isSelected ? "bg-white dark:bg-[#0B1F4B]" : "bg-emerald-500"
+                    isSelected ? "bg-white dark:bg-[#FF7F02]" : "bg-emerald-500"
                   )}
                 />
               )}
@@ -404,7 +404,7 @@ return (
 
       {/* ── Viewing Past / Planned Date Banner ── */}
       {isViewingPastDate && (
-        <div className="mx-1 mt-2 flex items-center justify-between rounded-2xl bg-[#DCE5F2] dark:bg-[#1E2E4B] px-3.5 py-1.5 text-xs font-bold text-[#0B1F4B] dark:text-white shadow-xs animate-fade">
+        <div className="mx-1 mt-2 flex items-center justify-between rounded-2xl bg-orange-100 dark:bg-[#1E2E4B] px-3.5 py-1.5 text-xs font-bold text-[#18181B] dark:text-white shadow-xs animate-fade">
           <div className="flex items-center gap-2">
             <span>🗓️</span>
             <span className="text-[11px]">
@@ -423,7 +423,7 @@ return (
           </div>
           <button
             onClick={() => setSelectedDateKey(todayKeyStr)}
-            className="rounded-full bg-white dark:bg-[#0B1F4B] px-2.5 py-0.5 text-[10px] font-black text-[#0B1F4B] dark:text-white shadow-xs active:scale-95"
+            className="rounded-full bg-white dark:bg-[#FF7F02] px-2.5 py-0.5 text-[10px] font-black text-[#18181B] dark:text-white shadow-xs active:scale-95"
           >
             Today ›
           </button>
@@ -436,7 +436,7 @@ return (
           <div className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-3xl shadow-inner">
             ✨
           </div>
-          <h2 className="mt-4 text-[20px] font-black text-[#0B1F4B] dark:text-white">
+          <h2 className="mt-4 text-[20px] font-black text-[#18181B] dark:text-white">
             Your Wardrobe Starts Here
           </h2>
           <p className="mt-2 text-xs leading-relaxed text-[#64748B] dark:text-[#94A3B8] max-w-[280px]">
@@ -446,14 +446,14 @@ return (
           <div className="mt-6 flex w-full max-w-[260px] flex-col gap-2">
             <button
               onClick={() => navigate("/add")}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] dark:bg-white text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md transition-transform active:scale-95"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md transition-transform active:scale-95"
             >
               <span>📸 Add Your First Piece</span>
             </button>
 
             <button
               onClick={loadDemoCloset}
-              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#0B1F4B] active:scale-95"
+              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#18181B] active:scale-95"
             >
               <span>✨ Load Sample Wardrobe (Test)</span>
             </button>
@@ -465,7 +465,7 @@ return (
           <div className="grid h-16 w-16 place-items-center rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-3xl shadow-inner">
             👑
           </div>
-          <h2 className="mt-4 text-[20px] font-black text-[#0B1F4B] dark:text-white">
+          <h2 className="mt-4 text-[20px] font-black text-[#18181B] dark:text-white">
             Your 3 free looks are used this week
           </h2>
           <p className="mt-2 text-xs leading-relaxed text-[#64748B] dark:text-[#94A3B8] max-w-[280px]">
@@ -476,14 +476,14 @@ return (
           <div className="mt-6 flex w-full max-w-[260px] flex-col gap-2">
             <button
               onClick={() => navigate("/upgrade")}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] dark:bg-white text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md transition-transform active:scale-95"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md transition-transform active:scale-95"
             >
               <span>👑 Upgrade to Pro</span>
             </button>
 
             <button
               onClick={() => navigate("/closet")}
-              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#0B1F4B] active:scale-95"
+              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#18181B] active:scale-95"
             >
               <span>Browse My Closet</span>
             </button>
@@ -613,7 +613,7 @@ return (
               )}
 
               {/* Top-Left: Match Score Pill Badge */}
-              <div className="absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full bg-white/90 dark:bg-[#0B1F4B]/90 backdrop-blur-md px-3 py-1.5 border border-black/5 dark:border-white/10 shadow-sm">
+              <div className="absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full bg-white/90 dark:bg-[#FF7F02]/90 backdrop-blur-md px-3 py-1.5 border border-black/5 dark:border-white/10 shadow-sm">
                 <span className="text-xs">✨</span>
                 <span className="text-[11px] font-black text-emerald-600 dark:text-emerald-400">
                   94% Match
@@ -631,7 +631,7 @@ return (
                   "absolute right-4 top-4 z-20 grid h-9 w-9 place-items-center rounded-full border shadow-sm active:scale-95 transition-all backdrop-blur-md",
                   isFavorite
                     ? "bg-rose-50 dark:bg-rose-950/60 border-rose-200 text-rose-500 text-base"
-                    : "bg-white/90 dark:bg-[#0B1F4B]/90 border-black/5 dark:border-white/10 text-slate-400 text-base"
+                    : "bg-white/90 dark:bg-[#FF7F02]/90 border-black/5 dark:border-white/10 text-slate-400 text-base"
                 )}
               >
                 {isFavorite ? "♥" : "♡"}
@@ -672,7 +672,7 @@ return (
               </div>
 
               {/* ── Glassmorphic In-Card Bottom Overlay (Matching Reference Design) ── */}
-              <div className="relative z-20 w-full rounded-b-[32px] bg-gradient-to-t from-[#0B1F4B]/95 via-[#0B1F4B]/80 to-transparent p-5 pt-12 text-white">
+              <div className="relative z-20 w-full rounded-b-[32px] bg-gradient-to-t from-[#FF7F02]/95 via-[#0B1F4B]/80 to-transparent p-5 pt-12 text-white">
                 {/* 1. Location & Weather Indicator */}
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-white/85">
                   <span className="text-amber-300">📍</span>
@@ -690,7 +690,7 @@ return (
                   </h2>
                   <span
                     className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#3B82F6] text-white text-[10px] font-black shadow-sm"
-                    title="FITLY Verified Color Harmony"
+                    title="ፍሬ (Firie) Verified Color Harmony"
                   >
                     ✓
                   </span>
@@ -843,7 +843,7 @@ return (
 
       {/* ── Lock Celebration Floating Toast ── */}
       {lockCelebration && (
-        <div className="fixed top-14 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-[#0B1F4B] dark:bg-white px-5 py-2.5 text-xs font-bold text-white dark:text-[#0B1F4B] shadow-2xl animate-bounce">
+        <div className="fixed top-14 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-[#FF7F02] dark:bg-white px-5 py-2.5 text-xs font-bold text-white dark:text-[#18181B] shadow-2xl animate-bounce">
           <span>✨</span>
           <span>Look locked in! Enjoy your style today.</span>
         </div>
@@ -852,7 +852,7 @@ return (
       {/* ── AI Styling Advice Bottom Sheet Modal (Triggered by 💬) ── */}
       {showAdviceModal && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-3">
               <div className="flex items-center gap-2">
                 <span className="text-xl">✨</span>
@@ -873,7 +873,7 @@ return (
 
             {/* AI Explanation Box */}
             <div className="mt-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#1E293B] p-4 text-xs">
-              <p className="font-bold text-[#0B1F4B] dark:text-white flex items-center gap-1.5 mb-1.5">
+              <p className="font-bold text-[#18181B] dark:text-white flex items-center gap-1.5 mb-1.5">
                 <span>💡</span>
                 <span>Why this combination works</span>
               </p>
@@ -920,7 +920,7 @@ return (
                   }
                   setShowAdviceModal(false);
                 }}
-                className="flex-1 rounded-2xl bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] py-3 text-xs font-bold active:scale-95 shadow-md"
+                className="flex-1 rounded-2xl bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] py-3 text-xs font-bold active:scale-95 shadow-md"
               >
                 ✓ Wear This Look
               </button>
@@ -938,7 +938,7 @@ return (
       {/* ── Weather & Daily Styling Advisory Sheet ── */}
       {showWeatherModal && weather && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-2">
               <div className="flex items-center gap-2">
                 <span className="text-2xl">{weather.icon}</span>
@@ -958,9 +958,9 @@ return (
             </div>
 
             <div className="mt-4 rounded-2xl bg-[#F1F5F9] dark:bg-[#1E293B] p-4 text-xs">
-              <p className="font-bold text-[#0B1F4B] dark:text-white flex items-center gap-1.5 mb-1">
+              <p className="font-bold text-[#18181B] dark:text-white flex items-center gap-1.5 mb-1">
                 <span>💡</span>
-                <span>FITLY Styling Advice</span>
+                <span>ፍሬ (Firie) Styling Advice</span>
               </p>
               <p className="text-[#475569] dark:text-[#CBD5E1] leading-relaxed">
                 {weather.temperatureC >= 22
@@ -983,7 +983,7 @@ return (
               </button>
               <button
                 onClick={() => setShowWeatherModal(false)}
-                className="flex-1 rounded-2xl bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] py-3 text-xs font-bold active:scale-95"
+                className="flex-1 rounded-2xl bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] py-3 text-xs font-bold active:scale-95"
               >
                 Got it
               </button>
@@ -995,7 +995,7 @@ return (
       {/* ── Garment Quick Inspector Modal ── */}
       {activeItem && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-3">
               <span className="text-[10px] font-black uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8]">
                 {activeItem.slot} · {activeItem.category}
@@ -1042,7 +1042,7 @@ return (
                   setActiveItem(null);
                   navigate("/closet");
                 }}
-                className="flex-1 rounded-2xl bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] py-3 text-xs font-bold active:scale-95"
+                className="flex-1 rounded-2xl bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] py-3 text-xs font-bold active:scale-95"
               >
                 Open in Closet 👗
               </button>
@@ -1060,7 +1060,7 @@ return (
       {/* ── Occasion Selector Modal / Bottom Sheet ── */}
       {showOccasionModal && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-3">
               <h3 className="text-lg font-black tracking-tight">What's the occasion?</h3>
               <button
@@ -1071,7 +1071,7 @@ return (
               </button>
             </div>
             <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
-              FITLY curates the best color match, style, and footwear for this event.
+              ፍሬ (Firie) curates the best color match, style, and footwear for this event.
             </p>
 
             {/* Options */}
@@ -1079,7 +1079,7 @@ return (
               {/* Option 1: Date */}
               <button
                 onClick={() => handleSelectOccasion("date")}
-                className="flex w-full items-center gap-3.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#1E293B]/60 p-3.5 text-left transition-all hover:border-[#0B1F4B] dark:hover:border-white hover:scale-[1.01]"
+                className="flex w-full items-center gap-3.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#1E293B]/60 p-3.5 text-left transition-all hover:border-[#FF7F02] dark:hover:border-white hover:scale-[1.01]"
               >
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#FEF2F2] dark:bg-[#451A22] text-xl">
                   🍷
@@ -1095,7 +1095,7 @@ return (
               {/* Option 2: Normal Day */}
               <button
                 onClick={() => handleSelectOccasion("none")}
-                className="flex w-full items-center gap-3.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#1E293B]/60 p-3.5 text-left transition-all hover:border-[#0B1F4B] dark:hover:border-white hover:scale-[1.01]"
+                className="flex w-full items-center gap-3.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#1E293B]/60 p-3.5 text-left transition-all hover:border-[#FF7F02] dark:hover:border-white hover:scale-[1.01]"
               >
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F0FDF4] dark:bg-[#064E3B] text-xl">
                   ☕
@@ -1111,7 +1111,7 @@ return (
               {/* Option 3: Party */}
               <button
                 onClick={() => handleSelectOccasion("party")}
-                className="flex w-full items-center gap-3.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#1E293B]/60 p-3.5 text-left transition-all hover:border-[#0B1F4B] dark:hover:border-white hover:scale-[1.01]"
+                className="flex w-full items-center gap-3.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#1E293B]/60 p-3.5 text-left transition-all hover:border-[#FF7F02] dark:hover:border-white hover:scale-[1.01]"
               >
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#FFFBEB] dark:bg-[#78350F] text-xl">
                   🎉
@@ -1131,7 +1131,7 @@ return (
       {/* ── Free Plan Look Limit Modal (1 look/day · 3 per week) ── */}
       {showLookLimitModal && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 text-center shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 text-center shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-2xl">
               👑
             </div>
@@ -1146,7 +1146,7 @@ return (
                 : "Free members get one fresh look a day. Come back tomorrow for a new one, or go Pro for unlimited outfits."}
             </p>
 
-            <p className="mt-4 rounded-2xl bg-[#F8FAFC] px-3.5 py-2.5 text-[11px] font-black text-[#0B1F4B] dark:bg-[#1E293B] dark:text-white">
+            <p className="mt-4 rounded-2xl bg-[#F8FAFC] px-3.5 py-2.5 text-[11px] font-black text-[#18181B] dark:bg-[#1E293B] dark:text-white">
               {(outfitsLeftThisWeek ?? 0)} of {FREE_WEEKLY_OUTFIT_LIMIT} free looks left this week
               {(outfitsLeftThisWeek ?? 0) > 0 && outfitsLeftToday === 0 ? " · next one tomorrow" : ""}
             </p>
@@ -1157,14 +1157,14 @@ return (
                   setShowLookLimitModal(false);
                   navigate("/upgrade");
                 }}
-                className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0B1F4B] text-xs font-black text-white shadow-md active:scale-95 dark:bg-white dark:text-[#0B1F4B]"
+                className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#FF7F02] text-xs font-black text-white shadow-md active:scale-95 dark:bg-white dark:text-[#18181B]"
               >
                 <span>👑</span>
                 <span>Upgrade to Pro</span>
               </button>
               <button
                 onClick={() => setShowLookLimitModal(false)}
-                className="flex h-11 w-full items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-xs font-bold text-[#0B1F4B] active:scale-95 dark:border-[#334155] dark:bg-[#1E293B] dark:text-white"
+                className="flex h-11 w-full items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-xs font-bold text-[#18181B] active:scale-95 dark:border-[#334155] dark:bg-[#1E293B] dark:text-white"
               >
                 Maybe later
               </button>

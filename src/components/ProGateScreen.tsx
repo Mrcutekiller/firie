@@ -29,7 +29,7 @@ const PERKS = [
  */
 export default function ProGateScreen({
   title = "Date Spots is a Pro feature",
-  description = "Discover venues, check verified menu prices, plan your dates and match an outfit to every spot — all included with FITLY Pro.",
+  description = "Discover venues, check verified menu prices, plan your dates and match an outfit to every spot — all included with ፍሬ (Firie) Pro.",
 }: {
   title?: string;
   description?: string;
@@ -39,18 +39,18 @@ export default function ProGateScreen({
   return (
     <div className="mx-auto flex w-full max-w-[430px] flex-col items-center pb-6 pt-4 text-center animate-fade">
       <div className="relative">
-        <div className="grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-tr from-[#0B1F4B] via-[#122A5E] to-[#1E3A8A] text-4xl shadow-xl">
+        <div className="grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-tr from-[#FF7F02] to-[#FFA24C] text-4xl shadow-xl shadow-orange-500/25">
           👑
         </div>
-        <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#0B1F4B] shadow-sm">
+        <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-sm">
           Pro
         </span>
       </div>
 
-      <h1 className="mt-5 text-xl font-black tracking-tight text-[#0B1F4B] dark:text-white">
+      <h1 className="mt-5 text-xl font-black tracking-tight text-[#18181B] dark:text-white">
         {title}
       </h1>
-      <p className="mt-2 max-w-[320px] text-xs leading-relaxed text-[#64748B] dark:text-[#94A3B8]">
+      <p className="mt-2 max-w-[320px] text-xs leading-relaxed text-[#71717A] dark:text-[#A1A1AA]">
         {description}
       </p>
 
@@ -58,16 +58,16 @@ export default function ProGateScreen({
         {PERKS.map((perk) => (
           <li
             key={perk.title}
-            className="flex gap-3 rounded-2xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs dark:border-[#1E293B] dark:bg-[#0F172A]"
+            className="flex gap-3 rounded-2xl border border-orange-100 bg-white p-3.5 shadow-xs dark:border-zinc-800 dark:bg-zinc-900"
           >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#F1F5F9] text-base dark:bg-[#1E293B]">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-50 text-base dark:bg-zinc-800">
               {perk.icon}
             </span>
             <span className="min-w-0">
-              <span className="block text-xs font-extrabold text-[#0B1F4B] dark:text-white">
+              <span className="block text-xs font-extrabold text-[#18181B] dark:text-white">
                 {perk.title}
               </span>
-              <span className="mt-0.5 block text-[10.5px] leading-relaxed text-[#73819A]">
+              <span className="mt-0.5 block text-[10.5px] leading-relaxed text-[#71717A] dark:text-[#A1A1AA]">
                 {perk.desc}
               </span>
             </span>
@@ -75,29 +75,29 @@ export default function ProGateScreen({
         ))}
       </ul>
 
-      <div className="mt-6 w-full rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3.5 dark:border-[#1E293B] dark:bg-[#0C1527]">
-        <p className="text-[10px] font-black uppercase tracking-wider text-[#73819A]">
-          FITLY Pro
+      <div className="mt-6 w-full rounded-2xl border border-orange-200 bg-orange-50/60 p-3.5 dark:border-zinc-800 dark:bg-zinc-900/60">
+        <p className="text-[10px] font-black uppercase tracking-wider text-[#FF7F02]">
+          ፍሬ (Firie) Pro
         </p>
-        <p className="mt-1 text-sm font-black text-[#0B1F4B] dark:text-white">
-          600 ETB <span className="text-xs font-bold text-[#73819A]">/ month</span>
-          <span className="ml-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[9px] font-black text-white align-middle">
-            25% OFF yearly
+        <p className="mt-1 text-sm font-black text-[#18181B] dark:text-white">
+          600 ETB <span className="text-xs font-bold text-[#71717A]">/ month</span>
+          <span className="ml-2 rounded-full bg-[#FF7F02] px-2 py-0.5 text-[9px] font-black text-white align-middle">
+            40% OFF yearly
           </span>
         </p>
       </div>
 
       <button
         onClick={() => navigate("/upgrade")}
-        className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] text-xs font-black text-white shadow-xl transition-transform active:scale-98 dark:bg-white dark:text-[#0B1F4B]"
+        className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-xs font-black text-white shadow-xl shadow-orange-500/25 transition-transform active:scale-98"
       >
-        <span>Upgrade to Pro</span>
+        <span>Upgrade to ፍሬ Pro</span>
         <span>→</span>
       </button>
 
       <button
         onClick={() => navigate("/")}
-        className="mt-2.5 h-10 w-full rounded-2xl border border-[#E2E8F0] bg-white text-xs font-bold text-[#64748B] transition-transform active:scale-98 dark:border-[#1E293B] dark:bg-[#0F172A] dark:text-[#94A3B8]"
+        className="mt-2.5 h-10 w-full rounded-2xl border border-orange-100 bg-white text-xs font-bold text-[#71717A] transition-transform active:scale-98 dark:border-zinc-800 dark:bg-zinc-900 dark:text-[#A1A1AA]"
       >
         Back to Outfits
       </button>

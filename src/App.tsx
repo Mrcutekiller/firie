@@ -57,14 +57,16 @@ export default function App() {
   }
 
   // On Web: Default route `/` is the official Landing Page so visitors download the app!
+  // On Native App: Default route `/` is the HomeScreen inside the Layout shell!
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/about" element={<LandingPage />} />
+      {!isNative && <Route path="/" element={<LandingPage />} />}
 
       {/* App Routes (For Native App & Direct Links) */}
       <Route element={<Layout />}>
+        {isNative && <Route path="/" element={<HomeScreen />} />}
         <Route path="/app" element={<HomeScreen />} />
         <Route path="/closet" element={<ClosetScreen />} />
         <Route path="/history" element={<HistoryScreen />} />

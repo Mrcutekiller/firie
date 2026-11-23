@@ -1,6 +1,6 @@
 {
   "appId": "com.fitly.app",
-  "appName": "FITLY",
+  "appName": "ፍሬ (Firie)",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"

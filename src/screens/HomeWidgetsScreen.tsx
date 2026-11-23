@@ -38,10 +38,10 @@ export default function HomeWidgetsScreen() {
   const shoes = items.find((i) => i.slot === "shoes");
 
   const themeStyles = {
-    navy: "bg-[#0B1F4B]/95 text-white border-white/15 backdrop-blur-xl",
+    navy: "bg-[#FF7F02]/95 text-white border-white/15 backdrop-blur-xl",
     glass: "bg-white/30 dark:bg-black/45 text-slate-900 dark:text-white border-white/30 backdrop-blur-2xl shadow-xl",
     onyx: "bg-[#080E1A]/95 text-white border-white/10 backdrop-blur-xl",
-    light: "bg-white/95 text-[#0B1F4B] border-slate-200/80 shadow-lg backdrop-blur-xl",
+    light: "bg-white/95 text-[#18181B] border-slate-200/80 shadow-lg backdrop-blur-xl",
   };
 
   const handleQuickStyle = (e?: React.MouseEvent, occ?: EventType) => {
@@ -66,7 +66,7 @@ export default function HomeWidgetsScreen() {
 
   const handleCopyTokens = () => {
     const spec = {
-      app: "FITLY Mobile",
+      app: "ፍሬ (Firie) Mobile",
       widget: `FigCraft Interactive Widget (${size.toUpperCase()})`,
       interactiveIntent: "QuickStyleIntent (Runs in background without app launch)",
       theme: widgetTheme,
@@ -106,7 +106,7 @@ export default function HomeWidgetsScreen() {
         </button>
 
         <div className="text-center">
-          <h1 className="text-base font-black tracking-tight text-[#0B1F4B] dark:text-white">
+          <h1 className="text-base font-black tracking-tight text-[#18181B] dark:text-white">
             Home Widgets Studio
           </h1>
           <p className="text-[10px] font-medium text-[#73819A]">
@@ -132,8 +132,8 @@ export default function HomeWidgetsScreen() {
             className={cn(
               "flex-1 rounded-xl py-2 text-center capitalize transition-all",
               size === s
-                ? "bg-white dark:bg-[#0B1F4B] text-[#0B1F4B] dark:text-white shadow-xs font-black"
-                : "text-[#73819A] hover:text-[#0B1F4B]"
+                ? "bg-white dark:bg-[#FF7F02] text-[#18181B] dark:text-white shadow-xs font-black"
+                : "text-[#73819A] hover:text-[#18181B]"
             )}
           >
             {s === "small" ? "2×2" : s === "medium" ? "4×2" : s === "large" ? "4×4" : "Lock"}
@@ -152,7 +152,7 @@ export default function HomeWidgetsScreen() {
               className={cn(
                 "rounded-full px-2.5 py-1 text-[10px] font-bold capitalize transition-all border",
                 widgetTheme === t
-                  ? "bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] border-transparent shadow-xs"
+                  ? "bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] border-transparent shadow-xs"
                   : "bg-white dark:bg-[#1E293B] text-[#73819A] border-[#E2E8F0] dark:border-[#334155]"
               )}
             >
@@ -272,7 +272,7 @@ export default function HomeWidgetsScreen() {
                 {/* Direct "✨ Quick Style Me" Action Pill inside widget */}
                 <button
                   onClick={(e) => handleQuickStyle(e)}
-                  className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B1F4B] px-3 py-1 text-[9.5px] font-black shadow-md active:scale-95 transition-transform"
+                  className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#18181B] px-3 py-1 text-[9.5px] font-black shadow-md active:scale-95 transition-transform"
                 >
                   <span>✨</span>
                   <span>Quick Style Me</span>
@@ -288,7 +288,7 @@ export default function HomeWidgetsScreen() {
                     className={cn(
                       "rounded-full px-2 py-0.5 text-[8.5px] font-bold transition-all border",
                       widgetOccasion === occ
-                        ? "bg-white text-[#0B1F4B] border-white font-black"
+                        ? "bg-white text-[#18181B] border-white font-black"
                         : "bg-white/10 hover:bg-white/20 text-white/80 border-white/10"
                     )}
                   >
@@ -370,12 +370,12 @@ export default function HomeWidgetsScreen() {
               {/* Header with Quick Style Me */}
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-black tracking-wider text-[#3B82F6]">FITLY</span>
+                  <span className="text-xs font-black tracking-wider text-[#3B82F6]">ፍሬ (Firie)</span>
                   <span className="text-[10px] opacity-75">· {profile.city}</span>
                 </div>
                 <button
                   onClick={(e) => handleQuickStyle(e)}
-                  className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B1F4B] px-3 py-1 text-[9.5px] font-black shadow-md active:scale-95 transition-transform"
+                  className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#18181B] px-3 py-1 text-[9.5px] font-black shadow-md active:scale-95 transition-transform"
                 >
                   <span>✨ Quick Style Me</span>
                 </button>
@@ -439,7 +439,7 @@ export default function HomeWidgetsScreen() {
                         className={cn(
                           "rounded-full px-2 py-0.5 text-[8.5px] font-bold transition-all border",
                           widgetOccasion === occ
-                            ? "bg-white text-[#0B1F4B] border-white font-black"
+                            ? "bg-white text-[#18181B] border-white font-black"
                             : "bg-white/10 text-white/80 border-white/10"
                         )}
                       >
@@ -492,7 +492,7 @@ export default function HomeWidgetsScreen() {
             <div className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-600 text-white text-base shadow-sm">
               F
             </div>
-            <span>FITLY</span>
+            <span>ፍሬ (Firie)</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <div className="grid h-11 w-11 place-items-center rounded-2xl bg-rose-500 text-white text-base shadow-sm">
@@ -519,28 +519,28 @@ export default function HomeWidgetsScreen() {
       <div className="mt-5 space-y-2.5">
         <button
           onClick={(e) => handleQuickStyle(e)}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B1F4B] text-xs font-black shadow-md transition-transform active:scale-95"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-[#18181B] text-xs font-black shadow-md transition-transform active:scale-95"
         >
           <span>✨ Test "Quick Style Me" (Simulate in-widget run)</span>
         </button>
 
         <button
           onClick={() => setShowInstallHelp(true)}
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] dark:bg-white text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md transition-transform active:scale-95"
+          className="flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md transition-transform active:scale-95"
         >
           <span>📲 How to Add Widget to Home Screen</span>
         </button>
 
         <button
           onClick={() => setShowCodeSpec(!showCodeSpec)}
-          className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] text-xs font-bold text-[#0B1F4B] dark:text-white shadow-xs transition-transform active:scale-95"
+          className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] text-xs font-bold text-[#18181B] dark:text-white shadow-xs transition-transform active:scale-95"
         >
           <span>{showCodeSpec ? "Hide In-Widget Architecture" : "⚡ How It Works Without Opening the App"}</span>
         </button>
 
         <button
           onClick={handleCopyTokens}
-          className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#73819A] hover:text-[#0B1F4B] active:scale-95"
+          className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#73819A] hover:text-[#18181B] active:scale-95"
         >
           <span>{copiedTokens ? "✓ Copied to Clipboard!" : "📋 Copy FigCraft Design Spec & Tokens"}</span>
         </button>
@@ -552,18 +552,18 @@ export default function HomeWidgetsScreen() {
           <div className="flex items-center gap-2">
             <span className="text-xl">⚡</span>
             <div>
-              <h3 className="font-black text-[#0B1F4B] dark:text-white">
+              <h3 className="font-black text-[#18181B] dark:text-white">
                 In-Widget Interactive Execution
               </h3>
               <p className="text-[10.5px] text-[#73819A]">
-                Runs in the background without launching the FITLY app
+                Runs in the background without launching the ፍሬ (Firie) app
               </p>
             </div>
           </div>
 
           <div className="space-y-2.5 pt-2 border-t border-[#E2E8F0] dark:border-[#1E293B]">
             <div className="rounded-2xl bg-[#F8FAFC] dark:bg-[#111C2E] p-3 border border-[#E2E8F0] dark:border-[#334155]">
-              <b className="block text-[11px] text-[#0B1F4B] dark:text-white mb-1">
+              <b className="block text-[11px] text-[#18181B] dark:text-white mb-1">
                  Apple iOS 17 & 18 (WidgetKit + AppIntent)
               </b>
               <p className="text-[10.5px] text-[#64748B] dark:text-[#94A3B8]">
@@ -572,7 +572,7 @@ export default function HomeWidgetsScreen() {
             </div>
 
             <div className="rounded-2xl bg-[#F8FAFC] dark:bg-[#111C2E] p-3 border border-[#E2E8F0] dark:border-[#334155]">
-              <b className="block text-[11px] text-[#0B1F4B] dark:text-white mb-1">
+              <b className="block text-[11px] text-[#18181B] dark:text-white mb-1">
                 🤖 Google Android 12, 14 & 15 (Jetpack Glance)
               </b>
               <p className="text-[10.5px] text-[#64748B] dark:text-[#94A3B8]">
@@ -586,9 +586,9 @@ export default function HomeWidgetsScreen() {
       {/* ── Install Instructions Modal ── */}
       {showInstallHelp && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-6 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-3">
-              <h3 className="text-base font-black tracking-tight">Add FITLY to Home Screen</h3>
+              <h3 className="text-base font-black tracking-tight">Add ፍሬ (Firie) to Home Screen</h3>
               <button
                 onClick={() => setShowInstallHelp(false)}
                 className="grid h-8 w-8 place-items-center rounded-full bg-black/5 dark:bg-white/10 text-sm font-bold"
@@ -604,7 +604,7 @@ export default function HomeWidgetsScreen() {
                 className={cn(
                   "flex-1 rounded-lg py-1.5 text-center transition-all",
                   deviceOs === "ios"
-                    ? "bg-white dark:bg-[#0B1F4B] text-[#0B1F4B] dark:text-white shadow-xs"
+                    ? "bg-white dark:bg-[#FF7F02] text-[#18181B] dark:text-white shadow-xs"
                     : "text-[#73819A]"
                 )}
               >
@@ -615,7 +615,7 @@ export default function HomeWidgetsScreen() {
                 className={cn(
                   "flex-1 rounded-lg py-1.5 text-center transition-all",
                   deviceOs === "android"
-                    ? "bg-white dark:bg-[#0B1F4B] text-[#0B1F4B] dark:text-white shadow-xs"
+                    ? "bg-white dark:bg-[#FF7F02] text-[#18181B] dark:text-white shadow-xs"
                     : "text-[#73819A]"
                 )}
               >
@@ -637,7 +637,7 @@ export default function HomeWidgetsScreen() {
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 dark:bg-blue-900/60 text-[10px] font-black text-blue-700 dark:text-blue-300">
                       2
                     </span>
-                    <p>Tap the <b>+</b> button in the top corner and search for <b>FITLY</b>.</p>
+                    <p>Tap the <b>+</b> button in the top corner and search for <b>ፍሬ (Firie)</b>.</p>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 dark:bg-blue-900/60 text-[10px] font-black text-blue-700 dark:text-blue-300">
@@ -649,7 +649,7 @@ export default function HomeWidgetsScreen() {
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-amber-100 dark:bg-amber-900/60 text-[10px] font-black text-amber-700 dark:text-amber-300">
                       ✨
                     </span>
-                    <p>Tap <b>"Quick Style Me"</b> directly on your Home Screen anytime to get a new look without launching FITLY!</p>
+                    <p>Tap <b>"Quick Style Me"</b> directly on your Home Screen anytime to get a new look without launching ፍሬ (Firie)!</p>
                   </div>
                 </>
               ) : (
@@ -664,7 +664,7 @@ export default function HomeWidgetsScreen() {
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-[10px] font-black text-emerald-700 dark:text-emerald-300">
                       2
                     </span>
-                    <p>Tap <b>Widgets</b> and scroll down to the <b>FITLY</b> category.</p>
+                    <p>Tap <b>Widgets</b> and scroll down to the <b>ፍሬ (Firie)</b> category.</p>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-[10px] font-black text-emerald-700 dark:text-emerald-300">
@@ -678,7 +678,7 @@ export default function HomeWidgetsScreen() {
 
             <button
               onClick={() => setShowInstallHelp(false)}
-              className="mt-6 w-full rounded-2xl bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] py-3 text-xs font-bold active:scale-95"
+              className="mt-6 w-full rounded-2xl bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] py-3 text-xs font-bold active:scale-95"
             >
               Got it
             </button>

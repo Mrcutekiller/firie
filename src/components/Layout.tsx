@@ -20,12 +20,13 @@ export default function Layout() {
   const initials = profile.name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase()).join("") || "A";
 
   return (
-    <div className="mx-auto flex min-h-[100dvh] max-w-[480px] flex-col bg-[#f8f9fb] dark:bg-[#080d1a] text-[#102642] dark:text-[#f1f5f9] transition-colors">
+    <div className="mx-auto flex min-h-[100dvh] max-w-[480px] flex-col bg-white dark:bg-[#0c0a09] text-[#18181B] dark:text-[#f1f5f9] transition-colors">
       {/* Global header — always visible on every Layout page */}
       {!isHome && (
         <header className="flex shrink-0 items-center justify-between px-[21px] pb-1 pt-[18px]">
-          <div className="text-[22px] font-extrabold tracking-[-1px] text-[#0B1F4B] dark:text-white">
-            FITLY<span className="text-[#8198b5]">.</span>
+          <div className="text-[22px] font-black tracking-[-1px] text-[#18181B] dark:text-white flex items-center gap-1.5">
+            <span>ፍሬ</span><span className="text-[#FF7F02]">.</span>
+            <span className="text-xs font-bold text-[#FF7F02] tracking-normal">Firie</span>
           </div>
           <div className="flex items-center gap-2">
             {/* Dark Mode toggle button */}
@@ -33,7 +34,7 @@ export default function Layout() {
               onClick={toggleTheme}
               aria-label="Toggle dark mode"
               title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="grid h-[34px] w-[34px] place-items-center rounded-full bg-[#e5ebf3] dark:bg-[#1e293b] text-[#27466c] dark:text-amber-300 transition-colors"
+              className="grid h-[34px] w-[34px] place-items-center rounded-full bg-orange-50 dark:bg-zinc-800 text-[#FF7F02] dark:text-amber-300 transition-colors"
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
@@ -44,8 +45,8 @@ export default function Layout() {
               aria-label="Settings"
               className={`grid h-[34px] w-[34px] place-items-center rounded-full transition-colors ${
                 isProfile
-                  ? "bg-[#0b1f4b] text-white"
-                  : "bg-[#e5ebf3] dark:bg-[#1e293b] text-[#27466c] dark:text-[#94a3b8] hover:bg-[#dce5f0]"
+                  ? "bg-[#FF7F02] text-white shadow-xs"
+                  : "bg-orange-50 dark:bg-zinc-800 text-[#FF7F02] dark:text-[#FF7F02] hover:bg-orange-100"
               }`}
             >
               <SettingsIcon />

@@ -125,7 +125,7 @@ export default function ClosetScreen() {
       {/* ── Closet Header (Matching Reference Screen 2) ── */}
       <div className="flex items-center justify-between pt-1">
         <div>
-          <h1 className="text-[26px] font-black tracking-tight text-[#0B1F4B] dark:text-white">
+          <h1 className="text-[26px] font-black tracking-tight text-[#18181B] dark:text-white">
             My Closet
           </h1>
           <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
@@ -141,11 +141,11 @@ export default function ClosetScreen() {
       {/* ── Top Stat Cards (Matching Screen 2 Reference) ── */}
       <div className="grid grid-cols-2 gap-3">
         <div className="flex items-center gap-3 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-3.5 shadow-sm">
-          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F1F5F9] dark:bg-[#1E293B] text-lg text-[#0B1F4B] dark:text-white">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F1F5F9] dark:bg-[#1E293B] text-lg text-[#18181B] dark:text-white">
             👔
           </div>
           <div>
-            <div className="text-lg font-black text-[#0B1F4B] dark:text-white leading-tight">
+            <div className="text-lg font-black text-[#18181B] dark:text-white leading-tight">
               {closet.length}
             </div>
             <div className="text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
@@ -155,11 +155,11 @@ export default function ClosetScreen() {
         </div>
 
         <div className="flex items-center gap-3 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-3.5 shadow-sm">
-          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F1F5F9] dark:bg-[#1E293B] text-lg text-[#0B1F4B] dark:text-white">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F1F5F9] dark:bg-[#1E293B] text-lg text-[#18181B] dark:text-white">
             🔖
           </div>
           <div>
-            <div className="text-lg font-black text-[#0B1F4B] dark:text-white leading-tight">
+            <div className="text-lg font-black text-[#18181B] dark:text-white leading-tight">
               {totalLooksCount}
             </div>
             <div className="text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
@@ -176,8 +176,8 @@ export default function ClosetScreen() {
           className={cn(
             "flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-black transition-all",
             segment === "pieces"
-              ? "bg-white text-[#0B1F4B] shadow-md dark:bg-[#0B1F4B] dark:text-white"
-              : "text-[#64748B] hover:text-[#0B1F4B] dark:text-[#94A3B8] dark:hover:text-white"
+              ? "bg-white text-[#18181B] shadow-md dark:bg-[#FF7F02] dark:text-white"
+              : "text-[#64748B] hover:text-[#18181B] dark:text-[#94A3B8] dark:hover:text-white"
           )}
         >
           <span>Wardrobe Pieces</span>
@@ -188,8 +188,8 @@ export default function ClosetScreen() {
           className={cn(
             "flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-black transition-all",
             segment === "looks"
-              ? "bg-white text-[#0B1F4B] shadow-md dark:bg-[#0B1F4B] dark:text-white"
-              : "text-[#64748B] hover:text-[#0B1F4B] dark:text-[#94A3B8] dark:hover:text-white"
+              ? "bg-white text-[#18181B] shadow-md dark:bg-[#FF7F02] dark:text-white"
+              : "text-[#64748B] hover:text-[#18181B] dark:text-[#94A3B8] dark:hover:text-white"
           )}
         >
           <span>Saved Looks</span>
@@ -202,7 +202,7 @@ export default function ClosetScreen() {
           {!isPro && (
             <div className="space-y-1.5">
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#e5eaf0] dark:bg-[#1E293B]">
-                <div className="h-full rounded-full bg-[#0B1F4B] dark:bg-white transition-all" style={{ width: `${pct}%` }} />
+                <div className="h-full rounded-full bg-[#FF7F02] dark:bg-white transition-all" style={{ width: `${pct}%` }} />
               </div>
               <div className="flex justify-between text-[10px] text-[#78899f] dark:text-[#94A3B8]">
                 <span>Free closet limit</span>
@@ -217,7 +217,7 @@ export default function ClosetScreen() {
               className="flex w-full items-center gap-3 rounded-2xl border border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/30 px-4 py-3 text-left transition-all active:scale-[0.98]"
             >
               <span className="text-xl">📦</span>
-              <span className="flex-1 text-xs font-semibold text-[#0B1F4B] dark:text-amber-200">
+              <span className="flex-1 text-xs font-semibold text-[#18181B] dark:text-amber-200">
                 Free plan is full ({FREE_ITEM_LIMIT} items). Upgrade for unlimited.
               </span>
               <ProBadge />
@@ -242,14 +242,14 @@ export default function ClosetScreen() {
                   className={cn(
                     "relative flex shrink-0 items-center gap-1.5 px-3 py-1.5 text-[11px] font-black transition-all active:scale-95",
                     isActive
-                      ? "text-[#0B1F4B] dark:text-white"
-                      : "text-[#64748B] dark:text-[#94A3B8] hover:text-[#0B1F4B]"
+                      ? "text-[#18181B] dark:text-white"
+                      : "text-[#64748B] dark:text-[#94A3B8] hover:text-[#18181B]"
                   )}
                 >
                   <span>{t.label}</span>
                   <span className="text-[9.5px] opacity-70">({t.count})</span>
                   {isActive && (
-                    <div className="absolute inset-x-2 -bottom-2 h-0.5 rounded-full bg-[#0B1F4B] dark:bg-white" />
+                    <div className="absolute inset-x-2 -bottom-2 h-0.5 rounded-full bg-[#FF7F02] dark:bg-white" />
                   )}
                 </button>
               );
@@ -260,23 +260,23 @@ export default function ClosetScreen() {
           {visible.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-[#CBD5E1] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-8 text-center shadow-sm animate-fade">
               <span className="text-4xl">👔</span>
-              <h3 className="mt-3 text-base font-black text-[#0B1F4B] dark:text-white">
+              <h3 className="mt-3 text-base font-black text-[#18181B] dark:text-white">
                 {categoryTab === "all" ? "Your closet is empty" : `No ${CATEGORY_LABELS[categoryTab as Category]} yet`}
               </h3>
               <p className="mt-1.5 text-xs text-[#64748B] dark:text-[#94A3B8] max-w-xs mx-auto leading-relaxed">
-                Add a photo of your clothes and FITLY will automatically remove the background and categorize each piece.
+                Add a photo of your clothes and ፍሬ (Firie) will automatically remove the background and categorize each piece.
               </p>
               <div className="mt-5 flex flex-col gap-2 max-w-[220px] mx-auto">
                 <button
                   onClick={() => navigate("/add")}
-                  className="flex h-11 w-full items-center justify-center gap-1.5 rounded-2xl bg-[#0B1F4B] dark:bg-white text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md active:scale-95 transition-transform"
+                  className="flex h-11 w-full items-center justify-center gap-1.5 rounded-2xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md active:scale-95 transition-transform"
                 >
                   <span>📸 Add Your First Piece</span>
                 </button>
                 {categoryTab === "all" && (
                   <button
                     onClick={loadDemoCloset}
-                    className="flex h-9 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#0B1F4B] active:scale-95 transition-transform"
+                    className="flex h-9 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#18181B] active:scale-95 transition-transform"
                   >
                     <span>✨ Load Sample Pieces (Test)</span>
                   </button>
@@ -322,7 +322,7 @@ export default function ClosetScreen() {
               className={cn(
                 "rounded-full px-4 py-1.5 text-xs font-black transition-all",
                 looksTab === "favorites"
-                  ? "bg-[#0B1F4B] text-white dark:bg-white dark:text-[#0B1F4B] shadow-sm"
+                  ? "bg-[#FF7F02] text-white dark:bg-white dark:text-[#18181B] shadow-sm"
                   : "bg-[#F1F5F9] text-[#64748B] dark:bg-[#1E293B] dark:text-[#94A3B8]"
               )}
             >
@@ -333,7 +333,7 @@ export default function ClosetScreen() {
               className={cn(
                 "rounded-full px-4 py-1.5 text-xs font-black transition-all",
                 looksTab === "history"
-                  ? "bg-[#0B1F4B] text-white dark:bg-white dark:text-[#0B1F4B] shadow-sm"
+                  ? "bg-[#FF7F02] text-white dark:bg-white dark:text-[#18181B] shadow-sm"
                   : "bg-[#F1F5F9] text-[#64748B] dark:bg-[#1E293B] dark:text-[#94A3B8]"
               )}
             >
@@ -367,7 +367,7 @@ export default function ClosetScreen() {
                         >
                           <div>
                             <OutfitPreview pieces={pieces} className="h-[120px]" />
-                            <p className="mt-2.5 truncate text-xs font-bold text-[#0B1F4B] dark:text-white">{title}</p>
+                            <p className="mt-2.5 truncate text-xs font-bold text-[#18181B] dark:text-white">{title}</p>
                             <p className="truncate text-[10px] text-[#64748B] dark:text-[#94A3B8]">
                               {pieces.length} pieces{outfit.event ? ` · ${EVENT_LABELS[outfit.event]}` : ""}
                             </p>
@@ -380,14 +380,14 @@ export default function ClosetScreen() {
                                 localStorage.setItem("fitly_has_requested_outfit", "true");
                                 navigate("/");
                               }}
-                              className="w-full rounded-full bg-[#0B1F4B] dark:bg-white py-1.5 text-[10.5px] font-bold text-white dark:text-[#0B1F4B] shadow-sm active:scale-95 transition-transform"
+                              className="w-full rounded-full bg-[#FF7F02] dark:bg-white py-1.5 text-[10.5px] font-bold text-white dark:text-[#18181B] shadow-sm active:scale-95 transition-transform"
                             >
                               🔒 Wear This Look
                             </button>
                             <div className="flex gap-1.5">
                               <button
                                 onClick={() => navigate("/camera", { state: { itemIds: outfit.itemIds } })}
-                                className="flex-1 rounded-full border border-[#E2E8F0] dark:border-[#1E293B] py-1 text-[9.5px] font-bold text-[#0B1F4B] dark:text-white hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]"
+                                className="flex-1 rounded-full border border-[#E2E8F0] dark:border-[#1E293B] py-1 text-[9.5px] font-bold text-[#18181B] dark:text-white hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]"
                               >
                                 📷 Camera
                               </button>
@@ -455,7 +455,7 @@ export default function ClosetScreen() {
                           className="flex flex-col gap-2 rounded-2xl border border-[#E2E8F0] bg-white p-3 dark:border-[#1E293B] dark:bg-[#0F172A] shadow-sm"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-extrabold text-[#0B1F4B] dark:text-white">
+                            <span className="text-xs font-extrabold text-[#18181B] dark:text-white">
                               {shortDate(log.date)}
                             </span>
                             <span className="rounded-full bg-[#F1F5F9] dark:bg-[#1E293B] px-2 py-0.5 text-[9.5px] font-bold text-[#64748B] dark:text-[#94A3B8]">
@@ -466,7 +466,7 @@ export default function ClosetScreen() {
                           <div className="flex items-center gap-3">
                             <OutfitPreview pieces={pieces} className="h-[64px] w-[64px] shrink-0" />
                             <div className="min-w-0 flex-1">
-                              <p className="truncate text-xs font-bold text-[#0B1F4B] dark:text-white">{title}</p>
+                              <p className="truncate text-xs font-bold text-[#18181B] dark:text-white">{title}</p>
                               <p className="mt-0.5 truncate text-[10px] text-[#64748B] dark:text-[#94A3B8]">
                                 {pieces.map((item) => item.name).join(" · ")}
                               </p>
@@ -493,13 +493,13 @@ export default function ClosetScreen() {
                                 localStorage.setItem("fitly_has_requested_outfit", "true");
                                 navigate("/");
                               }}
-                              className="rounded-full bg-[#0B1F4B] dark:bg-white px-3.5 py-1 text-[10px] font-bold text-white dark:text-[#0B1F4B] shadow-sm transition-transform active:scale-95"
+                              className="rounded-full bg-[#FF7F02] dark:bg-white px-3.5 py-1 text-[10px] font-bold text-white dark:text-[#18181B] shadow-sm transition-transform active:scale-95"
                             >
                               ↻ Wear Again
                             </button>
                             <button
                               onClick={() => navigate("/camera", { state: { itemIds: log.itemIds } })}
-                              className="rounded-full border border-[#E2E8F0] dark:border-[#1E293B] px-3.5 py-1 text-[10px] font-bold text-[#0B1F4B] dark:text-white"
+                              className="rounded-full border border-[#E2E8F0] dark:border-[#1E293B] px-3.5 py-1 text-[10px] font-bold text-[#18181B] dark:text-white"
                             >
                               📷 Camera
                             </button>
@@ -518,7 +518,7 @@ export default function ClosetScreen() {
       <div className="fixed bottom-24 left-1/2 z-30 -translate-x-1/2">
         <button
           onClick={() => navigate("/add")}
-          className="flex items-center gap-2 rounded-full bg-[#0B1F4B] dark:bg-white px-6 py-3 text-xs font-bold text-white dark:text-[#0B1F4B] shadow-xl hover:scale-105 transition-transform active:scale-95"
+          className="flex items-center gap-2 rounded-full bg-[#FF7F02] dark:bg-white px-6 py-3 text-xs font-bold text-white dark:text-[#18181B] shadow-xl hover:scale-105 transition-transform active:scale-95"
         >
           <span className="text-base leading-none">＋</span>
           <span>Add Clothes</span>
@@ -552,7 +552,7 @@ export default function ClosetScreen() {
 
             {/* Name */}
             <div className="mb-4 text-center">
-              <p className="text-lg font-black text-[#0B1F4B] dark:text-white">{selected.name}</p>
+              <p className="text-lg font-black text-[#18181B] dark:text-white">{selected.name}</p>
               <p className="text-xs text-[#64748B] mt-0.5 dark:text-[#94A3B8]">
                 {selected.color} · {selected.category} · {selected.style}
               </p>
@@ -565,7 +565,7 @@ export default function ClosetScreen() {
                 <div className="mb-5 grid grid-cols-3 gap-2 rounded-2xl bg-[#F8FAFC] dark:bg-[#101D33] p-3 text-center border border-[#E2E8F0] dark:border-[#1E293B]">
                   <div className="flex flex-col items-center justify-center">
                     <span className="text-[10px] font-semibold text-[#64748B] dark:text-[#94A3B8]">WORN</span>
-                    <span className="text-sm font-black text-[#0B1F4B] dark:text-white mt-0.5">
+                    <span className="text-sm font-black text-[#18181B] dark:text-white mt-0.5">
                       {selected.timesWorn}×
                     </span>
                   </div>
@@ -577,7 +577,7 @@ export default function ClosetScreen() {
                   </div>
                   <div className="flex flex-col items-center justify-center">
                     <span className="text-[10px] font-semibold text-[#64748B] dark:text-[#94A3B8]">STATUS</span>
-                    <span className="text-[10.5px] font-bold text-[#0B1F4B] dark:text-white mt-0.5">
+                    <span className="text-[10.5px] font-bold text-[#18181B] dark:text-white mt-0.5">
                       {selected.timesWorn >= 4 ? "Staple ⭐" : selected.timesWorn > 0 ? "Active 🔄" : "Unworn 🏷️"}
                     </span>
                   </div>
@@ -591,7 +591,7 @@ export default function ClosetScreen() {
                 setSelectedId(null);
                 navigate("/camera", { state: { itemIds: [selected.id] } });
               }}
-              className="mb-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#0B1F4B] dark:bg-white py-3 text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md active:scale-98 transition-transform"
+              className="mb-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] dark:bg-white py-3 text-xs font-bold text-white dark:text-[#18181B] shadow-md active:scale-98 transition-transform"
             >
               <span>📷 Capture Look With This in Camera</span>
             </button>
@@ -622,7 +622,7 @@ export default function ClosetScreen() {
       <button
         onClick={() => navigate("/add")}
         aria-label="Add clothes"
-        className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#0B1F4B] text-white shadow-2xl transition-transform active:scale-90 hover:scale-105 border border-white/20"
+        className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#FF7F02] text-white shadow-2xl transition-transform active:scale-90 hover:scale-105 border border-white/20"
       >
         <span className="text-2xl font-light leading-none">+</span>
       </button>

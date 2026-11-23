@@ -520,7 +520,7 @@ export default function TodayOutfitCarousel({
                 <span className="text-xl">🧠</span>
                 <div>
                   <h3 className="text-sm font-black text-navy-900">Styling Rationale</h3>
-                  <p className="text-[10px] text-navy-400">FITLY Pro Intelligence</p>
+                  <p className="text-[10px] text-navy-400">ፍሬ Pro Intelligence</p>
                 </div>
               </div>
               <button

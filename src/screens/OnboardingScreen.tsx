@@ -138,8 +138,8 @@ export default function OnboardingScreen({ onDone }: Props) {
         {/* Center Brand Identity */}
         <div className="flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3.5 py-1 border border-white/20 shadow-sm">
           <BrandLogo size={22} rounded="rounded-lg" />
-          <span className="text-xs font-black tracking-wider text-white">FITLY</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+          <span className="text-xs font-black tracking-wider text-white">ፍሬ (Firie)</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-[#FF7F02] animate-pulse" />
         </div>
 
         {/* Swipe Hint Pill */}
@@ -156,15 +156,15 @@ export default function OnboardingScreen({ onDone }: Props) {
           <div className="rounded-3xl bg-black/40 backdrop-blur-xl p-5 border border-white/20 shadow-2xl text-left space-y-3.5">
             {/* Prominent Large App Logo */}
             <div className="flex items-center gap-3.5">
-              <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-xl p-2 border border-white/80">
+              <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-xl p-2 border border-orange-200">
                 <BrandLogo size={52} rounded="rounded-xl" />
-                <span className="absolute -bottom-1 -right-1 rounded-full bg-[#0B1F4B] text-white p-0.5 text-[9px] shadow-md border border-white/20">
+                <span className="absolute -bottom-1 -right-1 rounded-full bg-[#FF7F02] text-white p-0.5 text-[9px] shadow-md border border-white/20">
                   ✨
                 </span>
               </div>
               <div>
-                <span className="inline-block rounded-full bg-white/20 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-blue-300 border border-white/15">
-                  ● PERSONAL AI WARDROBE
+                <span className="inline-block rounded-full bg-[#FF7F02]/30 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-orange-300 border border-orange-400/30">
+                  ● ፍሬ · PERSONAL AI WARDROBE
                 </span>
                 <h1 className="text-2xl font-black tracking-tight text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                   Dress better. Live stylish.
@@ -193,9 +193,9 @@ export default function OnboardingScreen({ onDone }: Props) {
             <div className="pt-1 space-y-2">
               <button
                 onClick={() => setStep("why")}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs sm:text-sm font-black shadow-2xl hover:bg-slate-100 active:scale-98 transition-all"
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white text-xs sm:text-sm font-black shadow-2xl shadow-orange-500/40 active:scale-98 transition-all"
               >
-                <span>Explore FITLY</span>
+                <span>Explore ፍሬ (Firie)</span>
                 <span className="text-base font-bold">→</span>
               </button>
 
@@ -217,11 +217,11 @@ export default function OnboardingScreen({ onDone }: Props) {
         {step === "why" && (
           <div className="rounded-3xl bg-black/40 backdrop-blur-xl p-5 border border-white/20 shadow-2xl text-left space-y-3">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-blue-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                ● THE FITLY ADVANTAGE
+              <span className="text-[10px] font-black uppercase tracking-wider text-orange-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                ● THE ፍሬ (FIRIE) ADVANTAGE
               </span>
               <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                Why Choose FITLY?
+                Why Choose ፍሬ (Firie)?
               </h2>
             </div>
 
@@ -253,7 +253,7 @@ export default function OnboardingScreen({ onDone }: Props) {
 
             <button
               onClick={() => setStep("how")}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs sm:text-sm font-black shadow-2xl hover:bg-slate-100 active:scale-98 transition-all"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white text-xs sm:text-sm font-black shadow-2xl shadow-orange-500/40 active:scale-98 transition-all"
             >
               <span>See How It Works</span>
               <span className="text-base font-bold">→</span>
@@ -265,17 +265,17 @@ export default function OnboardingScreen({ onDone }: Props) {
         {step === "how" && (
           <div className="rounded-3xl bg-black/40 backdrop-blur-xl p-5 border border-white/20 shadow-2xl text-left space-y-3">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+              <span className="text-[10px] font-black uppercase tracking-wider text-orange-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
                 ● SIMPLE 3-STEP ROUTINE
               </span>
               <h2 className="mt-0.5 text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                How FITLY Works
+                How ፍሬ Works
               </h2>
             </div>
 
             <div className="space-y-2">
               <div className="rounded-2xl bg-black/40 backdrop-blur-md p-2.5 border border-white/20 flex items-center gap-3">
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-400 text-[10px] font-black text-black">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#FF7F02] text-[10px] font-black text-white">
                   1
                 </span>
                 <div>
@@ -285,7 +285,7 @@ export default function OnboardingScreen({ onDone }: Props) {
               </div>
 
               <div className="rounded-2xl bg-black/40 backdrop-blur-md p-2.5 border border-white/20 flex items-center gap-3">
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-blue-400 text-[10px] font-black text-black">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#FF7F02] text-[10px] font-black text-white">
                   2
                 </span>
                 <div>
@@ -295,7 +295,7 @@ export default function OnboardingScreen({ onDone }: Props) {
               </div>
 
               <div className="rounded-2xl bg-black/40 backdrop-blur-md p-2.5 border border-white/20 flex items-center gap-3">
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-amber-400 text-[10px] font-black text-black">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#FF7F02] text-[10px] font-black text-white">
                   3
                 </span>
                 <div>
@@ -307,7 +307,7 @@ export default function OnboardingScreen({ onDone }: Props) {
 
             <button
               onClick={() => setStep("profile")}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs sm:text-sm font-black shadow-2xl hover:bg-slate-100 active:scale-98 transition-all"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white text-xs sm:text-sm font-black shadow-2xl shadow-orange-500/40 active:scale-98 transition-all"
             >
               <span>Set Up My Profile</span>
               <span className="text-base font-bold">→</span>
@@ -379,7 +379,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                     onClick={() => setGender("men")}
                     className={`flex h-9 items-center justify-center gap-1.5 rounded-xl text-xs font-black border transition-all ${
                       gender === "men"
-                        ? "bg-white text-[#0B1F4B] border-white shadow-lg"
+                        ? "bg-[#FF7F02] text-white border-orange-400 shadow-lg shadow-orange-500/25"
                         : "bg-black/40 text-slate-200 border-white/20"
                     }`}
                   >
@@ -391,7 +391,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                     onClick={() => setGender("women")}
                     className={`flex h-9 items-center justify-center gap-1.5 rounded-xl text-xs font-black border transition-all ${
                       gender === "women"
-                        ? "bg-white text-[#0B1F4B] border-white shadow-lg"
+                        ? "bg-[#FF7F02] text-white border-orange-400 shadow-lg shadow-orange-500/25"
                         : "bg-black/40 text-slate-200 border-white/20"
                     }`}
                   >
@@ -413,7 +413,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                       onClick={() => setStylePreference(s)}
                       className={`h-8 rounded-xl text-[10px] font-black border transition-all ${
                         stylePreference === s
-                          ? "bg-blue-500 text-white border-blue-400 shadow-md"
+                          ? "bg-[#FF7F02] text-white border-orange-400 shadow-md"
                           : "bg-black/40 text-slate-200 border-white/20"
                       }`}
                     >
@@ -425,7 +425,7 @@ export default function OnboardingScreen({ onDone }: Props) {
 
               <button
                 type="submit"
-                className="mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs sm:text-sm font-black shadow-2xl hover:bg-slate-100 active:scale-98 transition-all"
+                className="mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white text-xs sm:text-sm font-black shadow-2xl shadow-orange-500/40 active:scale-98 transition-all"
               >
                 <span>Enter My Wardrobe ✨</span>
               </button>
@@ -443,7 +443,7 @@ export default function OnboardingScreen({ onDone }: Props) {
                 key={s}
                 onClick={() => setStep(s)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  s === step ? "w-6 bg-white" : "w-2 bg-white/30 hover:bg-white/60"
+                  s === step ? "w-6 bg-[#FF7F02]" : "w-2 bg-white/30 hover:bg-white/60"
                 }`}
                 title={`Jump to step ${idx + 1}`}
               />

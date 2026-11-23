@@ -125,12 +125,12 @@ export default function ProfileScreen() {
       <span className="flex-1 text-xs font-semibold text-[#14264B] dark:text-[#E2E8F0]">{label}</span>
       <span
         className={`relative h-5 w-9 rounded-full transition-colors ${
-          value ? "bg-[#0B1F4B] dark:bg-white" : "bg-[#c5cfdb] dark:bg-slate-700"
+          value ? "bg-[#FF7F02] dark:bg-white" : "bg-[#c5cfdb] dark:bg-slate-700"
         }`}
       >
         <span
           className={`absolute top-[2px] h-4 w-4 rounded-full transition-all ${
-            value ? "right-[2px] bg-white dark:bg-[#0B1F4B]" : "left-[2px] bg-white"
+            value ? "right-[2px] bg-white dark:bg-[#FF7F02]" : "left-[2px] bg-white"
           }`}
         />
       </span>
@@ -141,7 +141,7 @@ export default function ProfileScreen() {
     <div className="space-y-4 pb-24 dark:text-[#E2E8F0] relative">
       {/* ── Toast notification feedback ── */}
       {toastMessage && (
-        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-[#0B1F4B] dark:bg-white px-5 py-2.5 text-xs font-bold text-white dark:text-[#0B1F4B] shadow-2xl animate-fade">
+        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-[#FF7F02] dark:bg-white px-5 py-2.5 text-xs font-bold text-white dark:text-[#18181B] shadow-2xl animate-fade">
           <span>✓</span>
           <span>{toastMessage}</span>
         </div>
@@ -152,7 +152,7 @@ export default function ProfileScreen() {
         <div className="relative">
           <button
             onClick={() => setActiveModal("name")}
-            className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-tr from-[#0B1F4B] to-[#2563EB] text-xl font-black text-white shadow-md active:scale-95 transition-transform"
+            className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-tr from-[#FF7F02] to-[#FFA24C] text-xl font-black text-white shadow-md shadow-orange-500/20 active:scale-95 transition-transform"
             title="Edit profile name"
           >
             {profile.name
@@ -169,7 +169,7 @@ export default function ProfileScreen() {
             onClick={() => setActiveModal("name")}
             className="text-left w-full group"
           >
-            <h2 className="truncate text-base font-black text-[#0B1F4B] dark:text-white group-hover:underline">
+            <h2 className="truncate text-base font-black text-[#18181B] dark:text-white group-hover:underline">
               {profile.name || "Biruk Fikru"}
             </h2>
             <p className="mt-0.5 truncate text-xs text-[#73819A]">
@@ -184,15 +184,15 @@ export default function ProfileScreen() {
         </span>
       </section>
 
-      {/* ── FITLY Pro Member Banner (Matching Reference Screen 5) ── */}
-      <section className="flex items-center justify-between gap-3 rounded-2xl bg-[#0B1F4B] p-4 text-white shadow-md">
+      {/* ── ፍሬ Pro Member Banner (Matching Reference Screen 5) ── */}
+      <section className="flex items-center justify-between gap-3 rounded-2xl bg-[#FF7F02] p-4 text-white shadow-md">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-xl text-amber-300">
             👑
           </div>
           <div>
             <h3 className="text-xs font-extrabold leading-tight">
-              {isPro ? "FITLY Pro Active" : "Upgrade to FITLY Pro"}
+              {isPro ? "ፍሬ Pro Active" : "Upgrade to ፍሬ Pro"}
             </h3>
             <p className="mt-0.5 text-[10.5px] text-white/70">
               {isPro
@@ -372,7 +372,7 @@ export default function ProfileScreen() {
       </section>
 
       <div className="rounded-2xl bg-[#EEF3F8] dark:bg-[#0F172A] p-4 text-[11px] leading-relaxed text-[#73819A]">
-        <b className="text-[#0B1F4B] dark:text-white">Your outfit, your rules.</b> FITLY
+        <b className="text-[#18181B] dark:text-white">Your outfit, your rules.</b> ፍሬ (Firie)
         pairs tops, bottoms and shoes, maintains harmonious contrast, and matches your style
         to Addis weather and occasions.
       </div>
@@ -382,7 +382,7 @@ export default function ProfileScreen() {
       {/* 1. Style Preferences Modal */}
       {activeModal === "style" && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#0B1F4B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
+          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#18181B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
               <h3 className="text-base font-black">Choose Style Preference</h3>
               <button
@@ -410,8 +410,8 @@ export default function ProfileScreen() {
                   }}
                   className={`flex w-full items-center justify-between rounded-xl p-3 text-xs font-bold border transition-all ${
                     style === opt
-                      ? "bg-[#0B1F4B] text-white border-[#0B1F4B]"
-                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#0B1F4B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
+                      ? "bg-[#FF7F02] text-white border-[#FF7F02]"
+                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#18181B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
                   }`}
                 >
                   <span>{opt}</span>
@@ -426,7 +426,7 @@ export default function ProfileScreen() {
       {/* 2. Color Comfort Modal */}
       {activeModal === "colors" && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#0B1F4B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
+          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#18181B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
               <h3 className="text-base font-black">Choose Color Comfort</h3>
               <button
@@ -453,8 +453,8 @@ export default function ProfileScreen() {
                   }}
                   className={`flex w-full items-center justify-between rounded-xl p-3 text-xs font-bold border transition-all ${
                     colors === opt
-                      ? "bg-[#0B1F4B] text-white border-[#0B1F4B]"
-                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#0B1F4B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
+                      ? "bg-[#FF7F02] text-white border-[#FF7F02]"
+                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#18181B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
                   }`}
                 >
                   <span>{opt}</span>
@@ -469,7 +469,7 @@ export default function ProfileScreen() {
       {/* 3. Traditional Wear Modal */}
       {activeModal === "traditional" && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#0B1F4B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
+          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#18181B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
               <h3 className="text-base font-black">Habesha Traditional Wear</h3>
               <button
@@ -497,8 +497,8 @@ export default function ProfileScreen() {
                   }}
                   className={`flex w-full items-center justify-between rounded-xl p-3 text-xs font-bold border transition-all ${
                     traditionalWear === opt.id
-                      ? "bg-[#0B1F4B] text-white border-[#0B1F4B]"
-                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#0B1F4B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
+                      ? "bg-[#FF7F02] text-white border-[#FF7F02]"
+                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#18181B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
                   }`}
                 >
                   <span>{opt.label}</span>
@@ -513,7 +513,7 @@ export default function ProfileScreen() {
       {/* 4. Weather City / Neighborhood Location Modal */}
       {activeModal === "location" && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#0B1F4B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
+          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#18181B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
               <h3 className="text-base font-black">Select Weather Location</h3>
               <button
@@ -542,8 +542,8 @@ export default function ProfileScreen() {
                   }}
                   className={`flex w-full items-center justify-between rounded-xl p-3 text-xs font-bold border transition-all ${
                     profile.city === loc
-                      ? "bg-[#0B1F4B] text-white border-[#0B1F4B]"
-                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#0B1F4B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
+                      ? "bg-[#FF7F02] text-white border-[#FF7F02]"
+                      : "bg-[#F8FAFC] dark:bg-[#0C1527] text-[#18181B] dark:text-white border-[#E2E8F0] dark:border-[#1E293B]"
                   }`}
                 >
                   <span>📍 {loc}</span>
@@ -558,7 +558,7 @@ export default function ProfileScreen() {
       {/* 5. Edit Profile Name Modal */}
       {activeModal === "name" && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#0B1F4B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
+          <div className="w-full max-w-sm rounded-[32px] bg-white dark:bg-[#0F172A] p-6 shadow-2xl text-[#18181B] dark:text-white border border-[#E2E8F0] dark:border-[#1E293B]">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
               <h3 className="text-base font-black">Edit Profile Details</h3>
               <button
@@ -584,7 +584,7 @@ export default function ProfileScreen() {
                   required
                   value={profile.name}
                   onChange={(e) => update({ name: e.target.value })}
-                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] dark:bg-[#0C1527] px-3.5 py-2.5 text-xs font-bold text-[#0B1F4B] dark:text-white outline-none focus:border-[#0B1F4B]"
+                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] dark:bg-[#0C1527] px-3.5 py-2.5 text-xs font-bold text-[#18181B] dark:text-white outline-none focus:border-[#FF7F02]"
                 />
               </div>
               <div>
@@ -595,12 +595,12 @@ export default function ProfileScreen() {
                   type="email"
                   value={profile.email}
                   onChange={(e) => update({ email: e.target.value })}
-                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] dark:bg-[#0C1527] px-3.5 py-2.5 text-xs font-bold text-[#0B1F4B] dark:text-white outline-none focus:border-[#0B1F4B]"
+                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] dark:bg-[#0C1527] px-3.5 py-2.5 text-xs font-bold text-[#18181B] dark:text-white outline-none focus:border-[#FF7F02]"
                 />
               </div>
               <button
                 type="submit"
-                className="mt-4 flex h-11 w-full items-center justify-center rounded-xl bg-[#0B1F4B] dark:bg-white text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md active:scale-95"
+                className="mt-4 flex h-11 w-full items-center justify-center rounded-xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md active:scale-95"
               >
                 Save Changes
               </button>

@@ -99,7 +99,7 @@ export default function PlaceCard({ place, near, layout = "scroll", onClick, onS
                     e.stopPropagation();
                     onStyleForPlace(place);
                   }}
-                  className="rounded-full bg-[#0B1F4B] dark:bg-white px-2.5 py-1 text-[9px] font-bold text-white dark:text-[#0B1F4B] shadow-xs active:scale-95 transition-transform"
+                  className="rounded-full bg-[#FF7F02] dark:bg-white px-2.5 py-1 text-[9px] font-bold text-white dark:text-[#18181B] shadow-xs active:scale-95 transition-transform"
                 >
                   ✨ Style
                 </button>
@@ -131,7 +131,7 @@ export default function PlaceCard({ place, near, layout = "scroll", onClick, onS
         <span className="relative block">
           <PlaceImage place={place} className="h-[108px] w-full" rounded="rounded-2xl" />
           {place.tags.includes("romantic") && (
-            <span className="absolute left-2 top-2 rounded-full bg-white/95 dark:bg-[#0B1F4B] px-2 py-0.5 text-[8.5px] font-extrabold text-[#E11D48] dark:text-[#FDA4AF] shadow-sm">
+            <span className="absolute left-2 top-2 rounded-full bg-white/95 dark:bg-[#FF7F02] px-2 py-0.5 text-[8.5px] font-extrabold text-[#E11D48] dark:text-[#FDA4AF] shadow-sm">
               ♥ Romantic
             </span>
           )}
@@ -163,7 +163,7 @@ export default function PlaceCard({ place, near, layout = "scroll", onClick, onS
             e.stopPropagation();
             onStyleForPlace(place);
           }}
-          className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#0B1F4B] dark:bg-white py-1.5 text-[9.5px] font-bold text-white dark:text-[#0B1F4B] shadow-xs active:scale-95 transition-transform hover:opacity-95"
+          className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#FF7F02] dark:bg-white py-1.5 text-[9.5px] font-bold text-white dark:text-[#18181B] shadow-xs active:scale-95 transition-transform hover:opacity-95"
         >
           <span>✨</span>
           <span>Style for here</span>

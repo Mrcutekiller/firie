@@ -99,7 +99,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
       onClick={onClose}
     >
       <div
-        className="flex max-h-[92vh] w-full max-w-[440px] flex-col overflow-y-auto rounded-3xl bg-white p-5 text-[#0B1F4B] shadow-2xl dark:bg-[#0B1528] dark:text-white animate-pop no-scrollbar"
+        className="flex max-h-[92vh] w-full max-w-[440px] flex-col overflow-y-auto rounded-3xl bg-white p-5 text-[#18181B] shadow-2xl dark:bg-[#0B1528] dark:text-white animate-pop no-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Header Bar matching Reference Image 3 (INDYX) ── */}
@@ -117,7 +117,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
           <div className="flex items-center gap-1.5">
             <button
               onClick={onOpenCapsulePlanner}
-              className="flex items-center gap-1 rounded-full bg-[#0B1F4B] px-3 py-1.5 text-[10.5px] font-bold text-white shadow-sm dark:bg-white dark:text-[#0B1F4B] transition-transform active:scale-95"
+              className="flex items-center gap-1 rounded-full bg-[#FF7F02] px-3 py-1.5 text-[10.5px] font-bold text-white shadow-sm dark:bg-white dark:text-[#18181B] transition-transform active:scale-95"
             >
               <span>🧳 Trip Capsule</span>
             </button>
@@ -134,19 +134,19 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
         <div className="mt-3 flex items-center justify-between px-2">
           <button
             onClick={prevMonth}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1F5F9] text-sm font-bold text-[#0B1F4B] hover:bg-[#E2E8F0] dark:bg-[#152238] dark:text-white active:scale-90"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1F5F9] text-sm font-bold text-[#18181B] hover:bg-[#E2E8F0] dark:bg-[#152238] dark:text-white active:scale-90"
             aria-label="Previous month"
           >
             ‹
           </button>
           <div className="text-center">
-            <span className="text-sm font-black tracking-wider text-[#0B1F4B] dark:text-white">
+            <span className="text-sm font-black tracking-wider text-[#18181B] dark:text-white">
               {monthName} {year}
             </span>
           </div>
           <button
             onClick={nextMonth}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1F5F9] text-sm font-bold text-[#0B1F4B] hover:bg-[#E2E8F0] dark:bg-[#152238] dark:text-white active:scale-90"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1F5F9] text-sm font-bold text-[#18181B] hover:bg-[#E2E8F0] dark:bg-[#152238] dark:text-white active:scale-90"
             aria-label="Next month"
           >
             ›
@@ -186,7 +186,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                 className={cn(
                   "relative flex h-[72px] flex-col justify-between rounded-xl border p-1 text-left transition-all active:scale-95 overflow-hidden",
                   isSelected
-                    ? "border-[#0B1F4B] ring-2 ring-[#0B1F4B] bg-[#F1F5FB] dark:border-white dark:ring-white dark:bg-[#1E2E4B]"
+                    ? "border-[#FF7F02] ring-2 ring-[#0B1F4B] bg-[#F1F5FB] dark:border-white dark:ring-white dark:bg-[#1E2E4B]"
                     : outfit
                     ? "border-[#E2E8F0] bg-white shadow-sm hover:border-[#CBD5E1] dark:border-[#1E293B] dark:bg-[#101D33]"
                     : "border-dashed border-[#E2E8F0] bg-[#FAFBFD] dark:border-[#1E293B]/60 dark:bg-[#0B1322]/50 hover:bg-white"
@@ -198,7 +198,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                     className={cn(
                       "text-[9.5px] font-black",
                       isToday
-                        ? "rounded-full bg-[#0B1F4B] px-1 text-white dark:bg-white dark:text-[#0B1F4B]"
+                        ? "rounded-full bg-[#FF7F02] px-1 text-white dark:bg-white dark:text-[#18181B]"
                         : "text-[#64748B] dark:text-[#94A3B8]"
                     )}
                   >
@@ -253,7 +253,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                     day: "numeric",
                   })}
                 </span>
-                <h4 className="text-xs font-black text-[#0B1F4B] dark:text-white">
+                <h4 className="text-xs font-black text-[#18181B] dark:text-white">
                   {activeDayData ? `${activeDayData.event}` : "No Outfit Logged"}
                 </h4>
               </div>
@@ -283,7 +283,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                           className="max-h-full max-w-full object-contain"
                         />
                       </div>
-                      <span className="mt-1 truncate text-[9px] font-bold text-center text-[#0B1F4B] dark:text-white w-full">
+                      <span className="mt-1 truncate text-[9px] font-bold text-center text-[#18181B] dark:text-white w-full">
                         {p.name}
                       </span>
                     </div>
@@ -312,7 +312,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                       onClose();
                       navigate("/");
                     }}
-                    className="flex-1 rounded-full bg-[#0B1F4B] dark:bg-white py-1.5 text-[10px] font-bold text-white dark:text-[#0B1F4B] shadow-sm active:scale-95 transition-transform"
+                    className="flex-1 rounded-full bg-[#FF7F02] dark:bg-white py-1.5 text-[10px] font-bold text-white dark:text-[#18181B] shadow-sm active:scale-95 transition-transform"
                   >
                     🔒 Wear This Look Today
                   </button>
@@ -321,7 +321,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                       onClose();
                       navigate("/camera", { state: { itemIds: activeDayData.itemIds } });
                     }}
-                    className="rounded-full border border-[#E2E8F0] dark:border-[#1E293B] px-3.5 py-1.5 text-[10px] font-bold text-[#0B1F4B] dark:text-white"
+                    className="rounded-full border border-[#E2E8F0] dark:border-[#1E293B] px-3.5 py-1.5 text-[10px] font-bold text-[#18181B] dark:text-white"
                   >
                     📷 Camera
                   </button>
@@ -337,7 +337,7 @@ export default function OutfitCalendarModal({ isOpen, onClose, onOpenCapsulePlan
                     onClose();
                     navigate("/");
                   }}
-                  className="mt-2 rounded-full bg-[#0B1F4B] dark:bg-white px-4 py-1.5 text-[10px] font-bold text-white dark:text-[#0B1F4B] shadow-sm"
+                  className="mt-2 rounded-full bg-[#FF7F02] dark:bg-white px-4 py-1.5 text-[10px] font-bold text-white dark:text-[#18181B] shadow-sm"
                 >
                   ✨ Curate Outfit for This Day
                 </button>

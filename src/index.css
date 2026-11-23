@@ -11,27 +11,26 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------------------
-   FITLY theme — navy & white
-   A calm, premium wardrobe palette. All accents stay within navy + white,
-   with amber reserved strictly for the Pro tier.
+   ፍሬ (Firie) theme — White & Orange (#FF7F02)
+   Clean high-fashion white surfaces with vibrant citrus orange brand accents.
    --------------------------------------------------------------------------- */
 @theme {
-  --color-navy-50: #eef2f8;
-  --color-navy-100: #d6e0ee;
-  --color-navy-200: #adc0dc;
-  --color-navy-300: #7f9ac4;
-  --color-navy-400: #4f70a1;
-  --color-navy-500: #2c4f80;
-  --color-navy-600: #1c3c68;
-  --color-navy-700: #122c50;
-  --color-navy-800: #0b1f3a;
-  --color-navy-900: #071527;
-  --color-navy-950: #040d18;
+  --color-navy-50: #fffaf5;
+  --color-navy-100: #ffeedb;
+  --color-navy-200: #fed7aa;
+  --color-navy-300: #fdba74;
+  --color-navy-400: #fb923c;
+  --color-navy-500: #ff7f02;
+  --color-navy-600: #ea580c;
+  --color-navy-700: #c2410c;
+  --color-navy-800: #ff7f02;
+  --color-navy-900: #18181b;
+  --color-navy-950: #09090b;
 
-  --color-ink: var(--color-navy-900);
-  --color-canvas: #f5f7fb;
+  --color-ink: #18181b;
+  --color-canvas: #ffffff;
   --color-surface: #ffffff;
-  --color-surface-alt: #eef2f8;
+  --color-surface-alt: #fffaf5;
 
   --font-sans: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
@@ -47,15 +46,15 @@
 
 :root.dark, html.dark {
   color-scheme: dark;
-  --color-canvas: #080d1a;
-  --color-ink: #f8fafc;
-  --color-surface: #0f172a;
-  --color-surface-alt: #1e293b;
+  --color-canvas: #0c0a09;
+  --color-ink: #fdfdfd;
+  --color-surface: #1c1917;
+  --color-surface-alt: #292524;
 }
 
 html.dark body {
-  background: #080d1a !important;
-  color: #f8fafc !important;
+  background: #0c0a09 !important;
+  color: #fdfdfd !important;
 }
 
 html,

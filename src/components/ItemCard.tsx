@@ -60,7 +60,7 @@ export default function ItemCard({
             cpw.highlight
               ? "bg-emerald-500 text-white ring-1 ring-emerald-300"
               : item.timesWorn === 0
-              ? "bg-[#0B1F4B] text-white dark:bg-white dark:text-[#0B1F4B]"
+              ? "bg-[#FF7F02] text-white dark:bg-white dark:text-[#18181B]"
               : "bg-[#E2E8F0] text-[#475569] dark:bg-[#1E293B] dark:text-[#94A3B8]"
           }`}
         >
@@ -68,7 +68,7 @@ export default function ItemCard({
         </span>
 
         {item.category === "traditional" && (
-          <span className="absolute bottom-1 rounded-full bg-[#0B1F4B] px-1.5 py-0.5 text-[6.5px] font-black tracking-wide text-white shadow-sm">
+          <span className="absolute bottom-1 rounded-full bg-[#FF7F02] px-1.5 py-0.5 text-[6.5px] font-black tracking-wide text-white shadow-sm">
             HABESHA
           </span>
         )}
@@ -76,7 +76,7 @@ export default function ItemCard({
 
       {/* Item info */}
       <div className="mt-2 w-full px-1">
-        <p className="truncate text-[11px] font-bold text-[#0B1F4B] dark:text-white leading-tight">
+        <p className="truncate text-[11px] font-bold text-[#18181B] dark:text-white leading-tight">
           {item.name}
         </p>
         <p className="truncate text-[9.5px] text-[#64748B] dark:text-[#94A3B8] mt-0.5">

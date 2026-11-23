@@ -50,15 +50,15 @@ export default function InsightsScreen() {
         .map(itemById)
         .filter(Boolean)
         .map((item) => item?.name)
-        .join(" · ") || "Your FITLY look"
+        .join(" · ") || "Your ፍሬ (Firie) look"
     : "No outfit selected yet";
 
   async function shareLook() {
-    const text = `Today's FITLY look: ${outfitText}. Styled with FITLY.`;
+    const text = `Today's ፍሬ (Firie) look: ${outfitText}. Styled with ፍሬ (Firie).`;
     const browserNavigator = navigator as Navigator & { share?: (data: ShareData) => Promise<void> };
     try {
       if (typeof browserNavigator.share === "function") {
-        await browserNavigator.share({ title: "Today's FITLY look", text });
+        await browserNavigator.share({ title: "Today's ፍሬ (Firie) look", text });
       } else {
         await navigator.clipboard.writeText(text);
       }
@@ -77,13 +77,13 @@ export default function InsightsScreen() {
           <p className="text-[10px] font-bold uppercase tracking-[1.4px] text-[#73819A]">
             WARDROBE ANALYTICS
           </p>
-          <h1 className="mt-1 text-2xl font-black tracking-tight text-[#0B1F4B] dark:text-white">
+          <h1 className="mt-1 text-2xl font-black tracking-tight text-[#18181B] dark:text-white">
             Style Insights
           </h1>
         </div>
         <button
           onClick={() => navigate("/widgets")}
-          className="flex items-center gap-1.5 rounded-full bg-[#EAF0F8] dark:bg-[#1E293B] px-3.5 py-1.5 text-xs font-bold text-[#0B1F4B] dark:text-white shadow-xs active:scale-95 transition-transform"
+          className="flex items-center gap-1.5 rounded-full bg-[#EAF0F8] dark:bg-[#1E293B] px-3.5 py-1.5 text-xs font-bold text-[#18181B] dark:text-white shadow-xs active:scale-95 transition-transform"
         >
           <span>📱</span>
           <span>Home Widgets</span>
@@ -91,7 +91,7 @@ export default function InsightsScreen() {
       </section>
 
       {/* Hero Analytics Card */}
-      <section className="rounded-3xl bg-gradient-to-br from-[#0B1F4B] via-[#163568] to-[#1E437E] p-5 text-white shadow-xl">
+      <section className="rounded-3xl bg-gradient-to-br from-[#FF7F02] via-[#163568] to-[#1E437E] p-5 text-white shadow-xl">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[1.4px] text-[#BFD3EA]">
@@ -131,7 +131,7 @@ export default function InsightsScreen() {
           <p className="text-[9px] font-bold uppercase tracking-wider text-[#73819A]">
             MOST WORN PIECE
           </p>
-          <p className="mt-2 text-sm font-black truncate text-[#0B1F4B] dark:text-white">
+          <p className="mt-2 text-sm font-black truncate text-[#18181B] dark:text-white">
             {mostWorn ? itemById(mostWorn[0])?.name ?? "Favorite" : "None yet"}
           </p>
           <p className="text-[10px] text-[#73819A] mt-0.5">
@@ -143,7 +143,7 @@ export default function InsightsScreen() {
           <p className="text-[9px] font-bold uppercase tracking-wider text-[#73819A]">
             WEATHER COMFORT
           </p>
-          <p className="mt-2 text-sm font-black text-[#0B1F4B] dark:text-white">
+          <p className="mt-2 text-sm font-black text-[#18181B] dark:text-white">
             {weather ? `${Math.round(weather.temperatureC)}°C ${weather.condition}` : "Optimal"}
           </p>
           <p className="text-[10px] text-[#73819A] mt-0.5">
@@ -163,7 +163,7 @@ export default function InsightsScreen() {
               📱
             </span>
             <div>
-              <b className="block text-xs text-[#0B1F4B] dark:text-white">
+              <b className="block text-xs text-[#18181B] dark:text-white">
                 FigCraft Home Screen Widgets
               </b>
               <span className="text-[10.5px] text-[#73819A]">
@@ -183,7 +183,7 @@ export default function InsightsScreen() {
               📤
             </span>
             <div>
-              <b className="block text-xs text-[#0B1F4B] dark:text-white">
+              <b className="block text-xs text-[#18181B] dark:text-white">
                 Share Today's Look
               </b>
               <span className="text-[10.5px] text-[#73819A]">
@@ -203,7 +203,7 @@ export default function InsightsScreen() {
               🧳
             </span>
             <div>
-              <b className="block text-xs text-[#0B1F4B] dark:text-white">
+              <b className="block text-xs text-[#18181B] dark:text-white">
                 Trip Capsule Wardrobe
               </b>
               <span className="text-[10.5px] text-[#73819A]">
@@ -216,7 +216,7 @@ export default function InsightsScreen() {
       </section>
 
       {notice && (
-        <div className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 rounded-full bg-[#0B1F4B] px-5 py-2 text-xs font-bold text-white shadow-xl animate-fade">
+        <div className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 rounded-full bg-[#FF7F02] px-5 py-2 text-xs font-bold text-white shadow-xl animate-fade">
           {notice}
         </div>
       )}

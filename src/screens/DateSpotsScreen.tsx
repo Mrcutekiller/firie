@@ -177,7 +177,7 @@ export default function DateSpotsScreen() {
     if (res.results.length > 0) return res.results;
     return placeSections(near)[0].places.map((p) => ({
       place: p,
-      reason: "Recently added to FITLY",
+      reason: "Recently added to ፍሬ (Firie)",
       score: 0,
       estTotalForPeople: null,
       distanceKm: null,
@@ -278,7 +278,7 @@ export default function DateSpotsScreen() {
             <span className="rounded-full bg-amber-400/20 text-amber-700 dark:text-amber-300 border border-amber-400/30 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider">
               👑 PRO EXCLUSIVE
             </span>
-            <h1 className="mt-1.5 text-2xl sm:text-3xl font-black leading-tight text-[#0B1F4B] dark:text-white tracking-tight">
+            <h1 className="mt-1.5 text-2xl sm:text-3xl font-black leading-tight text-[#18181B] dark:text-white tracking-tight">
               Date Spots &amp; Venues
             </h1>
             <p className="mt-0.5 text-xs text-[#64748B] dark:text-[#94A3B8]">
@@ -295,7 +295,7 @@ export default function DateSpotsScreen() {
         </section>
 
         {/* Pro Lock Hero Card */}
-        <div className="rounded-3xl border-2 border-[#0B1F4B] dark:border-blue-500 bg-gradient-to-br from-[#0B1F4B] to-[#163568] p-6 text-white shadow-2xl relative overflow-hidden">
+        <div className="rounded-3xl border-2 border-[#FF7F02] dark:border-blue-500 bg-gradient-to-br from-[#FF7F02] to-[#FFA742] p-6 text-white shadow-2xl relative overflow-hidden">
           <div className="absolute -right-6 -top-6 h-36 w-36 rounded-full bg-blue-500/20 blur-2xl pointer-events-none" />
           <div className="relative z-10 space-y-4">
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-2xl shadow-inner">
@@ -307,7 +307,7 @@ export default function DateSpotsScreen() {
                 Date Suggestions are Exclusive to Pro
               </h2>
               <p className="mt-1.5 text-xs text-slate-200 leading-relaxed font-normal">
-                Never feel underdressed or guess the bill. <b>FITLY Pro</b> curates top Addis Ababa cafes, romantic rooftops, and dinner spots with verified menu budgets in ETB and custom outfit pairing.
+                Never feel underdressed or guess the bill. <b>ፍሬ Pro</b> curates top Addis Ababa cafes, romantic rooftops, and dinner spots with verified menu budgets in ETB and custom outfit pairing.
               </p>
             </div>
 
@@ -335,9 +335,9 @@ export default function DateSpotsScreen() {
             <div className="pt-2">
               <button
                 onClick={() => navigate("/upgrade")}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs sm:text-sm font-black shadow-xl hover:bg-slate-100 active:scale-98 transition-all"
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#FF7F02] text-xs sm:text-sm font-black shadow-xl hover:bg-orange-50 active:scale-98 transition-all"
               >
-                <span>Upgrade to Pro · 600 ETB / month</span>
+                <span>Upgrade to ፍሬ Pro · 600 ETB / month</span>
                 <span className="text-base">→</span>
               </button>
               <p className="mt-2 text-center text-[10px] text-white/70">
@@ -360,10 +360,10 @@ export default function DateSpotsScreen() {
             ].map((spot, i) => (
               <div key={i} className="flex items-center justify-between rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-3 shadow-xs">
                 <div>
-                  <p className="text-xs font-black text-[#0B1F4B] dark:text-white">{spot.name}</p>
+                  <p className="text-xs font-black text-[#18181B] dark:text-white">{spot.name}</p>
                   <p className="text-[10px] text-[#73819A]">{spot.type}</p>
                 </div>
-                <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-[10px] font-bold text-[#0B1F4B] dark:text-white">
+                <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-[10px] font-bold text-[#18181B] dark:text-white">
                   🔒 Pro
                 </span>
               </div>
@@ -398,7 +398,7 @@ export default function DateSpotsScreen() {
       <div className="flex flex-wrap items-center gap-2">
         <button
           onClick={() => setShowCitySheet(true)}
-          className="flex items-center gap-1.5 rounded-full border border-[#e0e6ed] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] px-3.5 py-1.5 text-[11px] font-bold text-[#0B1F4B] dark:text-white shadow-sm"
+          className="flex items-center gap-1.5 rounded-full border border-[#e0e6ed] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] px-3.5 py-1.5 text-[11px] font-bold text-[#18181B] dark:text-white shadow-sm"
         >
           📍 {gps ? "My location" : city} <span className="text-[#98a4b4]">▾</span>
         </button>
@@ -429,7 +429,7 @@ export default function DateSpotsScreen() {
           onFocus={() => setTab("search")}
           placeholder="Search cafes, rooftops, verified menus…"
           aria-label="Find a place for your date"
-          className="w-full rounded-full border border-[#e2e8ef] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] py-3 pl-10 pr-4 text-xs text-[#0B1F4B] dark:text-white outline-none placeholder:text-[#98a4b4] focus:border-[#2563EB] shadow-sm"
+          className="w-full rounded-full border border-[#e2e8ef] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] py-3 pl-10 pr-4 text-xs text-[#18181B] dark:text-white outline-none placeholder:text-[#98a4b4] focus:border-[#FF7F02] shadow-sm"
         />
       </div>
 
@@ -453,7 +453,7 @@ export default function DateSpotsScreen() {
                 setTab("discover");
               }
             }}
-            className="shrink-0 rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] px-3.5 py-1.5 text-[10.5px] font-bold text-[#0B1F4B] dark:text-[#DCE5F2] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] shadow-sm transition-all"
+            className="shrink-0 rounded-full border border-[#E2E8F0] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] px-3.5 py-1.5 text-[10.5px] font-bold text-[#18181B] dark:text-[#DCE5F2] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] shadow-sm transition-all"
           >
             {vibe.label}
           </button>
@@ -468,7 +468,7 @@ export default function DateSpotsScreen() {
             onClick={() => setTab(t.id)}
             className={`shrink-0 rounded-full border px-3.5 py-1.5 text-[11px] font-bold transition-all shadow-sm ${
               tab === t.id
-                ? "border-[#0B1F4B] bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B]"
+                ? "border-[#FF7F02] bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B]"
                 : "border-[#e0e6ed] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] text-[#718198] dark:text-[#94A3B8]"
             }`}
           >
@@ -487,7 +487,7 @@ export default function DateSpotsScreen() {
             className="flex w-full items-center justify-between rounded-[15px] border border-[#dce5f0] bg-[#eef3fa] px-4 py-3 text-left dark:border-[#1E293B] dark:bg-[#16213b]"
           >
             <span>
-              <b className="block text-xs text-[#17375d] dark:text-[#DCE5F2]">Ask FITLY for a spot</b>
+              <b className="block text-xs text-[#17375d] dark:text-[#DCE5F2]">Ask ፍሬ (Firie) for a spot</b>
               <span className="mt-0.5 block text-[10px] text-[#5f7396] dark:text-[#94A3B8]">
                 “Find me a romantic cafe for two under 1,500 ETB”
               </span>
@@ -516,7 +516,7 @@ export default function DateSpotsScreen() {
                   className={cn(
                     "flex-1 rounded-full px-3 py-2 text-[11px] font-bold transition-all active:scale-95",
                     partyMode === option.id
-                      ? "bg-[#0B1F4B] text-white shadow-sm dark:bg-white dark:text-[#0B1F4B]"
+                      ? "bg-[#FF7F02] text-white shadow-sm dark:bg-white dark:text-[#18181B]"
                       : "text-[#64748B] dark:text-[#94A3B8]"
                   )}
                 >
@@ -539,7 +539,7 @@ export default function DateSpotsScreen() {
                   value={partyBudget}
                   onChange={(event) => setPartyBudget(Math.max(0, Number(event.target.value) || 0))}
                   aria-label="Total budget for the whole party"
-                  className="mt-1 w-full rounded-xl border border-[#e2e8ef] bg-white px-3 py-2.5 text-xs font-bold text-[#0B1F4B] outline-none focus:border-[#2563EB] dark:border-[#1E293B] dark:bg-[#0C1527] dark:text-white"
+                  className="mt-1 w-full rounded-xl border border-[#e2e8ef] bg-white px-3 py-2.5 text-xs font-bold text-[#18181B] outline-none focus:border-[#FF7F02] dark:border-[#1E293B] dark:bg-[#0C1527] dark:text-white"
                 />
               </label>
 
@@ -551,17 +551,17 @@ export default function DateSpotsScreen() {
                   <button
                     onClick={() => setOthers((value) => Math.max(0, value - 1))}
                     aria-label="One fewer person"
-                    className="grid h-7 w-7 place-items-center rounded-lg bg-[#F1F5F9] text-sm font-bold text-[#0B1F4B] active:scale-95 dark:bg-[#1E293B] dark:text-white"
+                    className="grid h-7 w-7 place-items-center rounded-lg bg-[#F1F5F9] text-sm font-bold text-[#18181B] active:scale-95 dark:bg-[#1E293B] dark:text-white"
                   >
                     −
                   </button>
-                  <span className="min-w-[56px] text-center text-xs font-black text-[#0B1F4B] dark:text-white">
+                  <span className="min-w-[56px] text-center text-xs font-black text-[#18181B] dark:text-white">
                     {people} {people === 1 ? "person" : "total"}
                   </span>
                   <button
                     onClick={() => setOthers((value) => Math.min(49, value + 1))}
                     aria-label="One more person"
-                    className="grid h-7 w-7 place-items-center rounded-lg bg-[#F1F5F9] text-sm font-bold text-[#0B1F4B] active:scale-95 dark:bg-[#1E293B] dark:text-white"
+                    className="grid h-7 w-7 place-items-center rounded-lg bg-[#F1F5F9] text-sm font-bold text-[#18181B] active:scale-95 dark:bg-[#1E293B] dark:text-white"
                   >
                     ＋
                   </button>
@@ -578,7 +578,7 @@ export default function DateSpotsScreen() {
                   className={cn(
                     "shrink-0 rounded-lg px-2.5 py-1 text-[10px] font-bold transition-all active:scale-95",
                     partyBudget === preset
-                      ? "bg-[#0B1F4B] dark:bg-white text-white dark:text-[#0B1F4B] shadow-sm font-black"
+                      ? "bg-[#FF7F02] dark:bg-white text-white dark:text-[#18181B] shadow-sm font-black"
                       : "bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] hover:bg-[#E2E8F0]"
                   )}
                 >
@@ -590,8 +590,8 @@ export default function DateSpotsScreen() {
             <div className="mt-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#0C1527] p-2 text-[10px] leading-relaxed text-[#64748B] dark:text-[#94A3B8] border border-[#E2E8F0] dark:border-[#1E293B]">
               {partyBudget > 0 ? (
                 <span>
-                  💰 Total: <b className="text-[#0B1F4B] dark:text-white">{partyBudget.toLocaleString()} ETB</b> for{" "}
-                  <b className="text-[#0B1F4B] dark:text-white">{people}</b> (You + {others} {others === 1 ? "other" : "others"}) ≈{" "}
+                  💰 Total: <b className="text-[#18181B] dark:text-white">{partyBudget.toLocaleString()} ETB</b> for{" "}
+                  <b className="text-[#18181B] dark:text-white">{people}</b> (You + {others} {others === 1 ? "other" : "others"}) ≈{" "}
                   <b className="text-[#059669] dark:text-[#34D399]">{perPersonBudget.toLocaleString()} ETB / person</b>. Spots are filtered and ranked to fit your budget.
                 </span>
               ) : (
@@ -603,11 +603,11 @@ export default function DateSpotsScreen() {
           {PLACES.length === 0 ? (
             <div className="my-6 rounded-3xl border border-dashed border-[#DCE5F2] dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-8 text-center shadow-sm animate-fade">
               <span className="text-4xl">📍</span>
-              <h3 className="mt-3 text-base font-black text-[#0B1F4B] dark:text-white">
+              <h3 className="mt-3 text-base font-black text-[#18181B] dark:text-white">
                 Ready for Your Real Locations
               </h3>
               <p className="mt-1.5 text-xs text-[#64748B] dark:text-[#94A3B8] max-w-sm mx-auto leading-relaxed">
-                All previous demo spots have been cleared. Send your locations, their real menus, and prices, and FITLY will display them here with the interactive budget calculator and outfit matching!
+                All previous demo spots have been cleared. Send your locations, their real menus, and prices, and ፍሬ (Firie) will display them here with the interactive budget calculator and outfit matching!
               </p>
             </div>
           ) : (
@@ -714,14 +714,14 @@ export default function DateSpotsScreen() {
         <div className="space-y-4">
           {/* AI ask */}
           <div className="rounded-[15px] border border-[#e7ebf0] bg-white dark:border-[#1E293B] dark:bg-[#0F172A] p-3">
-            <label className="text-[10px] font-bold uppercase tracking-wider text-[#8392a7]">Ask FITLY</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-[#8392a7]">Ask ፍሬ (Firie)</label>
             <div className="mt-1.5 flex gap-2">
               <input
                 value={askText}
                 onChange={(e) => setAskText(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && runAsk()}
                 placeholder="Romantic cafe for two under 1,500 ETB…"
-                aria-label="Ask FITLY for a place"
+                aria-label="Ask ፍሬ (Firie) for a place"
                 className="min-w-0 flex-1 rounded-xl border border-[#e2e8ef] px-3 py-2.5 text-xs outline-none focus:border-[#7892b4]"
               />
               <Button onClick={runAsk} disabled={askBusy} className="px-3 py-2.5 text-xs">
@@ -843,7 +843,7 @@ export default function DateSpotsScreen() {
               <EmptyState
                 icon="🍽"
                 title="No listed place matches yet"
-                body="Try a wider budget or clear a filter. FITLY only shows real, listed venues — it never invents restaurants."
+                body="Try a wider budget or clear a filter. ፍሬ (Firie) only shows real, listed venues — it never invents restaurants."
                 action={<Button variant="secondary" onClick={() => { setText(""); setMaxBudget(null); setMaxDistance(null); setCuisines([]); setTags([]); }}>Clear filters</Button>}
               />
             ) : (
@@ -1032,7 +1032,7 @@ export default function DateSpotsScreen() {
             <EmptyState
               icon="♡"
               title={collection === "All" ? "Nothing saved yet" : `Nothing in ${collection} yet`}
-              body="Tap the heart on any restaurant or cafe to keep it here — favourites stay with your FITLY account."
+              body="Tap the heart on any restaurant or cafe to keep it here — favourites stay with your ፍሬ (Firie) account."
               action={<Button onClick={() => setTab("discover")}>Browse places</Button>}
             />
           ) : (
@@ -1166,7 +1166,7 @@ export default function DateSpotsScreen() {
       {/* ── Spot Outfit Matcher Modal Sheet ── */}
       {stylingPlace && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade">
-          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-5 shadow-2xl animate-slide-up text-[#0B1F4B] dark:text-white">
+          <div className="w-full max-w-sm rounded-[32px] border border-white/20 bg-white dark:bg-[#0F172A] p-5 shadow-2xl animate-slide-up text-[#18181B] dark:text-white">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] dark:border-[#1E293B]">
               <div className="flex items-center gap-2.5">
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#EEF2F6] dark:bg-[#1E293B] text-xl shadow-xs">
@@ -1190,14 +1190,14 @@ export default function DateSpotsScreen() {
             {closet.length === 0 ? (
               <div className="mt-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#1E293B] p-5 text-center">
                 <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
-                  Your closet is empty. Add a few pieces so FITLY can curate an outfit for this venue.
+                  Your closet is empty. Add a few pieces so ፍሬ (Firie) can curate an outfit for this venue.
                 </p>
                 <button
                   onClick={() => {
                     setStylingPlace(null);
                     navigate("/closet");
                   }}
-                  className="mt-3 rounded-full bg-[#0B1F4B] dark:bg-white px-5 py-2 text-xs font-bold text-white dark:text-[#0B1F4B]"
+                  className="mt-3 rounded-full bg-[#FF7F02] dark:bg-white px-5 py-2 text-xs font-bold text-white dark:text-[#18181B]"
                 >
                   Add Items to Closet
                 </button>
@@ -1230,7 +1230,7 @@ export default function DateSpotsScreen() {
                             className="max-h-[46px] max-w-full object-contain"
                           />
                         </div>
-                        <span className="truncate text-[8.5px] font-bold text-[#0B1F4B] dark:text-white max-w-full">
+                        <span className="truncate text-[8.5px] font-bold text-[#18181B] dark:text-white max-w-full">
                           {item.name}
                         </span>
                       </div>
@@ -1240,7 +1240,7 @@ export default function DateSpotsScreen() {
 
                 {/* AI Venue Rationale */}
                 <div className="rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F1F5F9] dark:bg-[#1E293B]/70 p-3 text-[11px] leading-relaxed text-[#475569] dark:text-[#CBD5E1]">
-                  <b className="font-bold text-[#0B1F4B] dark:text-white">Why it fits: </b>
+                  <b className="font-bold text-[#18181B] dark:text-white">Why it fits: </b>
                   {placeOutfits[0].reason}
                 </div>
 
@@ -1255,7 +1255,7 @@ export default function DateSpotsScreen() {
                       setStylingPlace(null);
                       navigate("/");
                     }}
-                    className="flex-1 rounded-2xl bg-[#0B1F4B] dark:bg-white py-3 text-xs font-bold text-white dark:text-[#0B1F4B] shadow-md active:scale-95 transition-transform"
+                    className="flex-1 rounded-2xl bg-[#FF7F02] dark:bg-white py-3 text-xs font-bold text-white dark:text-[#18181B] shadow-md active:scale-95 transition-transform"
                   >
                     🔒 Wear This Look
                   </button>
@@ -1267,7 +1267,7 @@ export default function DateSpotsScreen() {
                         state: { placeId: stylingPlace.id, itemIds: matched.itemIds },
                       });
                     }}
-                    className="flex items-center justify-center gap-1.5 rounded-2xl border border-[#0B1F4B] dark:border-white px-4 py-3 text-xs font-bold text-[#0B1F4B] dark:text-white active:scale-95 transition-transform"
+                    className="flex items-center justify-center gap-1.5 rounded-2xl border border-[#FF7F02] dark:border-white px-4 py-3 text-xs font-bold text-[#18181B] dark:text-white active:scale-95 transition-transform"
                   >
                     <span>📷</span>
                     <span>Camera</span>

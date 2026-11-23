@@ -101,7 +101,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="flex max-h-[92vh] w-full max-w-[460px] flex-col overflow-y-auto rounded-3xl bg-white p-5 text-[#0B1F4B] shadow-2xl dark:bg-[#0B1528] dark:text-white animate-pop no-scrollbar"
+        className="flex max-h-[92vh] w-full max-w-[460px] flex-col overflow-y-auto rounded-3xl bg-white p-5 text-[#18181B] shadow-2xl dark:bg-[#0B1528] dark:text-white animate-pop no-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -136,7 +136,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
                 className={cn(
                   "shrink-0 rounded-2xl px-3.5 py-2 text-xs font-bold transition-all shadow-sm active:scale-95",
                   destination.id === d.id
-                    ? "bg-[#0B1F4B] text-white dark:bg-white dark:text-[#0B1F4B] shadow-md"
+                    ? "bg-[#FF7F02] text-white dark:bg-white dark:text-[#18181B] shadow-md"
                     : "bg-[#F1F5F9] text-[#64748B] dark:bg-[#152238] dark:text-[#94A3B8] hover:bg-[#E2E8F0]"
                 )}
               >
@@ -165,7 +165,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
               className={cn(
                 "flex-1 rounded-xl py-1.5 text-xs font-bold transition-all text-center",
                 durationDays === d.days
-                  ? "bg-white text-[#0B1F4B] shadow-sm dark:bg-[#0B1F4B] dark:text-white"
+                  ? "bg-white text-[#18181B] shadow-sm dark:bg-[#FF7F02] dark:text-white"
                   : "text-[#64748B] dark:text-[#94A3B8]"
               )}
             >
@@ -179,7 +179,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
           <div className="flex items-center gap-2">
             <span className="text-xl">✨</span>
             <div>
-              <p className="text-xs font-black text-[#0B1F4B] dark:text-white">
+              <p className="text-xs font-black text-[#18181B] dark:text-white">
                 Capsule Formula: {capsulePieces.length} Pieces = {dailyLooks.length} Distinct Looks
               </p>
               <p className="text-[10px] text-[#64748B] dark:text-[#94A3B8]">
@@ -206,7 +206,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
                   className={cn(
                     "flex h-7 w-7 items-center justify-center rounded-full text-xs font-black transition-all",
                     selectedOutfitDay === l.day
-                      ? "bg-[#0B1F4B] text-white dark:bg-white dark:text-[#0B1F4B] shadow-sm scale-105"
+                      ? "bg-[#FF7F02] text-white dark:bg-white dark:text-[#18181B] shadow-sm scale-105"
                       : "bg-[#F1F5F9] text-[#64748B] dark:bg-[#152238] dark:text-[#94A3B8]"
                   )}
                 >
@@ -220,7 +220,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
             <div className="rounded-2xl border border-[#E2E8F0] bg-[#FAFBFD] dark:border-[#1E293B] dark:bg-[#101D33] p-3.5 shadow-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-xs font-black text-[#0B1F4B] dark:text-white">{currentLook.title}</h4>
+                  <h4 className="text-xs font-black text-[#18181B] dark:text-white">{currentLook.title}</h4>
                   <span className="text-[10px] font-semibold text-[#64748B] dark:text-[#94A3B8]">
                     {currentLook.event} · {currentLook.pieces.length} pieces
                   </span>
@@ -240,7 +240,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
                     onClose();
                     navigate("/");
                   }}
-                  className="rounded-full bg-[#0B1F4B] px-3 py-1 text-[10px] font-bold text-white shadow-sm dark:bg-white dark:text-[#0B1F4B] active:scale-95"
+                  className="rounded-full bg-[#FF7F02] px-3 py-1 text-[10px] font-bold text-white shadow-sm dark:bg-white dark:text-[#18181B] active:scale-95"
                 >
                   🔒 Wear This Look
                 </button>
@@ -263,7 +263,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
                         className="max-h-full max-w-full object-contain drop-shadow-sm"
                       />
                     </div>
-                    <span className="mt-1 text-[9px] font-bold text-center text-[#0B1F4B] dark:text-white truncate w-full">
+                    <span className="mt-1 text-[9px] font-bold text-center text-[#18181B] dark:text-white truncate w-full">
                       {piece.name}
                     </span>
                   </div>
@@ -319,7 +319,7 @@ export default function TripCapsuleModal({ isOpen, onClose }: Props) {
                     <div>
                       <p
                         className={cn(
-                          "text-xs font-bold text-[#0B1F4B] dark:text-white",
+                          "text-xs font-bold text-[#18181B] dark:text-white",
                           isPacked && "line-through opacity-60"
                         )}
                       >

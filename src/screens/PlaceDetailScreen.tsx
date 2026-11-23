@@ -97,7 +97,7 @@ export default function PlaceDetailScreen() {
         <EmptyState
           icon="📍"
           title="Place not found"
-          body="This venue isn't in FITLY's list — it may have been removed. We only keep real, listed places."
+          body="This venue isn't in ፍሬ (Firie)'s list — it may have been removed. We only keep real, listed places."
           action={<Button onClick={() => navigate("/datespots")}>Back to Date Spots</Button>}
         />
       </div>
@@ -109,21 +109,21 @@ export default function PlaceDetailScreen() {
       <div className="space-y-5 pt-3 pb-12 animate-fade max-w-md mx-auto">
         <button
           onClick={() => navigate("/datespots")}
-          className="flex items-center gap-1.5 text-xs font-bold text-[#64748B] hover:text-[#0B1F4B]"
+          className="flex items-center gap-1.5 text-xs font-bold text-[#64748B] hover:text-[#18181B]"
         >
           <span>← Back to Date Spots</span>
         </button>
-        <div className="rounded-3xl border-2 border-[#0B1F4B] dark:border-blue-500 bg-gradient-to-br from-[#0B1F4B] to-[#163568] p-6 text-white text-center shadow-2xl space-y-4">
+        <div className="rounded-3xl border-2 border-[#FF7F02] dark:border-blue-500 bg-gradient-to-br from-[#FF7F02] to-[#FFA742] p-6 text-white text-center shadow-2xl space-y-4">
           <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl shadow-inner">
             🔒
           </div>
           <h2 className="text-xl font-black text-white">Pro Exclusive Venue Details</h2>
           <p className="text-xs text-slate-200">
-            Verified menu budgets, dress codes, and custom closet pairing for <b>{place.name}</b> are exclusive to FITLY Pro members.
+            Verified menu budgets, dress codes, and custom closet pairing for <b>{place.name}</b> are exclusive to ፍሬ Pro members.
           </p>
           <button
             onClick={() => navigate("/upgrade")}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1F4B] text-xs font-black shadow-xl hover:bg-slate-100 transition-all"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[#18181B] text-xs font-black shadow-xl hover:bg-slate-100 transition-all"
           >
             <span>Upgrade to Pro · 600 ETB / month</span>
             <span>→</span>
@@ -532,7 +532,7 @@ export default function PlaceDetailScreen() {
         {closet.length === 0 ? (
           <div className="space-y-2">
             <p className="text-[11px] leading-relaxed text-[#7186a0]">
-              Your closet is empty. FITLY only styles clothes you own — add a few pieces first.
+              Your closet is empty. ፍሬ (Firie) only styles clothes you own — add a few pieces first.
             </p>
             <Button variant="secondary" onClick={() => navigate("/add")} className="text-xs">
               Add closet items
@@ -569,7 +569,7 @@ export default function PlaceDetailScreen() {
                     localStorage.setItem("fitly_has_requested_outfit", "true");
                     navigate("/");
                   }}
-                  className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#0B1F4B] dark:bg-white py-2 text-xs font-bold text-white dark:text-[#0B1F4B] shadow-xs active:scale-95 transition-transform"
+                  className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#FF7F02] dark:bg-white py-2 text-xs font-bold text-white dark:text-[#18181B] shadow-xs active:scale-95 transition-transform"
                 >
                   <span>🔒 Wear this look today</span>
                 </button>
@@ -629,7 +629,7 @@ export default function PlaceDetailScreen() {
                 <p className="text-2xl">✓</p>
                 <p className="mt-1 text-sm font-bold text-navy-900">Report filed</p>
                 <p className="mx-auto mt-1.5 max-w-[300px] text-[11px] leading-relaxed text-[#7186a0]">
-                  Thank you — FITLY re-checks reports against the listed sources before changing anything. Nothing
+                  Thank you — ፍሬ (Firie) re-checks reports against the listed sources before changing anything. Nothing
                   on this page is edited automatically.
                 </p>
                 <Button className="mt-4" onClick={() => setReportOpen(false)}>
