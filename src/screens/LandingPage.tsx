@@ -23,12 +23,30 @@ export default function LandingPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [activeSectionIndex, setActiveSectionIndex] = useState<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [downloadStarted, setDownloadStarted] = useState<boolean>(false);
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   // High-speed direct APK download served from Cloudflare R2 Edge CDN (Works globally across Vercel and Cloudflare)
   const apkDownloadUrl = "https://firie.birukf37.workers.dev/Firie.apk";
   const ipaDownloadUrl = "/FITLY.ipa";
+
+  const triggerDirectDownload = () => {
+    setDownloadStarted(true);
+    // Explicit trigger ensures download occurs even if browser restricts anchor tags
+    try {
+      const a = document.createElement("a");
+      a.href = apkDownloadUrl;
+      a.download = "Firie.apk";
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch {
+      window.location.assign(apkDownloadUrl);
+    }
+  };
 
   const scrollToDownload = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -336,7 +354,11 @@ export default function LandingPage() {
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href={apkDownloadUrl}
-              className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5"
+              download="Firie.apk"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={triggerDirectDownload}
+              className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>Download APK</span>
               <span className="text-[10px]">⬇</span>
@@ -418,7 +440,11 @@ export default function LandingPage() {
             <div className="pt-5 pb-3 space-y-2 border-t border-orange-100 mt-5">
               <a
                 href={apkDownloadUrl}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all"
+                download="Firie.apk"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={triggerDirectDownload}
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all cursor-pointer"
               >
                 <span>Download Firie App (28 MB APK)</span>
                 <span>⬇</span>
@@ -537,7 +563,11 @@ export default function LandingPage() {
                       <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
                         <a
                           href={apkDownloadUrl}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
+                          download="Firie.apk"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={triggerDirectDownload}
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
                         >
                           <span>Download Firie App (28 MB APK)</span>
                           <span className="text-sm sm:text-base">⬇</span>
@@ -623,7 +653,11 @@ export default function LandingPage() {
               <div className="mt-6 sm:mt-8 pt-4 border-t border-orange-100">
                 <a
                   href={apkDownloadUrl}
-                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
+                  download="Firie.apk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={triggerDirectDownload}
+                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25 cursor-pointer"
                 >
                   <span>⬇️ Download Firie App (28 MB APK)</span>
                 </a>
@@ -932,6 +966,43 @@ export default function LandingPage() {
             >
               Close Terms of Service
             </button>
+          </div>
+        </div>
+      )}
+      {/* ── Active Download Feedback & Instructions Banner ── */}
+      {downloadStarted && (
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-lg rounded-2xl bg-[#18181B] text-white p-4 sm:p-5 shadow-2xl border border-orange-500/50 animate-fade">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl animate-bounce">🚀</span>
+              <div>
+                <p className="text-xs sm:text-sm font-black text-white">
+                  Firie.apk (28 MB) Download Started!
+                </p>
+                <p className="text-[11px] text-zinc-300 mt-0.5">
+                  Check your browser's download manager in the top-right toolbar or notification shade.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setDownloadStarted(false)}
+              className="text-zinc-400 hover:text-white p-1 text-sm font-bold"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="mt-3 pt-2.5 border-t border-zinc-800 flex items-center justify-between text-[11px]">
+            <span className="text-zinc-400">Didn't start?</span>
+            <a
+              href="https://firie.birukf37.workers.dev/Firie.apk"
+              download="Firie.apk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-[#FF7F02] hover:underline flex items-center gap-1"
+            >
+              <span>Click for Direct Edge Download</span>
+              <span>›</span>
+            </a>
           </div>
         </div>
       )}

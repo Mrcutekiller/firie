@@ -243,30 +243,62 @@ export default {
       }
     }
 
-    // Direct High-Speed Release APK Download from Cloudflare R2 Edge (Bypasses SPA)
+    // Direct High-Speed Release Download from Cloudflare R2 Edge (Bypasses SPA)
+    //
+    // `.apk` and `.ipa` are deliberately excluded from the static asset bundle
+    // by `public/.assetsignore` (Cloudflare enforces a 25 MiB asset limit), so
+    // they can ONLY be served from R2. Without this branch the request falls
+    // through to `ASSETS.fetch()`, which answers a SPA request with
+    // `index.html` (~1.2 KB) — the visitor then downloads a tiny HTML file
+    // named `.apk`/`.ipa` instead of the real application package.
     const lowerPath = url.pathname.toLowerCase();
-    if (
-      lowerPath === "/firie.apk" ||
-      lowerPath === "/fitly.apk" ||
-      lowerPath === "/download/apk" ||
-      lowerPath === "/api/download/apk"
-    ) {
+    const releaseExt = /\.(apk|ipa)$/.exec(lowerPath);
+    const releaseAlias = /^\/(?:api\/)?download\/(apk|ipa)$/.exec(lowerPath);
+    const releaseRoute = releaseExt || releaseAlias;
+
+    if (releaseRoute) {
       if (!photos) {
         return error("Cloudflare R2 storage bucket is not configured", 503);
       }
-      const filename = lowerPath.includes("fitly") ? "FITLY.apk" : "Firie.apk";
-      const object = (await photos.get(`releases/${filename}`)) || (await photos.get("releases/Firie.apk"));
+
+      const ext = releaseRoute[1];
+      const isApk = ext === "apk";
+
+      // `/FITLY.apk` and `/Firie.apk` address their own object. The bare
+      // `/download/apk` and `/api/download/apk` aliases resolve to the
+      // default release for that platform.
+      const explicitName = /\/(fitly|firie)\.(apk|ipa)$/.exec(lowerPath);
+      const fallbackName = isApk ? "Firie.apk" : "FITLY.ipa";
+      const filename = explicitName ? `${explicitName[1] === "fitly" ? "FITLY" : "Firie"}.${ext}` : fallbackName;
+
+      const object = (await photos.get(`releases/${filename}`)) || (await photos.get(`releases/${fallbackName}`));
+
+      // Never fall back to the SPA here: serving index.html under an
+      // `.apk`/`.ipa` filename is exactly the "1.22 KB download" bug.
       if (!object) {
-        return new Response("Release APK package not found in Cloudflare R2", { status: 404 });
+        return error(`Release package ${filename} is not available yet.`, 404);
       }
+
+      const userAgent = request.headers.get("User-Agent") || "";
+      const isAndroid = userAgent.toLowerCase().includes("android");
+      const contentType = isAndroid
+        ? "application/vnd.android.package-archive"
+        : "application/octet-stream";
 
       const headers = new Headers();
       object.writeHttpMetadata(headers);
-      headers.set("Content-Type", "application/vnd.android.package-archive");
-      headers.set("Content-Disposition", `attachment; filename="${filename}"`);
+      headers.set("Content-Type", isApk ? contentType : "application/octet-stream");
+      headers.set("Content-Disposition", `attachment; filename="${filename}"; filename*=UTF-8''${filename}`);
       headers.set("Content-Length", String(object.size));
       headers.set("Cache-Control", "public, max-age=3600");
       headers.set("Access-Control-Allow-Origin", "*");
+      headers.set("Access-Control-Expose-Headers", "Content-Disposition, Content-Length, Content-Type");
+      headers.set("X-Content-Type-Options", "nosniff");
+
+      if (request.method === "HEAD") {
+        return new Response(null, { headers });
+      }
+
       return new Response(object.body, { headers });
     }
 
