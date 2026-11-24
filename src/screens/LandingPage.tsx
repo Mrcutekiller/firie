@@ -31,19 +31,6 @@ export default function LandingPage() {
 
   const triggerDirectDownload = () => {
     setDownloadStarted(true);
-    // Explicit trigger ensures download occurs even if browser restricts anchor tags
-    try {
-      const a = document.createElement("a");
-      a.href = apkDownloadUrl;
-      a.download = "Firie.apk";
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } catch {
-      window.location.assign(apkDownloadUrl);
-    }
   };
 
   const scrollToDownload = (e?: React.MouseEvent) => {
@@ -314,8 +301,6 @@ export default function LandingPage() {
             <a
               href={apkDownloadUrl}
               download="Firie.apk"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={triggerDirectDownload}
               className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
             >
@@ -348,7 +333,7 @@ export default function LandingPage() {
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#FF7F02]">
                   Lookbook Chapters
                 </span>
-                <span className="text-[10px] font-bold text-zinc-400">10 Curated Sections</span>
+                <span className="text-[10px] font-bold text-zinc-400">{NAV_MENU_ITEMS.length} Curated Sections</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -400,8 +385,6 @@ export default function LandingPage() {
               <a
                 href={apkDownloadUrl}
                 download="Firie.apk"
-                target="_blank"
-                rel="noopener noreferrer"
                 onClick={triggerDirectDownload}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all cursor-pointer"
               >
@@ -523,8 +506,6 @@ export default function LandingPage() {
                         <a
                           href={apkDownloadUrl}
                           download="Firie.apk"
-                          target="_blank"
-                          rel="noopener noreferrer"
                           onClick={triggerDirectDownload}
                           className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
                         >
@@ -613,8 +594,6 @@ export default function LandingPage() {
                 <a
                   href={apkDownloadUrl}
                   download="Firie.apk"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={triggerDirectDownload}
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25 cursor-pointer"
                 >
@@ -953,8 +932,6 @@ export default function LandingPage() {
             <a
               href="https://firie.birukf37.workers.dev/Firie.apk"
               download="Firie.apk"
-              target="_blank"
-              rel="noopener noreferrer"
               className="font-bold text-[#FF7F02] hover:underline flex items-center gap-1"
             >
               <span>Click for Direct Edge Download</span>
