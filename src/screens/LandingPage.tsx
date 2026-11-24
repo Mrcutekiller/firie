@@ -5,14 +5,12 @@ import { cn } from "../components/ui";
 const NAV_MENU_ITEMS = [
   { id: "overview", label: "Wardrobe Overview", chapter: "01", icon: "✨", desc: "Digital closet & color science" },
   { id: "curation-swiper", label: "AI Outfit Swiper", chapter: "02", icon: "⚡", desc: "Pass or wear daily flat-lays" },
-  { id: "silhouette-harmony", label: "Proportions & Drape", chapter: "03", icon: "📐", desc: "Boxy cuts & fluid leg lines" },
-  { id: "climate-layering", label: "Live Weather Sync", chapter: "04", icon: "⛅", desc: "Addis Ababa temperature alerts" },
-  { id: "venue-spots", label: "Venues & Dress Codes", chapter: "05", icon: "📍", desc: "Curated spots & ETB budgets" },
-  { id: "kinetic-motion", label: "Fabric & Movement", chapter: "06", icon: "🌊", desc: "Heavyweight cotton in motion" },
-  { id: "ai-studio", label: "Studio Cutouts", chapter: "07", icon: "📸", desc: "Instant background removal" },
-  { id: "daily-look", label: "Ready to Wear", chapter: "08", icon: "🧥", desc: "Zero morning decision fatigue" },
-  { id: "tailored-lifestyle", label: "Fit & Proportions", chapter: "09", icon: "📏", desc: "Height, frame & lifestyle" },
-  { id: "mobile-experience", label: "Native Mobile App", chapter: "10", icon: "📱", desc: "iOS & Android in motion" },
+  { id: "climate-layering", label: "Live Weather Sync", chapter: "03", icon: "⛅", desc: "Addis Ababa temperature alerts" },
+  { id: "venue-spots", label: "Venues & Dress Codes", chapter: "04", icon: "📍", desc: "Curated spots & ETB budgets" },
+  { id: "ai-studio", label: "Studio Cutouts", chapter: "05", icon: "📸", desc: "Instant background removal" },
+  { id: "daily-look", label: "Ready to Wear", chapter: "06", icon: "🧥", desc: "Zero morning decision fatigue" },
+  { id: "tailored-lifestyle", label: "Fit & Proportions", chapter: "07", icon: "📏", desc: "Height, frame & lifestyle" },
+  { id: "mobile-experience", label: "Android App", chapter: "08", icon: "📱", desc: "Android APK · Mobile Web" },
 ];
 
 export default function LandingPage() {
@@ -29,7 +27,7 @@ export default function LandingPage() {
 
   // High-speed direct APK download served from Cloudflare R2 Edge CDN (Works globally across Vercel and Cloudflare)
   const apkDownloadUrl = "https://firie.birukf37.workers.dev/Firie.apk";
-  const ipaDownloadUrl = "/FITLY.ipa";
+  // iOS is PWA only — no IPA file served
 
   const triggerDirectDownload = () => {
     setDownloadStarted(true);
@@ -126,25 +124,7 @@ export default function LandingPage() {
       ],
       align: "video-left",
     },
-    {
-      id: "silhouette-harmony",
-      badge: "SILHOUETTE & PROPORTION ARCHITECTURE",
-      badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "TAILORED CUTS & DRAPE",
-      title: "Balanced Proportions, Every Time.",
-      subtitle: "From headwear to footwear, the whole silhouette is considered.",
-      description:
-        "A great outfit is more than matching colors. Firie evaluates drape, fabric weight, and silhouette balance — pairing relaxed oversized pieces with structured bottoms for an effortless contemporary line.",
-      video: "/videos/page-3.mp4",
-      poster: "/images/page_previews/page_3.jpg",
-      hasDownloadBtn: false,
-      bullets: [
-        "Tops and bottoms calibrated by fabric weight and cut",
-        "Drop-shoulder and relaxed silhouette pairing",
-        "Smart footwear pairing based on trouser hem",
-      ],
-      align: "text-left",
-    },
+
     {
       id: "climate-layering",
       badge: "REAL-TIME CLIMATE LAYERING",
@@ -183,25 +163,7 @@ export default function LandingPage() {
       ],
       align: "text-left",
     },
-    {
-      id: "kinetic-motion",
-      badge: "KINETIC DRAPE & MOVEMENT",
-      badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "ERGONOMICS IN MOTION",
-      title: "Clothes That Move With You.",
-      subtitle: "Tested in motion, so you look confident from every angle.",
-      description:
-        "Garments should not only look good on a hanger or lying flat on a bed. Firie evaluates movement and drape so your clothes feel as good as they look while you walk.",
-      video: "/videos/page-6.mp4",
-      poster: "/images/page_previews/page_6.jpg",
-      hasDownloadBtn: false,
-      bullets: [
-        "Fluid motion testing and drape integrity",
-        "Natural crease behavior and posture harmony",
-        "Designed for all-day confidence in motion",
-      ],
-      align: "video-left",
-    },
+
     {
       id: "ai-studio",
       badge: "INSTANT WARDROBE DIGITIZATION",
@@ -234,7 +196,7 @@ export default function LandingPage() {
       poster: "/images/page_previews/page_8.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Direct install for Android (APK) and iPhone (iOS)",
+        "Direct Android APK install & iPhone Safari Web App (PWA)",
         "Free plan: one fresh look a day, three a week (up to 30 items)",
         "Pro plan: unlimited looks, complete Date Spots & outfit history (600 ETB/mo)",
       ],
@@ -261,20 +223,20 @@ export default function LandingPage() {
     },
     {
       id: "mobile-experience",
-      badge: "NATIVE MOBILE INTELLIGENCE",
+      badge: "ANDROID APP & MOBILE WEB",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "IOS & ANDROID SUITE",
+      tagline: "ANDROID APP · MOBILE WEB",
       title: "The Full Firie Experience in Your Pocket.",
-      subtitle: "Engineered from the ground up for iPhone and Android.",
+      subtitle: "Built for Android APK and iPhone Safari Web App.",
       description:
-        "Fast, fluid, and intuitive. Take high-precision closet photos, swipe through personalized daily outfits, and match your look with Addis Ababa's best spots wherever you go.",
+        "Fast, fluid, and intuitive. Photograph your clothes, swipe through personalized daily outfits, and match your look with Addis Ababa's best spots wherever you go.",
       video: "/videos/page-10.mp4",
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: true,
       bullets: [
-        "Zero load time with local-first on-device intelligence",
-        "Optional Cloudflare edge backup for instant multi-device sync",
-        "Complete wardrobe autonomy and privacy",
+        "Direct 28 MB Android APK install with no Play Store required",
+        "Optional Cloudflare D1 & R2 backup for multi-device sync",
+        "Instant iPhone access via Safari Add to Home Screen",
       ],
       align: "video-left",
     },
@@ -287,7 +249,7 @@ export default function LandingPage() {
     },
     {
       q: "Can I install Firie directly on Android and iPhone without an App Store?",
-      a: "Yes! For Android, click the Download button to get the official Firie.apk (28 MB) and tap to install immediately. For iPhone, you can download the package or open this page in Safari and tap 'Add to Home Screen' for an instant standalone app.",
+      a: "Yes! For Android, click the Download button to get the official Firie.apk (28 MB) and tap to install immediately. For iPhone, open this page in Safari and tap 'Add to Home Screen' for a free instant web app.",
     },
     {
       q: "Are my photos and wardrobe items kept private?",
@@ -332,7 +294,6 @@ export default function LandingPage() {
             </div>
             <span className="text-lg sm:text-xl font-black tracking-tight text-[#18181B]">
               Firie<span className="text-[#FF7F02]">.</span>
-              <span className="ml-1 text-xs font-bold text-[#FF7F02] tracking-normal">Firie</span>
             </span>
           </Link>
 
@@ -340,10 +301,8 @@ export default function LandingPage() {
           <nav className="hidden lg:flex items-center gap-7 text-xs font-bold text-[#71717A]">
             <a href="#overview" className="hover:text-[#FF7F02] transition-colors">Overview</a>
             <a href="#curation-swiper" className="hover:text-[#FF7F02] transition-colors">AI Swiper</a>
-            <a href="#silhouette-harmony" className="hover:text-[#FF7F02] transition-colors">Proportions</a>
             <a href="#climate-layering" className="hover:text-[#FF7F02] transition-colors">Weather</a>
             <a href="#venue-spots" className="hover:text-[#FF7F02] transition-colors">Venues</a>
-            <a href="#kinetic-motion" className="hover:text-[#FF7F02] transition-colors">Motion</a>
             <a href="#ai-studio" className="hover:text-[#FF7F02] transition-colors">Studio</a>
             <a href="#tailored-lifestyle" className="hover:text-[#FF7F02] transition-colors">Lifestyle</a>
             <a href="#pricing" className="hover:text-[#FF7F02] transition-colors">Plans</a>
@@ -667,7 +626,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* iOS Card */}
+            {/* iPhone / PWA Card */}
             <div className="rounded-3xl border border-orange-100 bg-white p-5 sm:p-8 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#FF7F02] transition-all">
               <div>
                 <div className="flex items-center justify-between">
@@ -675,40 +634,41 @@ export default function LandingPage() {
                     
                   </span>
                   <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 text-[10px] font-black text-orange-900">
-                    IPA & 1-Tap Safari
+                    Free · Safari PWA
                   </span>
                 </div>
-                <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">Apple iOS (iPhone / iPad)</h3>
+                <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">iPhone / iOS (Free Web App)</h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-[#71717A]">
-                  Install Firie on your iPhone in 5 seconds via Safari with zero extra software, or download the compiled IPA package.
+                  Firie works seamlessly on iPhone — no App Store required. Add it to your Home Screen in Safari for a full-screen app experience.
                 </p>
                 <div className="mt-3.5 rounded-2xl bg-[#FFFBF7] border border-orange-100 p-3 sm:p-3.5 text-xs text-[#18181B] space-y-1">
                   <p className="font-black text-[#18181B] flex items-center gap-1.5">
                     <span>💡</span>
-                    <span>1-Tap Instant Install on iPhone:</span>
+                    <span>Add to Home Screen on iPhone:</span>
                   </p>
                   <p className="text-[11px] text-[#71717A]">
-                    1. Open this website in <b>Safari</b> on your iPhone.
+                    1. Open <b>fitly-lovat.vercel.app</b> in <b>Safari</b>.
                   </p>
                   <p className="text-[11px] text-[#71717A]">
                     2. Tap the <b>Share ⬆️</b> icon at the bottom.
                   </p>
                   <p className="text-[11px] text-[#71717A]">
-                    3. Tap <b>"Add to Home Screen" ➕</b>.
+                    3. Tap <b>"Add to Home Screen" ➕</b> — done!
                   </p>
                 </div>
               </div>
 
               <div className="mt-5 sm:mt-6 pt-4 border-t border-orange-100 flex flex-col gap-2">
                 <a
-                  href={ipaDownloadUrl}
-                  download="FITLY.ipa"
+                  href="https://fitly-lovat.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
                 >
-                  <span>⬇️ Download FITLY.ipa</span>
+                  <span>🌐 Open Firie in Safari</span>
                 </a>
                 <p className="text-center text-[10px] text-[#A1A1AA]">
-                  For AltStore, Sideloadly, or direct developer install
+                  Then tap Share → Add to Home Screen for a full app experience
                 </p>
               </div>
             </div>
@@ -886,9 +846,6 @@ export default function LandingPage() {
             </button>
             <a href={apkDownloadUrl} className="hover:text-[#FF7F02] transition-colors">
               Android APK (28 MB)
-            </a>
-            <a href={ipaDownloadUrl} download="FITLY.ipa" className="hover:text-[#FF7F02] transition-colors">
-              iOS Package
             </a>
             <button onClick={() => navigate("/")} className="hover:text-[#FF7F02] transition-colors">
               Open App

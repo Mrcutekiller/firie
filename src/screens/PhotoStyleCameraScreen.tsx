@@ -683,24 +683,8 @@ export default function PhotoStyleCameraScreen() {
         /* SCREEN B: LIVE CAMERA VIEW (Matching Reference Design Image Exactly)       */
         /* ────────────────────────────────────────────────────────────────────────── */
         <div className="relative flex h-full w-full flex-col justify-between overflow-hidden">
-          {/* iOS Status Bar Emulation */}
-          <div className="relative z-30 flex items-center justify-between px-6 pt-3 text-[13px] font-semibold tracking-tight text-white/90">
-            <span>9:41</span>
-            <div className="flex items-center gap-1.5">
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-                <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4a1 1 0 0 0 1.25 1.25l1.79-.62C9.07 21.26 10.49 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9z" />
-              </svg>
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-                <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z" />
-              </svg>
-              <div className="flex h-2.5 w-5 items-center rounded-[3px] border border-white/80 p-0.5">
-                <div className="h-full w-full rounded-[1px] bg-white" />
-              </div>
-            </div>
-          </div>
-
-          {/* ── 1. Top Navigation Bar (Close, FITLY Wordmark, Flash) ── */}
-          <header className="relative z-30 flex items-center justify-between px-5 pt-1 pb-1">
+          {/* ── 1. Top Navigation Bar (Close, Firie Wordmark, Flash) ── */}
+          <header className="relative z-30 flex items-center justify-between px-5 pt-4 pb-1">
             {/* Close button */}
             <button
               onClick={() => navigate(-1)}
@@ -713,10 +697,10 @@ export default function PhotoStyleCameraScreen() {
               </svg>
             </button>
 
-            {/* Firie Wordmark — Centered, spaced typography */}
+            {/* Firie Wordmark — Centered */}
             <div className="flex items-center gap-1.5">
               <span className="text-[16px] font-black tracking-wider text-white drop-shadow-md">
-                Firie <span className="text-[#FF7F02] text-xs font-bold tracking-normal">Firie</span>
+                Firie
               </span>
             </div>
 

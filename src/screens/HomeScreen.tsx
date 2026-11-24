@@ -841,7 +841,7 @@ return (
                 <div>
                   <h3 className="text-base font-black">AI Style Breakdown</h3>
                   <p className="text-[10.5px] text-[#64748B] dark:text-[#94A3B8]">
-                    94% Harmony Score · {occasionLabel}
+                    {occasionLabel}
                   </p>
                 </div>
               </div>

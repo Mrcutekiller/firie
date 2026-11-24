@@ -26,7 +26,6 @@ export default function Layout() {
         <header className="flex shrink-0 items-center justify-between px-[21px] pb-1 pt-[18px]">
           <div className="text-[22px] font-black tracking-[-1px] text-[#18181B] dark:text-white flex items-center gap-1.5">
             <span>Firie</span><span className="text-[#FF7F02]">.</span>
-            <span className="text-xs font-bold text-[#FF7F02] tracking-normal">Firie</span>
           </div>
           <div className="flex items-center gap-2">
             {/* Dark Mode toggle button */}

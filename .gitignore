@@ -31,3 +31,6 @@ test-download.apk
 # Intermediate design video assets
 design/**/*.mp4
 design/*.mp4
+
+# Wrangler local state
+.wrangler/
