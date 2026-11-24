@@ -604,7 +604,10 @@ export default function LandingPage() {
                   <span>⬇️ Download Firie App (28 MB APK)</span>
                 </a>
                 <p className="mt-2 text-center text-[10px] text-[#A1A1AA]">
-                  File: Firie.apk (27.93 MB · Target Android 14) · Tap file on Android to install immediately
+                  File: Firie.apk (27.93 MB · Android 14) ·{" "}
+                  <span title="636839C1FC13D0C6359A74267ED7B97A2871BE93C07827B072A570A6BBA2A795" className="font-mono text-zinc-500">
+                    SHA256: 636839C1…A795
+                  </span>
                 </p>
               </div>
             </div>

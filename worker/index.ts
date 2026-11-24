@@ -212,7 +212,7 @@ function error(message: string, status = 400): Response {
 // ---------------------------------------------------------------------------
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
     // 0. Defense against admin probing, path traversal & sensitive environment file scraping
@@ -271,6 +271,25 @@ export default {
       const fallbackName = isApk ? "Firie.apk" : "FITLY.ipa";
       const filename = explicitName ? `${explicitName[1] === "fitly" ? "FITLY" : "Firie"}.${ext}` : fallbackName;
 
+      const userAgent = request.headers.get("User-Agent") || "";
+      const isAndroid = userAgent.toLowerCase().includes("android");
+      const contentType = isAndroid
+        ? "application/vnd.android.package-archive"
+        : "application/octet-stream";
+
+      // Check Cloudflare Edge Cache first for GET requests so repeat downloads serve at CDN speed
+      const cache = caches.default;
+      const cacheUrl = new URL(request.url);
+      cacheUrl.searchParams.set("ua", isAndroid ? "android" : "desktop");
+      const cacheKey = new Request(cacheUrl.toString(), { method: "GET" });
+
+      if (request.method === "GET") {
+        const cached = await cache.match(cacheKey);
+        if (cached) {
+          return cached;
+        }
+      }
+
       const object = (await photos.get(`releases/${filename}`)) || (await photos.get(`releases/${fallbackName}`));
 
       // Never fall back to the SPA here: serving index.html under an
@@ -279,18 +298,12 @@ export default {
         return error(`Release package ${filename} is not available yet.`, 404);
       }
 
-      const userAgent = request.headers.get("User-Agent") || "";
-      const isAndroid = userAgent.toLowerCase().includes("android");
-      const contentType = isAndroid
-        ? "application/vnd.android.package-archive"
-        : "application/octet-stream";
-
       const headers = new Headers();
       object.writeHttpMetadata(headers);
       headers.set("Content-Type", isApk ? contentType : "application/octet-stream");
       headers.set("Content-Disposition", `attachment; filename="${filename}"; filename*=UTF-8''${filename}`);
       headers.set("Content-Length", String(object.size));
-      headers.set("Cache-Control", "public, max-age=3600");
+      headers.set("Cache-Control", "public, max-age=31536000, immutable");
       headers.set("Access-Control-Allow-Origin", "*");
       headers.set("Access-Control-Expose-Headers", "Content-Disposition, Content-Length, Content-Type");
       headers.set("X-Content-Type-Options", "nosniff");
@@ -299,7 +312,11 @@ export default {
         return new Response(null, { headers });
       }
 
-      return new Response(object.body, { headers });
+      const response = new Response(object.body, { headers });
+      if (request.method === "GET") {
+        ctx.waitUntil(cache.put(cacheKey, response.clone()));
+      }
+      return response;
     }
 
     // Only process /api/ routes; forward all other paths to Static Assets
