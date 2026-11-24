@@ -23,6 +23,7 @@ import {
 } from "../lib/poses";
 import { getPlace } from "../lib/places";
 import { useApp } from "../lib/store";
+import { cloudflareBackend } from "../lib/backend";
 import type { ClosetItem } from "../lib/types";
 
 interface LocationState {
@@ -166,6 +167,21 @@ export default function PhotoStyleCameraScreen() {
     return [];
   });
 
+  // Load gallery photos from Cloudflare D1/R2 on mount so any device sees them
+  useEffect(() => {
+    if (cloudflareBackend.isAuthenticated()) {
+      cloudflareBackend.listGallery().then((cloudPhotos) => {
+        if (cloudPhotos && cloudPhotos.length > 0) {
+          setGalleryPhotos(cloudPhotos);
+          localStorage.setItem("fitly_camera_gallery", JSON.stringify(cloudPhotos));
+          if (cloudPhotos[0]?.dataUrl) {
+            setLastSavedThumbnail(cloudPhotos[0].dataUrl);
+          }
+        }
+      }).catch(console.warn);
+    }
+  }, []);
+
   const handleDeleteGalleryPhoto = (id: string) => {
     setGalleryPhotos((prev) => {
       const updated = prev.filter((p) => p.id !== id);
@@ -176,6 +192,7 @@ export default function PhotoStyleCameraScreen() {
       }
       return updated;
     });
+    cloudflareBackend.deleteGalleryPhoto(id).catch(console.warn);
   };
 
   const handleImportGalleryPhoto = (dataUrl: string) => {
@@ -199,6 +216,7 @@ export default function PhotoStyleCameraScreen() {
     setLastSavedThumbnail(dataUrl);
     setCaptureToast("✓ Photo imported to Firie Gallery!");
     setTimeout(() => setCaptureToast(null), 3000);
+    cloudflareBackend.saveGalleryPhoto(newPhoto).catch(console.warn);
   };
 
   /* ----------------------------- Recommendations ---------------------------- */
@@ -396,6 +414,7 @@ export default function PhotoStyleCameraScreen() {
 
     setCaptureToast("📸 Photo saved to Firie Gallery! Tap gallery to save to device");
     setTimeout(() => setCaptureToast(null), 3500);
+    cloudflareBackend.saveGalleryPhoto(newPhoto).catch(console.warn);
 
     // Record pose usage & note free quota
     markPoseUsed(activePose.id);

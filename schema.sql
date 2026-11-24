@@ -17,6 +17,13 @@ CREATE TABLE IF NOT EXISTS users (
   avoid_recently_worn INTEGER NOT NULL DEFAULT 1,
   billing_cycle TEXT NOT NULL DEFAULT 'monthly',
   pro_expires_at TEXT,
+  pro_since INTEGER,
+  height TEXT,
+  body_fit TEXT,
+  age_group TEXT,
+  preferred_style TEXT,
+  traditional_wear TEXT,
+  saved_looks TEXT, -- JSON array of saved look objects
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
@@ -72,9 +79,21 @@ CREATE TABLE IF NOT EXISTS sessions (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- 6. In-App Camera Gallery Photos
+CREATE TABLE IF NOT EXISTS camera_gallery (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  photo_url TEXT NOT NULL,
+  format TEXT DEFAULT 'story',
+  filter TEXT DEFAULT 'normal',
+  created_at INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- Indexes for ultra-fast edge lookups (< 5ms response time)
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_closet_user ON closet_items(user_id);
 CREATE INDEX IF NOT EXISTS idx_history_user_date ON outfit_logs(user_id, date);
 CREATE INDEX IF NOT EXISTS idx_date_plans_user ON date_plans(user_id, date);
 CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_gallery_user ON camera_gallery(user_id, created_at DESC);

@@ -26,19 +26,9 @@ export default function LandingPage() {
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // On local dev, serve from public folder. On Cloudflare / live production, download directly from GitHub repo.
-  const isLocal =
-    typeof window !== "undefined" &&
-    (window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1" ||
-      window.location.hostname.startsWith("192.168."));
-
-  const apkDownloadUrl = isLocal
-    ? "/FITLY.apk"
-    : "https://github.com/Mrcutekiller/firie/raw/main/public/FITLY.apk";
-  const ipaDownloadUrl = isLocal
-    ? "/FITLY.ipa"
-    : "https://github.com/Mrcutekiller/firie/raw/main/public/FITLY.ipa";
+  // High-speed direct APK download served from Cloudflare R2 Edge CDN
+  const apkDownloadUrl = "/Firie.apk";
+  const ipaDownloadUrl = "/FITLY.ipa";
 
   const scrollToDownload = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -635,13 +625,13 @@ export default function LandingPage() {
               <div className="mt-6 sm:mt-8 pt-4 border-t border-orange-100">
                 <a
                   href={apkDownloadUrl}
-                  download="FITLY.apk"
+                  download="Firie.apk"
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
                 >
-                  <span>⬇️ Download FITLY.apk</span>
+                  <span>⬇️ Download Firie App (APK)</span>
                 </a>
                 <p className="mt-2 text-center text-[10px] text-[#A1A1AA]">
-                  File: FITLY.apk · Tap file on Android to install immediately
+                  File: Firie.apk (Target Android 14) · Tap file on Android to install immediately
                 </p>
               </div>
             </div>

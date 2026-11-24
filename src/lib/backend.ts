@@ -51,6 +51,9 @@ export class CloudflareBackend implements Backend {
     } else {
       localStorage.removeItem(TOKEN_KEY);
     }
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("firie_auth_changed"));
+    }
   }
 
   isAuthenticated(): boolean {
@@ -73,13 +76,29 @@ export class CloudflareBackend implements Backend {
     return res;
   }
 
-  /** Sign up with email, password, and profile metadata */
+  /** Check whether an email is already registered on Cloudflare */
+  async checkEmail(email: string): Promise<{ ok: boolean; exists: boolean }> {
+    try {
+      const res = await fetch(`${this.baseUrl}/api/auth/check-email?email=${encodeURIComponent(email.trim().toLowerCase())}`);
+      const data = await res.json();
+      return { ok: Boolean(data?.ok), exists: Boolean(data?.exists) };
+    } catch {
+      return { ok: false, exists: false };
+    }
+  }
+
+  /** Sign up with email, password, and profile styling metadata */
   async signup(params: {
     email: string;
     password: string;
     name?: string;
     city?: string;
     gender?: "men" | "women";
+    height?: string;
+    bodyFit?: string;
+    ageGroup?: string;
+    preferredStyle?: string;
+    traditionalWear?: string;
   }): Promise<{ ok: boolean; user?: any; error?: string }> {
     try {
       const res = await fetch(`${this.baseUrl}/api/auth/signup`, {
@@ -148,11 +167,59 @@ export class CloudflareBackend implements Backend {
           gender: profile.gender,
           plan: profile.plan,
           units: profile.units,
-          avoid_recently_worn: profile.avoidRecentlyWorn,
+          avoidRecentlyWorn: profile.avoidRecentlyWorn,
+          billingCycle: profile.billingCycle,
+          proExpiresAt: profile.proExpiresAt,
+          proSince: profile.proSince,
+          height: profile.height,
+          bodyFit: profile.bodyFit,
+          ageGroup: profile.ageGroup,
+          preferredStyle: profile.preferredStyle,
+          traditionalWear: profile.traditionalWear,
         }),
       });
     } catch (e) {
       console.warn("Failed to persist profile to Cloudflare D1", e);
+    }
+  }
+
+  /* ---------------- Camera Gallery Cloud Sync (D1 + R2) ---------------- */
+  async listGallery(): Promise<any[]> {
+    if (!this.isAuthenticated()) return [];
+    try {
+      const res = await this.fetchAuth("/api/camera/gallery");
+      if (!res.ok) return [];
+      const data = await res.json();
+      return data.photos || [];
+    } catch {
+      return [];
+    }
+  }
+
+  async saveGalleryPhoto(photo: { id?: string; dataUrl: string; format?: string; filter?: string; createdAt?: number }): Promise<any | null> {
+    if (!this.isAuthenticated()) return null;
+    try {
+      const res = await this.fetchAuth("/api/camera/gallery", {
+        method: "POST",
+        body: JSON.stringify(photo),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data.photo || null;
+    } catch (e) {
+      console.warn("Failed to save gallery photo to Cloudflare", e);
+      return null;
+    }
+  }
+
+  async deleteGalleryPhoto(id: string): Promise<void> {
+    if (!this.isAuthenticated()) return;
+    try {
+      await this.fetchAuth(`/api/camera/gallery/${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+    } catch (e) {
+      console.warn("Failed to delete gallery photo from Cloudflare", e);
     }
   }
 

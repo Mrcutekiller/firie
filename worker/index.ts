@@ -25,6 +25,13 @@ interface UserRow {
   avoid_recently_worn: number;
   billing_cycle: string;
   pro_expires_at: string | null;
+  pro_since: number | null;
+  height: string | null;
+  body_fit: string | null;
+  age_group: string | null;
+  preferred_style: string | null;
+  traditional_wear: string | null;
+  saved_looks: string | null;
   created_at: number;
   updated_at: number;
 }
@@ -185,6 +192,36 @@ export default {
       return new Response(null, { headers: CORS_HEADERS });
     }
 
+    const secret = env.JWT_SECRET || "firie-edge-secret-key-addis-2026";
+    const db = env.DB || env.firie_db;
+    const photos = env.PHOTOS || env.firie_photos;
+
+    // Direct High-Speed Release APK Download from Cloudflare R2 Edge (Bypasses SPA)
+    if (
+      url.pathname === "/Firie.apk" ||
+      url.pathname === "/FITLY.apk" ||
+      url.pathname === "/download/apk" ||
+      url.pathname === "/api/download/apk"
+    ) {
+      if (!photos) {
+        return error("Cloudflare R2 storage bucket is not configured", 503);
+      }
+      const filename = url.pathname.includes("FITLY") ? "FITLY.apk" : "Firie.apk";
+      const object = (await photos.get(`releases/${filename}`)) || (await photos.get("releases/Firie.apk"));
+      if (!object) {
+        return new Response("Release APK package not found in Cloudflare R2", { status: 404 });
+      }
+
+      const headers = new Headers();
+      object.writeHttpMetadata(headers);
+      headers.set("Content-Type", "application/vnd.android.package-archive");
+      headers.set("Content-Disposition", `attachment; filename="${filename}"`);
+      headers.set("Content-Length", String(object.size));
+      headers.set("Cache-Control", "public, max-age=3600");
+      headers.set("Access-Control-Allow-Origin", "*");
+      return new Response(object.body, { headers });
+    }
+
     // Only process /api/ routes; forward all other paths to Static Assets
     if (!url.pathname.startsWith("/api/")) {
       if (env.ASSETS) {
@@ -192,10 +229,6 @@ export default {
       }
       return new Response("Not Found", { status: 404 });
     }
-
-    const secret = env.JWT_SECRET || "firie-edge-secret-key-addis-2026";
-    const db = env.DB || env.firie_db;
-    const photos = env.PHOTOS || env.firie_photos;
 
     // 1. Health check & status
     if (url.pathname === "/api/health") {
@@ -228,6 +261,15 @@ export default {
       return new Response(object.body, { headers });
     }
 
+    // 2.5 Check Email Existence (Immediate feedback on Step 1)
+    if (url.pathname === "/api/auth/check-email" && request.method === "GET") {
+      if (!db) return error("D1 Database binding missing in Cloudflare", 503);
+      const email = url.searchParams.get("email")?.trim().toLowerCase();
+      if (!email) return error("Email parameter required");
+      const existing = await db.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
+      return json({ ok: true, exists: Boolean(existing) });
+    }
+
     // 3. User Sign Up
     if (url.pathname === "/api/auth/signup" && request.method === "POST") {
       if (!db) return error("D1 Database binding missing in Cloudflare", 503);
@@ -238,6 +280,11 @@ export default {
         name?: string;
         city?: string;
         gender?: string;
+        height?: string;
+        bodyFit?: string;
+        ageGroup?: string;
+        preferredStyle?: string;
+        traditionalWear?: string;
       };
 
       if (!body.email || !body.password || body.password.length < 6) {
@@ -247,7 +294,7 @@ export default {
       const email = body.email.trim().toLowerCase();
       const existing = await db.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
       if (existing) {
-        return error("An account with this email already exists.", 409);
+        return error("An account with this email already exists. Please log in instead.", 409);
       }
 
       const userId = generateId();
@@ -256,8 +303,12 @@ export default {
       const now = Date.now();
 
       await db.prepare(
-        `INSERT INTO users (id, email, password_hash, salt, name, city, gender, plan, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 'free', ?, ?)`
+        `INSERT INTO users (
+           id, email, password_hash, salt, name, city, gender, plan, units,
+           avoid_recently_worn, billing_cycle, height, body_fit, age_group,
+           preferred_style, traditional_wear, saved_looks, created_at, updated_at
+         )
+         VALUES (?, ?, ?, ?, ?, ?, ?, 'free', 'metric', 1, 'monthly', ?, ?, ?, ?, ?, '[]', ?, ?)`
       )
         .bind(
           userId,
@@ -267,6 +318,11 @@ export default {
           body.name?.trim() || "Fashion Explorer",
           body.city?.trim() || "Addis Ababa",
           body.gender || "men",
+          body.height || null,
+          body.bodyFit || null,
+          body.ageGroup || null,
+          body.preferredStyle || null,
+          body.traditionalWear || null,
           now,
           now
         )
@@ -279,10 +335,21 @@ export default {
         user: {
           id: userId,
           email,
-          name: body.name || "Fashion Explorer",
-          city: body.city || "Addis Ababa",
+          name: body.name?.trim() || "Fashion Explorer",
+          city: body.city?.trim() || "Addis Ababa",
           gender: body.gender || "men",
           plan: "free",
+          units: "metric",
+          avoidRecentlyWorn: true,
+          billingCycle: "monthly",
+          height: body.height || null,
+          bodyFit: body.bodyFit || null,
+          ageGroup: body.ageGroup || null,
+          preferredStyle: body.preferredStyle || null,
+          traditionalWear: body.traditionalWear || null,
+          savedLooks: [],
+          proSince: null,
+          proExpiresAt: null,
         },
       });
     }
@@ -315,6 +382,11 @@ export default {
       }
 
       const token = await createToken(user.id, user.email, secret);
+      let parsedSavedLooks = [];
+      try {
+        if (user.saved_looks) parsedSavedLooks = JSON.parse(user.saved_looks);
+      } catch {}
+
       return json({
         ok: true,
         token,
@@ -324,9 +396,18 @@ export default {
           name: user.name,
           city: user.city,
           gender: user.gender,
-          plan: user.plan,
+          plan: user.plan || "free",
+          units: user.units || "metric",
+          avoidRecentlyWorn: Boolean(user.avoid_recently_worn),
           billingCycle: user.billing_cycle,
           proExpiresAt: user.pro_expires_at,
+          proSince: user.pro_since,
+          height: user.height,
+          bodyFit: user.body_fit,
+          ageGroup: user.age_group,
+          preferredStyle: user.preferred_style,
+          traditionalWear: user.traditional_wear,
+          savedLooks: parsedSavedLooks,
         },
       });
     }
@@ -351,6 +432,12 @@ export default {
       if (!db) return error("D1 Database not available", 503);
       const user = await db.prepare("SELECT * FROM users WHERE id = ?").bind(userId).first<UserRow>();
       if (!user) return error("User not found", 404);
+
+      let parsedSavedLooks = [];
+      try {
+        if (user.saved_looks) parsedSavedLooks = JSON.parse(user.saved_looks);
+      } catch {}
+
       return json({
         ok: true,
         user: {
@@ -364,6 +451,13 @@ export default {
           avoidRecentlyWorn: Boolean(user.avoid_recently_worn),
           billingCycle: user.billing_cycle,
           proExpiresAt: user.pro_expires_at,
+          proSince: user.pro_since,
+          height: user.height,
+          bodyFit: user.body_fit,
+          ageGroup: user.age_group,
+          preferredStyle: user.preferred_style,
+          traditionalWear: user.traditional_wear,
+          savedLooks: parsedSavedLooks,
         },
       });
     }
@@ -371,12 +465,27 @@ export default {
     // 6. Update Profile
     if (url.pathname === "/api/auth/profile" && request.method === "PUT") {
       if (!db) return error("D1 Database not available", 503);
-      const body = (await request.json().catch(() => ({}))) as Partial<UserRow>;
+      const body = (await request.json().catch(() => ({}))) as any;
       const now = Date.now();
       await db.prepare(
-        `UPDATE users SET name = COALESCE(?, name), city = COALESCE(?, city), gender = COALESCE(?, gender),
-         plan = COALESCE(?, plan), units = COALESCE(?, units), avoid_recently_worn = COALESCE(?, avoid_recently_worn),
-         updated_at = ? WHERE id = ?`
+        `UPDATE users SET
+           name = COALESCE(?, name),
+           city = COALESCE(?, city),
+           gender = COALESCE(?, gender),
+           plan = COALESCE(?, plan),
+           units = COALESCE(?, units),
+           avoid_recently_worn = COALESCE(?, avoid_recently_worn),
+           billing_cycle = COALESCE(?, billing_cycle),
+           pro_expires_at = COALESCE(?, pro_expires_at),
+           pro_since = COALESCE(?, pro_since),
+           height = COALESCE(?, height),
+           body_fit = COALESCE(?, body_fit),
+           age_group = COALESCE(?, age_group),
+           preferred_style = COALESCE(?, preferred_style),
+           traditional_wear = COALESCE(?, traditional_wear),
+           saved_looks = COALESCE(?, saved_looks),
+           updated_at = ?
+         WHERE id = ?`
       )
         .bind(
           body.name ?? null,
@@ -384,11 +493,93 @@ export default {
           body.gender ?? null,
           body.plan ?? null,
           body.units ?? null,
-          body.avoid_recently_worn !== undefined ? (body.avoid_recently_worn ? 1 : 0) : null,
+          body.avoidRecentlyWorn !== undefined ? (body.avoidRecentlyWorn ? 1 : 0) : (body.avoid_recently_worn !== undefined ? (body.avoid_recently_worn ? 1 : 0) : null),
+          body.billingCycle ?? body.billing_cycle ?? null,
+          body.proExpiresAt !== undefined ? (body.proExpiresAt ? String(body.proExpiresAt) : null) : null,
+          body.proSince ?? body.pro_since ?? null,
+          body.height ?? null,
+          body.bodyFit ?? body.body_fit ?? null,
+          body.ageGroup ?? body.age_group ?? null,
+          body.preferredStyle ?? body.preferred_style ?? null,
+          body.traditionalWear ?? body.traditional_wear ?? null,
+          body.savedLooks ? JSON.stringify(body.savedLooks) : null,
           now,
           userId
         )
         .run();
+      return json({ ok: true });
+    }
+
+    // 6.5 In-App Camera Gallery Endpoints (D1 + R2 Sync across devices)
+    if (url.pathname === "/api/camera/gallery" && request.method === "GET") {
+      if (!db) return error("D1 Database not available", 503);
+      const photosRes = await db.prepare(
+        "SELECT id, photo_url, format, filter, created_at FROM camera_gallery WHERE user_id = ? ORDER BY created_at DESC LIMIT 60"
+      ).bind(userId).all<any>();
+
+      const photosList = (photosRes.results || []).map((row) => ({
+        id: row.id,
+        dataUrl: row.photo_url,
+        format: row.format || "story",
+        filter: row.filter || "normal",
+        createdAt: row.created_at,
+        timestamp: row.created_at,
+      }));
+
+      return json({ ok: true, photos: photosList });
+    }
+
+    if (url.pathname === "/api/camera/gallery" && request.method === "POST") {
+      if (!db) return error("D1 Database not available", 503);
+      const body = (await request.json().catch(() => ({}))) as any;
+      const photoId = body.id || generateId();
+      let photoUrl = body.dataUrl || body.photoUrl || "";
+
+      // If it's a large base64 image and R2 is available, save to R2 for zero-egress performance
+      if (photos && photoUrl.startsWith("data:")) {
+        try {
+          const matches = photoUrl.match(/^data:([^;]+);base64,(.+)$/);
+          if (matches) {
+            const contentType = matches[1];
+            const base64Data = matches[2];
+            const bytes = Uint8Array.from(atob(base64Data), (c) => c.charCodeAt(0));
+            const r2Key = `gallery/${userId}/${photoId}.jpg`;
+            await photos.put(r2Key, bytes, {
+              httpMetadata: { contentType },
+            });
+            photoUrl = `/api/photo/${encodeURIComponent(r2Key)}`;
+          }
+        } catch (e) {
+          console.warn("R2 gallery photo save error:", e);
+        }
+      }
+
+      const now = body.createdAt || body.timestamp || Date.now();
+      await db.prepare(
+        `INSERT INTO camera_gallery (id, user_id, photo_url, format, filter, created_at)
+         VALUES (?, ?, ?, ?, ?, ?)
+         ON CONFLICT(id) DO UPDATE SET photo_url = excluded.photo_url, filter = excluded.filter`
+      )
+        .bind(photoId, userId, photoUrl, body.format || "story", body.filter || "normal", now)
+        .run();
+
+      return json({
+        ok: true,
+        photo: {
+          id: photoId,
+          dataUrl: photoUrl,
+          format: body.format || "story",
+          filter: body.filter || "normal",
+          createdAt: now,
+          timestamp: now,
+        },
+      });
+    }
+
+    if (url.pathname.startsWith("/api/camera/gallery/") && request.method === "DELETE") {
+      if (!db) return error("D1 Database not available", 503);
+      const photoId = decodeURIComponent(url.pathname.replace("/api/camera/gallery/", ""));
+      await db.prepare("DELETE FROM camera_gallery WHERE id = ? AND user_id = ?").bind(photoId, userId).run();
       return json({ ok: true });
     }
 

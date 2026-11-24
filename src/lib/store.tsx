@@ -125,6 +125,7 @@ interface AppContextValue {
   upgradeToPro: (cycle?: "monthly" | "yearly") => void;
   cancelPro: () => void;
   refreshWeather: () => void;
+  refreshFromCloudflare: () => Promise<void>;
   resetDemo: () => void;
   loadDemoCloset: () => void;
   clearAll: () => void;
@@ -313,31 +314,47 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [weather, setWeather] = useState<WeatherSnapshot | null>(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
 
-  // Automatically sync with Cloudflare on app mount if user is logged in
-  useEffect(() => {
-    if (cloudflareBackend.isAuthenticated()) {
-      (async () => {
+  // Authoritative Cloudflare edge sync (restores profile, plan, items, history, gallery across any device)
+  const refreshFromCloudflare = useCallback(async () => {
+    if (!cloudflareBackend.isAuthenticated()) return;
+    try {
+      const [cloudProfile, cloudItems, cloudHistory, cloudGallery] = await Promise.all([
+        cloudflareBackend.loadProfile(),
+        cloudflareBackend.listItems(),
+        cloudflareBackend.listHistory(),
+        cloudflareBackend.listGallery(),
+      ]);
+      if (cloudProfile) {
+        setProfileState((prev) => ({ ...prev, ...cloudProfile }));
+      }
+      if (cloudItems && cloudItems.length > 0) {
+        setCloset(cloudItems);
+      }
+      if (cloudHistory && cloudHistory.length > 0) {
+        setHistory(cloudHistory);
+      }
+      if (cloudGallery && cloudGallery.length > 0) {
         try {
-          const [cloudProfile, cloudItems, cloudHistory] = await Promise.all([
-            cloudflareBackend.loadProfile(),
-            cloudflareBackend.listItems(),
-            cloudflareBackend.listHistory(),
-          ]);
-          if (cloudProfile) {
-            setProfileState((prev) => ({ ...prev, ...cloudProfile }));
-          }
-          if (cloudItems && cloudItems.length > 0) {
-            setCloset(cloudItems);
-          }
-          if (cloudHistory && cloudHistory.length > 0) {
-            setHistory(cloudHistory);
-          }
-        } catch (e) {
-          console.warn("Cloudflare auto-sync notice:", e);
-        }
-      })();
+          localStorage.setItem("fitly_camera_gallery", JSON.stringify(cloudGallery));
+        } catch {}
+      }
+    } catch (e) {
+      console.warn("Cloudflare auto-sync notice:", e);
     }
   }, []);
+
+  useEffect(() => {
+    refreshFromCloudflare();
+    const handleAuthChange = () => {
+      refreshFromCloudflare();
+    };
+    window.addEventListener("firie_auth_changed", handleAuthChange);
+    window.addEventListener("storage", handleAuthChange);
+    return () => {
+      window.removeEventListener("firie_auth_changed", handleAuthChange);
+      window.removeEventListener("storage", handleAuthChange);
+    };
+  }, [refreshFromCloudflare]);
 
   /* ----------------------------- persistence ----------------------------- */
   useEffect(() => {
@@ -847,6 +864,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     upgradeToPro,
     cancelPro,
     refreshWeather,
+    refreshFromCloudflare,
     resetDemo,
     loadDemoCloset,
     clearAll,

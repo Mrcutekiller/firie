@@ -25,7 +25,7 @@ export default function App() {
   const [hasOnboarded, setHasOnboarded] = useState(
     () => localStorage.getItem("fitly_onboarded") === "1"
   );
-  const { setProfile, isPro } = useApp();
+  const { setProfile, isPro, refreshFromCloudflare } = useApp();
 
   const handleFinishOnboarding = (
     name: string,
@@ -54,6 +54,7 @@ export default function App() {
     localStorage.setItem("fitly_account_email", email);
     localStorage.setItem("fitly_onboarded", "1");
     setHasOnboarded(true);
+    refreshFromCloudflare().catch(console.warn);
   };
 
   // Expose for testing welcome flow directly and handle logout state transitions

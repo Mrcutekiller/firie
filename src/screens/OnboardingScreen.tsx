@@ -57,7 +57,7 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
   // Video reference
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     setErrorMsg(null);
     if (step === 1) {
       if (!email.trim() || !email.includes("@")) {
@@ -67,6 +67,20 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
       if (password.length < 6) {
         setErrorMsg("Password must be at least 6 characters.");
         return;
+      }
+      // Check if email already exists on Cloudflare Edge
+      setLoading(true);
+      try {
+        const check = await cloudflareBackend.checkEmail(email.trim().toLowerCase());
+        if (check.exists) {
+          setErrorMsg("An account with this email already exists. Please log in instead.");
+          setLoading(false);
+          return;
+        }
+      } catch {
+        // Continue if offline
+      } finally {
+        setLoading(false);
       }
     } else if (step === 2) {
       if (!name.trim()) {
@@ -93,11 +107,17 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
         name: name.trim() || "Fashion Explorer",
         city: city.trim(),
         gender,
+        height,
+        bodyFit,
+        ageGroup,
+        preferredStyle,
+        traditionalWear,
       });
 
       if (!res.ok) {
-        // Fallback gracefully to offline local mode if edge is not yet reachable
-        console.warn("Cloudflare Edge signup notice:", res.error);
+        setErrorMsg(res.error || "An account with this email already exists. Please log in instead.");
+        setLoading(false);
+        return;
       }
 
       // 2. Persist local storage keys
@@ -116,9 +136,8 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
       });
 
       navigate("/", { replace: true });
-    } catch {
-      onDone(name.trim() || "Fashion Explorer", city.trim(), email.trim().toLowerCase(), gender);
-      navigate("/", { replace: true });
+    } catch (e: any) {
+      setErrorMsg(e?.message || "Failed to complete signup with Cloudflare Edge.");
     } finally {
       setLoading(false);
     }
@@ -148,11 +167,21 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
       localStorage.setItem("fitly_onboarded", "1");
 
       const user = res.user || {};
+      if (user.preferredStyle) localStorage.setItem("fitly_style", user.preferredStyle);
+      if (user.traditionalWear) localStorage.setItem("fitly_traditional_wear", user.traditionalWear);
+
       onDone(
         user.name || "Fashion Explorer",
         user.city || "Addis Ababa",
         loginEmail.trim().toLowerCase(),
-        user.gender || "men"
+        user.gender || "men",
+        {
+          height: user.height,
+          bodyFit: user.bodyFit,
+          ageGroup: user.ageGroup,
+          preferredStyle: user.preferredStyle,
+          traditionalWear: user.traditionalWear,
+        }
       );
       navigate("/", { replace: true });
     } catch (err: any) {
@@ -326,8 +355,21 @@ export default function OnboardingScreen({ onDone, initialMode = "signup" }: Pro
             </div>
 
             {errorMsg && (
-              <div className="rounded-xl bg-red-500/20 border border-red-500/40 p-2 text-xs text-red-200 font-medium">
-                {errorMsg}
+              <div className="rounded-xl bg-red-500/20 border border-red-500/40 p-2.5 text-xs text-red-200 font-medium space-y-1">
+                <div>{errorMsg}</div>
+                {errorMsg.toLowerCase().includes("already exists") && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode("login");
+                      setLoginEmail(email);
+                      setErrorMsg(null);
+                    }}
+                    className="text-orange-400 font-bold underline hover:text-orange-300 transition-colors block text-[11px]"
+                  >
+                    Click here to Log In with this email →
+                  </button>
+                )}
               </div>
             )}
 
