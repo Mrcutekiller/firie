@@ -26,6 +26,22 @@
       "destination": "https://firie.birukf37.workers.dev/Firie.apk"
     },
     {
+      "source": "/FITLY.ipa",
+      "destination": "https://firie.birukf37.workers.dev/FITLY.ipa"
+    },
+    {
+      "source": "/Firie.ipa",
+      "destination": "https://firie.birukf37.workers.dev/FITLY.ipa"
+    },
+    {
+      "source": "/download/ipa",
+      "destination": "https://firie.birukf37.workers.dev/FITLY.ipa"
+    },
+    {
+      "source": "/api/download/ipa",
+      "destination": "https://firie.birukf37.workers.dev/FITLY.ipa"
+    },
+    {
       "source": "/((?!api/|.*\\..*).*)",
       "destination": "/index.html"
     }

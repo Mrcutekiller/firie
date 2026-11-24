@@ -225,7 +225,7 @@ export default function LandingPage() {
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: true,
       bullets: [
-        "Direct 28 MB Android APK install with no Play Store required",
+        "Direct Android APK install with no Play Store required",
         "Optional Cloudflare D1 & R2 backup for multi-device sync",
         "Instant iPhone access via Safari Add to Home Screen",
       ],
@@ -240,7 +240,7 @@ export default function LandingPage() {
     },
     {
       q: "Can I install Firie directly on Android and iPhone without an App Store?",
-      a: "Yes! For Android, click the Download button to get the official Firie.apk (28 MB) and tap to install immediately. For iPhone, open this page in Safari and tap 'Add to Home Screen' for a free instant web app.",
+      a: "Yes! For Android, click the Download button to get the official Firie.apk and tap to install immediately. For iPhone, open this page in Safari and tap 'Add to Home Screen' for a free instant web app.",
     },
     {
       q: "Are my photos and wardrobe items kept private?",
@@ -303,12 +303,11 @@ export default function LandingPage() {
           {/* Action Area: Mobile Hamburger + Single Download Button */}
           <div className="flex items-center gap-2 sm:gap-3">
             <a
-              href={apkDownloadUrl}
-              download="Firie.apk"
-              onClick={triggerDirectDownload}
+              href="#download"
+              onClick={scrollToDownload}
               className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Download APK</span>
+              <span>Download</span>
               <span className="text-[10px]">⬇</span>
             </a>
 
@@ -387,12 +386,14 @@ export default function LandingPage() {
 
             <div className="pt-5 pb-3 space-y-2 border-t border-orange-100 mt-5">
               <a
-                href={apkDownloadUrl}
-                download="Firie.apk"
-                onClick={triggerDirectDownload}
+                href="#download"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  scrollToDownload(e);
+                }}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all cursor-pointer"
               >
-                <span>Download Firie App (28 MB APK)</span>
+                <span>Download Firie App</span>
                 <span>⬇</span>
               </a>
               <button
@@ -508,12 +509,11 @@ export default function LandingPage() {
                     {s.hasDownloadBtn && (
                       <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
                         <a
-                          href={apkDownloadUrl}
-                          download="Firie.apk"
-                          onClick={triggerDirectDownload}
+                          href="#download"
+                          onClick={scrollToDownload}
                           className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
                         >
-                          <span>Download Firie App (28 MB APK)</span>
+                          <span>Download Firie App</span>
                           <span className="text-sm sm:text-base">⬇</span>
                         </a>
 
@@ -601,10 +601,10 @@ export default function LandingPage() {
                   onClick={triggerDirectDownload}
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25 cursor-pointer"
                 >
-                  <span>⬇️ Download Firie App (28 MB APK)</span>
+                  <span>⬇️ Download Firie App (APK)</span>
                 </a>
                 <p className="mt-2 text-center text-[10px] text-[#A1A1AA]">
-                  File: Firie.apk (27.93 MB · Android 14) ·{" "}
+                  File: Firie.apk (Android 14) ·{" "}
                   <span title="636839C1FC13D0C6359A74267ED7B97A2871BE93C07827B072A570A6BBA2A795" className="font-mono text-zinc-500">
                     SHA256: 636839C1…A795
                   </span>
@@ -830,8 +830,8 @@ export default function LandingPage() {
             <button onClick={() => setShowTermsModal(true)} className="hover:text-[#FF7F02] transition-colors">
               Terms of Service
             </button>
-            <a href={apkDownloadUrl} className="hover:text-[#FF7F02] transition-colors">
-              Android APK (28 MB)
+            <a href={apkDownloadUrl} download="Firie.apk" onClick={triggerDirectDownload} className="hover:text-[#FF7F02] transition-colors">
+              Android APK
             </a>
             <button onClick={() => navigate("/")} className="hover:text-[#FF7F02] transition-colors">
               Open App
@@ -920,7 +920,7 @@ export default function LandingPage() {
               <span className="text-2xl animate-bounce">🚀</span>
               <div>
                 <p className="text-xs sm:text-sm font-black text-white">
-                  Firie.apk (28 MB) Download Started!
+                  Firie.apk Download Started!
                 </p>
                 <p className="text-[11px] text-zinc-300 mt-0.5">
                   Tap the downloaded <b className="text-white">Firie.apk</b> notification → allow <b className="text-white">"Install unknown apps"</b> if prompted.
