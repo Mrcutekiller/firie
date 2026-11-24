@@ -25,12 +25,12 @@ export default function LandingPage() {
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // Same-origin /Firie.apk on Vercel (via Edge rewrite) and Cloudflare Workers (via R2), fallback to Workers CDN on localhost
+  // Same-origin /Firie.apk?v=2 on Vercel (via Edge rewrite) and Cloudflare Workers (via R2), fallback to Workers CDN on localhost
   const apkDownloadUrl =
     typeof window !== "undefined" &&
     (window.location.hostname.includes("vercel.app") || window.location.hostname.includes("workers.dev"))
-      ? "/Firie.apk"
-      : "https://firie.birukf37.workers.dev/Firie.apk";
+      ? "/Firie.apk?v=2"
+      : "https://firie.birukf37.workers.dev/Firie.apk?v=2";
   // iOS is PWA only — no IPA file served
 
   const triggerDirectDownload = () => {
@@ -937,7 +937,7 @@ export default function LandingPage() {
           <div className="mt-3 pt-2.5 border-t border-zinc-800 flex items-center justify-between text-[11px]">
             <span className="text-zinc-400">Didn't start?</span>
             <a
-              href="https://firie.birukf37.workers.dev/Firie.apk"
+              href="https://firie.birukf37.workers.dev/Firie.apk?v=2"
               download="Firie.apk"
               className="font-bold text-[#FF7F02] hover:underline flex items-center gap-1"
             >
