@@ -2,15 +2,95 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "../components/ui";
 
+/**
+ * Bandwidth-aware video player:
+ * - Shows poster immediately with zero black flash
+ * - Only loads & plays when visible and near the viewport (prevents 16 simultaneous downloads)
+ * - Pauses offscreen videos to keep slow connections fast
+ */
+function LazyVideo({
+  src,
+  poster,
+  priority = false,
+  className,
+}: {
+  src: string;
+  poster: string;
+  priority?: boolean;
+  className?: string;
+}) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(priority);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Ignore hidden responsive containers (display: none)
+        const isVisibleLayout = el.offsetParent !== null;
+        if (entry.isIntersecting && isVisibleLayout) {
+          setShouldLoad(true);
+          if (videoRef.current && videoRef.current.paused) {
+            videoRef.current.play().catch(() => {});
+          }
+        } else if (videoRef.current && !videoRef.current.paused) {
+          videoRef.current.pause();
+        }
+      },
+      { rootMargin: "250px 0px", threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative h-full w-full bg-zinc-900 overflow-hidden">
+      <img
+        src={poster}
+        alt=""
+        loading={priority ? "eager" : "lazy"}
+        className={cn(
+          "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500",
+          isReady ? "opacity-0 pointer-events-none" : "opacity-100"
+        )}
+      />
+      {shouldLoad && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload={priority ? "auto" : "metadata"}
+          onCanPlay={() => setIsReady(true)}
+          onPlaying={() => setIsReady(true)}
+          className={cn(
+            "relative h-full w-full object-cover object-center transition-opacity duration-500",
+            isReady ? "opacity-100" : "opacity-0",
+            className
+          )}
+        />
+      )}
+    </div>
+  );
+}
+
 const NAV_MENU_ITEMS = [
-  { id: "overview", label: "Wardrobe Overview", chapter: "01", icon: "✨", desc: "Digital closet & color science" },
-  { id: "curation-swiper", label: "AI Outfit Swiper", chapter: "02", icon: "⚡", desc: "Pass or wear daily flat-lays" },
-  { id: "climate-layering", label: "Live Weather Sync", chapter: "03", icon: "⛅", desc: "Addis Ababa temperature alerts" },
-  { id: "venue-spots", label: "Venues & Dress Codes", chapter: "04", icon: "📍", desc: "Curated spots & ETB budgets" },
-  { id: "ai-studio", label: "Studio Cutouts", chapter: "05", icon: "📸", desc: "Instant background removal" },
-  { id: "daily-look", label: "Ready to Wear", chapter: "06", icon: "🧥", desc: "Zero morning decision fatigue" },
-  { id: "tailored-lifestyle", label: "Fit & Proportions", chapter: "07", icon: "📏", desc: "Height, frame & lifestyle" },
-  { id: "mobile-experience", label: "Android App", chapter: "08", icon: "📱", desc: "Android APK · Mobile Web" },
+  { id: "overview", label: "Overview", chapter: "01", icon: "✨", desc: "Digital closet & color matching" },
+  { id: "curation-swiper", label: "Outfit Swiper", chapter: "02", icon: "⚡", desc: "Swipe daily looks from your closet" },
+  { id: "climate-layering", label: "Weather Sync", chapter: "03", icon: "⛅", desc: "Addis Ababa temperature alerts" },
+  { id: "venue-spots", label: "Date Spots", chapter: "04", icon: "📍", desc: "Venues, dress codes & ETB budgets" },
+  { id: "ai-studio", label: "Cutout Studio", chapter: "05", icon: "📸", desc: "Auto background removal" },
+  { id: "daily-look", label: "Daily Looks", chapter: "06", icon: "🧥", desc: "Zero morning decision fatigue" },
+  { id: "tailored-lifestyle", label: "Your Fit", chapter: "07", icon: "📏", desc: "Tailored to height & style" },
+  { id: "mobile-experience", label: "Mobile App", chapter: "08", icon: "📱", desc: "Android APK & iPhone Web App" },
 ];
 
 export default function LandingPage() {
@@ -79,155 +159,153 @@ export default function LandingPage() {
   const sections = [
     {
       id: "overview",
-      badge: "DIGITAL WARDROBE INTELLIGENCE",
+      badge: "DIGITAL CLOSET",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "STILLNESS COLLECTION · ADDIS ABABA",
+      tagline: "BUILT FOR ADDIS ABABA",
       title: "Your Wardrobe, Digitized.",
-      subtitle: "Precision daily styling built from the clothes you already own.",
+      subtitle: "Daily outfits styled from the clothes you already own.",
       description:
-        "Stop guessing what goes together every morning. Firie digitizes your real clothing, matches colors with color science, and assembles ready-to-wear outfits adapted to your live weather.",
+        "Stop guessing what to wear every morning. Photograph your clothes once — Firie removes the background, matches colors, and builds ready-to-wear outfits for today's weather.",
       video: "/videos/page-1.mp4",
       poster: "/images/page_previews/page_1.jpg",
       hasDownloadBtn: true,
       bullets: [
-        "Take a photo anywhere — auto background removal isolates your clothes",
-        "Curated daily outfits assembled exclusively from your real closet",
-        "Calibrated to live Addis Ababa weather, temperature, and occasion",
+        "Snap a photo anywhere — auto background removal isolates each piece",
+        "Daily outfits assembled from your real closet",
+        "Matched to live Addis Ababa weather and your occasion",
       ],
       align: "text-left",
     },
     {
       id: "curation-swiper",
-      badge: "AI OUTFIT DISCOVERY",
+      badge: "OUTFIT SWIPER",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "EFFORTLESS MORNING ROUTINE",
+      tagline: "SWIPE TO DRESS",
       title: "Swipe Through Today's Looks.",
-      subtitle: "Magazine-quality flat-lay outfits assembled from what you own.",
+      subtitle: "Clean flat-lay combinations from your own pieces.",
       description:
-        "Every morning, Firie presents ready-to-wear combinations built exclusively from your closet. Swipe right to wear the look, or swipe left to pass to the next suggestion.",
+        "Every morning, Firie pairs tops, bottoms, and shoes from your closet. Swipe right to wear a look, or swipe left to see another option.",
       video: "/videos/page-2.mp4",
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Fluid swipe gestures (✕ Pass, ♥ Wear)",
-        "Automatic color harmony scoring across 12 hues",
-        "Visual outfit history and calendar tracking",
+        "Quick swipe gestures (✕ Pass, ♥ Wear)",
+        "Color harmony matching across your wardrobe",
+        "Saved wear history and outfit calendar",
       ],
       align: "video-left",
     },
-
     {
       id: "climate-layering",
-      badge: "REAL-TIME CLIMATE LAYERING",
+      badge: "LIVE WEATHER SYNC",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "LIVE METEOROLOGY SYNC",
-      title: "Dressed for the Weather Outside.",
-      subtitle: "Thermal comfort from the morning chill to the evening breeze.",
+      tagline: "MORNING TO EVENING",
+      title: "Dressed for Today's Weather.",
+      subtitle: "Smart layering from cool mornings to warm afternoons.",
       description:
-        "Firie reads live weather data for your city. Whether it moves from 16°C in the morning to 24°C by afternoon in Addis Ababa, it selects the outer layers you can wear or stow without a second thought.",
+        "Firie checks live weather for your city. When Addis Ababa shifts from 16°C at 8 AM to 24°C by midday, it picks layers you can comfortably wear or take off.",
       video: "/videos/page-4.mp4",
       poster: "/images/page_previews/page_4.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Real-time temperature and precipitation forecast sync",
-        "Smart zip-hoodie and light outerwear layering alerts",
-        "Never carry a jacket you won't need",
+        "Real-time local temperature and rain forecast",
+        "Smart jacket and hoodie layering suggestions",
+        "Avoid overdressing or getting caught in the cold",
       ],
       align: "video-left",
     },
     {
       id: "venue-spots",
-      badge: "CURATED VENUE DRESS CODES",
+      badge: "DATE SPOTS",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "CITY EXPLORATION & NIGHTLIFE",
-      title: "Venues, Dress Codes & Budgets.",
-      subtitle: "Know where to go — and what to wear — before you leave.",
+      tagline: "VENUES & BUDGETS",
+      title: "Know Where to Go & What to Wear.",
+      subtitle: "Curated Addis Ababa spots with dress codes and ETB budgets.",
       description:
-        "Heading out for coffee, a rooftop sunset or a weekend celebration? Firie matches your outfit to curated spots in Addis Ababa and beyond, with verified menu prices and a budget calculator in ETB. Included with Firie Pro.",
+        "Planning coffee, a rooftop sunset, or dinner? Browse curated venues across Addis Ababa with dress-code tips, menu prices, and a built-in ETB budget planner.",
       video: "/videos/page-5.mp4",
       poster: "/images/page_previews/page_5.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Curated rooftop, lounge, café and restaurant database in Addis",
-        "Dress-code guidance for every venue",
-        "Verified menu prices and party budget estimates in ETB (Pro)",
+        "Curated cafés, rooftops, lounges, and restaurants in Addis",
+        "Outfit suggestions matched to each venue's vibe",
+        "Menu price guides and budget estimates in ETB (Pro)",
       ],
       align: "text-left",
     },
-
     {
       id: "ai-studio",
-      badge: "INSTANT WARDROBE DIGITIZATION",
+      badge: "CUTOUT STUDIO",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "DIGITAL CLOSET EDITORIAL",
-      title: "Studio-Quality Cutouts, Instantly.",
-      subtitle: "Turn ordinary closet photos into clean digital assets.",
+      tagline: "CLEAN CLOSET PHOTOS",
+      title: "Clean Cutouts in Seconds.",
+      subtitle: "Turn any hanger or bed photo into a crisp wardrobe card.",
       description:
-        "Photograph your hoodie, jacket or shoes anywhere — on a hanger, a bed or the carpet. Firie isolates the garment in milliseconds with precise edges, and every photo stays on your device.",
+        "Take a photo of your shirt, trousers, or sneakers anywhere. Firie removes the background automatically and tags category, slot, and color.",
       video: "/videos/page-7.mp4",
       poster: "/images/page_previews/page_7.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Automatic background cutout on your device",
-        "Color palette & category classification (Tops, Bottoms, Shoes)",
-        "100% private: photos never leave your device",
+        "On-device background removal with zero waiting",
+        "Auto-tagged by category (Tops, Bottoms, Shoes, Traditional)",
+        "Cloudflare R2 backup when signed in to your account",
       ],
       align: "text-left",
     },
     {
       id: "daily-look",
-      badge: "EFFORTLESS DAILY CONFIDENCE",
+      badge: "DAILY ROUTINE",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "READY TO WEAR",
-      title: "Your Daily Look, Ready to Wear.",
-      subtitle: "No morning decision fatigue. Ready in seconds.",
+      tagline: "READY IN SECONDS",
+      title: "Zero Morning Decision Fatigue.",
+      subtitle: "Open the app, pick your look, and step out.",
       description:
-        "Reclaim your mornings. Firie removes the daily stress of “what should I wear today?” so you start every day looking sharp, put-together, and authentically yourself.",
+        "Spend less time staring at your closet and more time on your day. Firie remembers what you wore recently so your outfits stay fresh.",
       video: "/videos/page-8.mp4",
       poster: "/images/page_previews/page_8.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Direct Android APK install & iPhone Safari Web App (PWA)",
-        "Free plan: one fresh look a day, three a week (up to 30 items)",
-        "Pro plan: unlimited looks, complete Date Spots & outfit history (600 ETB/mo)",
+        "Direct Android APK & iPhone Safari Web App (PWA)",
+        "Free plan: 1 fresh look/day, 3/week (up to 30 items)",
+        "Pro plan: unlimited looks, Date Spots & full history (600 ETB/mo)",
       ],
       align: "video-left",
     },
     {
       id: "tailored-lifestyle",
-      badge: "INTELLIGENT PROFILE & FIT STYLING",
+      badge: "YOUR PROFILE",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "PROPORTION ARCHITECTURE",
-      title: "Tailored to Your Height, Build & Routine.",
-      subtitle: "Personalized recommendations for your exact frame.",
+      tagline: "PERSONALIZED TO YOU",
+      title: "Styled for Your Build & Taste.",
+      subtitle: "Outfits adapted to your height, age, and preferred style.",
       description:
-        "Whether you prefer clean streetwear or tailored minimalism, Firie personalizes your daily looks according to your build, age, comfort zone, and neighborhood vibe.",
+        "Whether you lean toward streetwear, smart casual, or traditional Habesha wear, Firie tailors every recommendation to your profile.",
       video: "/videos/page-9.mp4",
       poster: "/images/page_previews/page_1.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Proportion mapping tailored to your height and silhouette",
-        "Seamless synchronization with your daily lifestyle",
-        "Culturally rooted contemporary Ethiopian fashion styling",
+        "Personalized to your height, fit preference, and style",
+        "Optional Habesha traditional wear rotation",
+        "Photo Style Camera with pose guides and filters",
       ],
       align: "text-left",
     },
     {
       id: "mobile-experience",
-      badge: "ANDROID APP & MOBILE WEB",
+      badge: "MOBILE EXPERIENCE",
       badgeColor: "bg-[#FF7F02] text-white",
-      tagline: "ANDROID APP · MOBILE WEB",
-      title: "The Full Firie Experience in Your Pocket.",
-      subtitle: "Built for Android APK and iPhone Safari Web App.",
+      tagline: "ANDROID & MOBILE WEB",
+      title: "Your Entire Closet in Your Pocket.",
+      subtitle: "Fast, lightweight, and synced across your devices.",
       description:
-        "Fast, fluid, and intuitive. Photograph your clothes, swipe through personalized daily outfits, and match your look with Addis Ababa's best spots wherever you go.",
+        "Upload your wardrobe, check today's weather-matched outfit, and use the Photo Style Camera anywhere — synced securely with Cloudflare D1 and R2.",
       video: "/videos/page-10.mp4",
       poster: "/images/page_previews/page_2.jpg",
       hasDownloadBtn: true,
       bullets: [
-        "Direct Android APK install with no Play Store required",
-        "Optional Cloudflare D1 & R2 backup for multi-device sync",
-        "Instant iPhone access via Safari Add to Home Screen",
+        "Direct Android APK install — no Play Store required",
+        "Cloudflare D1 & R2 account sync across devices",
+        "Instant iPhone install via Safari Add to Home Screen",
       ],
       align: "video-left",
     },
@@ -288,24 +366,46 @@ export default function LandingPage() {
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-bold text-[#71717A]">
-            <a href="#overview" className="hover:text-[#FF7F02] transition-colors">Overview</a>
-            <a href="#curation-swiper" className="hover:text-[#FF7F02] transition-colors">AI Swiper</a>
-            <a href="#climate-layering" className="hover:text-[#FF7F02] transition-colors">Weather</a>
-            <a href="#venue-spots" className="hover:text-[#FF7F02] transition-colors">Venues</a>
-            <a href="#ai-studio" className="hover:text-[#FF7F02] transition-colors">Studio</a>
-            <a href="#tailored-lifestyle" className="hover:text-[#FF7F02] transition-colors">Lifestyle</a>
-            <a href="#pricing" className="hover:text-[#FF7F02] transition-colors">Plans</a>
-            <a href="#faq" className="hover:text-[#FF7F02] transition-colors">FAQ</a>
+          {/* Desktop Navigation Links with Active Section Indicator */}
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-bold text-[#71717A]">
+            {[
+              { href: "#overview", label: "Overview", idx: 0 },
+              { href: "#curation-swiper", label: "Swiper", idx: 1 },
+              { href: "#climate-layering", label: "Weather", idx: 2 },
+              { href: "#venue-spots", label: "Date Spots", idx: 3 },
+              { href: "#ai-studio", label: "Studio", idx: 4 },
+              { href: "#tailored-lifestyle", label: "Your Fit", idx: 6 },
+              { href: "#pricing", label: "Plans", idx: -1 },
+              { href: "#faq", label: "FAQ", idx: -1 },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative py-1 transition-colors hover:text-[#FF7F02]",
+                  activeSectionIndex === item.idx ? "text-[#FF7F02] font-black" : ""
+                )}
+              >
+                {item.label}
+                {activeSectionIndex === item.idx && (
+                  <span className="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-[#FF7F02]" />
+                )}
+              </a>
+            ))}
           </nav>
 
-          {/* Action Area: Mobile Hamburger + Single Download Button */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Action Area: Web App + Download + Mobile Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <button
+              onClick={() => navigate("/app")}
+              className="hidden sm:inline-flex items-center rounded-full border border-orange-200 bg-orange-50/70 hover:bg-orange-100 px-3.5 py-2 text-[11px] font-bold text-[#18181B] transition-colors cursor-pointer"
+            >
+              Open Web App
+            </button>
             <a
               href="#download"
               onClick={scrollToDownload}
-              className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>Download</span>
               <span className="text-[10px]">⬇</span>
@@ -472,18 +572,13 @@ export default function LandingPage() {
                       {s.subtitle}
                     </p>
 
-                    {/* ── MOBILE VIDEO CARD (Visible right under headline on mobile phones so it is never hidden!) ── */}
+                    {/* ── MOBILE VIDEO CARD (Visible right under headline on mobile phones) ── */}
                     <div className="lg:hidden w-full my-2.5">
-                      <div className="relative w-full rounded-2xl overflow-hidden shadow-xl bg-black ring-1 ring-orange-500/20">
-                        <video
+                      <div className="relative w-full h-[250px] sm:h-[340px] rounded-2xl overflow-hidden shadow-xl bg-zinc-900 ring-1 ring-orange-500/20">
+                        <LazyVideo
                           src={s.video}
                           poster={s.poster}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          preload={index === 0 ? "metadata" : "none"}
-                          className="w-full h-[240px] sm:h-[340px] object-cover object-center"
+                          priority={index === 0}
                         />
                       </div>
                     </div>
@@ -536,16 +631,12 @@ export default function LandingPage() {
                       isTextLeft ? "order-2" : "order-2 lg:order-1"
                     )}
                   >
-                    <div className="relative w-full max-w-[440px] rounded-[36px] overflow-hidden shadow-2xl bg-black group ring-1 ring-orange-500/20">
-                      <video
+                    <div className="relative w-full max-w-[440px] h-[540px] xl:h-[600px] rounded-[36px] overflow-hidden shadow-2xl bg-zinc-900 group ring-1 ring-orange-500/20">
+                      <LazyVideo
                         src={s.video}
                         poster={s.poster}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload={index === 0 ? "metadata" : "none"}
-                        className="w-full h-[540px] xl:h-[600px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                        priority={index === 0}
+                        className="group-hover:scale-102 transition-transform duration-700"
                       />
                     </div>
                   </div>
