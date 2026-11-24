@@ -26,8 +26,8 @@ export default function LandingPage() {
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // High-speed direct APK download served from Cloudflare R2 Edge CDN
-  const apkDownloadUrl = "/Firie.apk";
+  // High-speed direct APK download served from Cloudflare R2 Edge CDN (Works globally across Vercel and Cloudflare)
+  const apkDownloadUrl = "https://firie.birukf37.workers.dev/Firie.apk";
   const ipaDownloadUrl = "/FITLY.ipa";
 
   const scrollToDownload = (e?: React.MouseEvent) => {

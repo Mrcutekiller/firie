@@ -158,6 +158,8 @@ async function verifyToken(
 // ---------------------------------------------------------------------------
 // HTTP Response Utility Helpers
 // ---------------------------------------------------------------------------
+// Security & HTTP Response Utility Helpers
+// ---------------------------------------------------------------------------
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -165,12 +167,38 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
-function json(data: unknown, status = 200): Response {
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(self), geolocation=(self), microphone=()",
+};
+
+// In-memory rate limiting per edge isolate to protect authentication & upload endpoints
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(key: string, limit = 15, windowMs = 60000): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(key);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(key, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+  if (entry.count >= limit) {
+    return false;
+  }
+  entry.count++;
+  return true;
+}
+
+function json(data: unknown, status = 200, extraHeaders: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(data), {
     status,
     headers: {
       "Content-Type": "application/json",
       ...CORS_HEADERS,
+      ...SECURITY_HEADERS,
+      ...extraHeaders,
     },
   });
 }
@@ -187,14 +215,33 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    // 0. Defense against admin probing, path traversal & sensitive environment file scraping
+    if (
+      url.pathname.startsWith("/admin") ||
+      url.pathname.includes("/.") ||
+      url.pathname.endsWith(".env") ||
+      url.pathname.endsWith(".git") ||
+      url.pathname.includes("..")
+    ) {
+      return error("Access Denied: unauthorized administrative or internal path.", 403);
+    }
+
     // Handle Pre-flight CORS
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: CORS_HEADERS });
+      return new Response(null, { headers: { ...CORS_HEADERS, ...SECURITY_HEADERS } });
     }
 
     const secret = env.JWT_SECRET || "firie-edge-secret-key-addis-2026";
     const db = env.DB || env.firie_db;
     const photos = env.PHOTOS || env.firie_photos;
+
+    // Rate Limiting Protection on Auth endpoints
+    const clientIp = request.headers.get("CF-Connecting-IP") || "anonymous";
+    if (url.pathname.startsWith("/api/auth/")) {
+      if (!checkRateLimit(`auth:${clientIp}`, 20, 60000)) {
+        return error("Too many requests from this address. Please wait a minute and try again.", 429);
+      }
+    }
 
     // Direct High-Speed Release APK Download from Cloudflare R2 Edge (Bypasses SPA)
     if (
@@ -604,9 +651,19 @@ export default {
         return error("Invalid base64 data URL format");
       }
 
-      const mimeType = match[1];
+      const mimeType = match[1].toLowerCase();
+      // Enforce strict image MIME types to prevent script execution or malicious payload upload
+      if (!mimeType.startsWith("image/") || (!mimeType.includes("jpeg") && !mimeType.includes("png") && !mimeType.includes("webp") && !mimeType.includes("jpg"))) {
+        return error("Unauthorized upload type: only JPEG, PNG, and WebP images are allowed", 415);
+      }
+
       const base64Data = match[2];
       const binaryString = atob(base64Data);
+      // Enforce 15 MB maximum payload size
+      if (binaryString.length > 15 * 1024 * 1024) {
+        return error("Upload exceeds maximum allowed size of 15MB", 413);
+      }
+
       const bytes = new Uint8Array(binaryString.length);
       for (let i = 0; i < binaryString.length; i++) {
         bytes[i] = binaryString.charCodeAt(i);
