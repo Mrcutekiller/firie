@@ -105,12 +105,18 @@ export default function LandingPage() {
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // Same-origin /Firie.apk?v=2 on Vercel (via Edge rewrite) and Cloudflare Workers (via R2), fallback to Workers CDN on localhost
+  // Content-addressed download URL. The `v` value is the first 8 hex chars of
+  // the APK's SHA256 (636839c1...), so the URL changes whenever the binary
+  // changes. That is what makes the `immutable` cache header safe: a stale or
+  // corrupted cached response can never outlive the file it represents.
+  const APK_VERSION = "636839c1";
+  // Same-origin /Firie.apk?v=... on Vercel (via Edge rewrite) and Cloudflare
+  // Workers (via R2), falling back to the Workers CDN on localhost.
   const apkDownloadUrl =
     typeof window !== "undefined" &&
     (window.location.hostname.includes("vercel.app") || window.location.hostname.includes("workers.dev"))
-      ? "/Firie.apk?v=2"
-      : "https://firie.birukf37.workers.dev/Firie.apk?v=2";
+      ? `/Firie.apk?v=${APK_VERSION}`
+      : `https://firie.birukf37.workers.dev/Firie.apk?v=${APK_VERSION}`;
   // iOS is PWA only — no IPA file served
 
   const triggerDirectDownload = () => {
@@ -1028,7 +1034,7 @@ export default function LandingPage() {
           <div className="mt-3 pt-2.5 border-t border-zinc-800 flex items-center justify-between text-[11px]">
             <span className="text-zinc-400">Didn't start?</span>
             <a
-              href="https://firie.birukf37.workers.dev/Firie.apk?v=2"
+              href={`https://firie.birukf37.workers.dev/Firie.apk?v=${APK_VERSION}`}
               download="Firie.apk"
               className="font-bold text-[#FF7F02] hover:underline flex items-center gap-1"
             >

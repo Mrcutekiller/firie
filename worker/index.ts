@@ -303,7 +303,17 @@ export default {
       headers.set("Content-Type", isApk ? contentType : "application/octet-stream");
       headers.set("Content-Disposition", `attachment; filename="${filename}"; filename*=UTF-8''${filename}`);
       headers.set("Content-Length", String(object.size));
-      headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      // `immutable` is only safe on a content-addressed URL. If we sent it on
+      // the bare `/Firie.apk`, any response that ever got cached under that
+      // name (including an HTML error page) would be pinned in the browser
+      // for a year with no way to revalidate - which is exactly how a
+      // 1.22 KB index.html can keep being "downloaded" long after the server
+      // was fixed. Versioned URLs are safe to pin; bare URLs must revalidate.
+      const isVersioned = url.searchParams.has("v") || url.searchParams.has("hash");
+      headers.set(
+        "Cache-Control",
+        isVersioned ? "public, max-age=31536000, immutable" : "public, max-age=0, must-revalidate",
+      );
       headers.set("Access-Control-Allow-Origin", "*");
       headers.set("Access-Control-Expose-Headers", "Content-Disposition, Content-Length, Content-Type");
       headers.set("X-Content-Type-Options", "nosniff");
