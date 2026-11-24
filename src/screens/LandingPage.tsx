@@ -90,7 +90,7 @@ const NAV_MENU_ITEMS = [
   { id: "ai-studio", label: "Cutout Studio", chapter: "05", icon: "📸", desc: "Auto background removal" },
   { id: "daily-look", label: "Daily Looks", chapter: "06", icon: "🧥", desc: "Zero morning decision fatigue" },
   { id: "tailored-lifestyle", label: "Your Fit", chapter: "07", icon: "📏", desc: "Tailored to height & style" },
-  { id: "mobile-experience", label: "Mobile App", chapter: "08", icon: "📱", desc: "Android APK & iPhone Web App" },
+  { id: "mobile-experience", label: "Mobile App", chapter: "08", icon: "📱", desc: "Android APK & iPhone IPA" },
 ];
 
 export default function LandingPage() {
@@ -117,7 +117,15 @@ export default function LandingPage() {
     (window.location.hostname.includes("vercel.app") || window.location.hostname.includes("workers.dev"))
       ? `/Firie.apk?v=${APK_VERSION}`
       : `https://firie.birukf37.workers.dev/Firie.apk?v=${APK_VERSION}`;
-  // iOS is PWA only — no IPA file served
+
+  // Same content-addressed scheme for the iOS build: first 8 hex chars of the
+  // IPA's SHA256 (831a801d...). Served from R2 via the same Edge rewrite.
+  const IPA_VERSION = "831a801d";
+  const ipaDownloadUrl =
+    typeof window !== "undefined" &&
+    (window.location.hostname.includes("vercel.app") || window.location.hostname.includes("workers.dev"))
+      ? `/FITLY.ipa?v=${IPA_VERSION}`
+      : `https://firie.birukf37.workers.dev/FITLY.ipa?v=${IPA_VERSION}`;
 
   const triggerDirectDownload = () => {
     setDownloadStarted(true);
@@ -271,7 +279,7 @@ export default function LandingPage() {
       poster: "/images/page_previews/page_8.jpg",
       hasDownloadBtn: false,
       bullets: [
-        "Direct Android APK & iPhone Safari Web App (PWA)",
+        "Direct Android APK & iPhone IPA downloads",
         "Free plan: 1 fresh look/day, 3/week (up to 30 items)",
         "Pro plan: unlimited looks, Date Spots & full history (600 ETB/mo)",
       ],
@@ -311,7 +319,7 @@ export default function LandingPage() {
       bullets: [
         "Direct Android APK install — no Play Store required",
         "Cloudflare D1 & R2 account sync across devices",
-        "Instant iPhone install via Safari Add to Home Screen",
+        "Instant iPhone install — direct IPA download or Safari Add to Home Screen",
       ],
       align: "video-left",
     },
@@ -324,7 +332,7 @@ export default function LandingPage() {
     },
     {
       q: "Can I install Firie directly on Android and iPhone without an App Store?",
-      a: "Yes! For Android, click the Download button to get the official Firie.apk and tap to install immediately. For iPhone, open this page in Safari and tap 'Add to Home Screen' for a free instant web app.",
+      a: "Yes! For Android, click the Download button to get the official Firie.apk and tap to install immediately. For iPhone, download the official FITLY.ipa, or open this page in Safari and tap 'Add to Home Screen' for a free instant web app.",
     },
     {
       q: "Are my photos and wardrobe items kept private?",
@@ -717,12 +725,12 @@ export default function LandingPage() {
                     
                   </span>
                   <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 text-[10px] font-black text-orange-900">
-                    Free · Safari PWA
+                    Direct IPA · Free
                   </span>
                 </div>
-                <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">iPhone / iOS (Free Web App)</h3>
+                <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">iPhone / iOS (Free IPA)</h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-[#71717A]">
-                  Firie works seamlessly on iPhone — no App Store required. Add it to your Home Screen in Safari for a full-screen app experience.
+                  Download the official iOS build straight from our edge — no App Store, no approval wait. Or skip the file and keep using Firie in Safari.
                 </p>
                 <div className="mt-3.5 rounded-2xl bg-[#FFFBF7] border border-orange-100 p-3 sm:p-3.5 text-xs text-[#18181B] space-y-1">
                   <p className="font-black text-[#18181B] flex items-center gap-1.5">
@@ -743,12 +751,25 @@ export default function LandingPage() {
 
               <div className="mt-5 sm:mt-6 pt-4 border-t border-orange-100 flex flex-col gap-2">
                 <a
+                  href={ipaDownloadUrl}
+                  download="FITLY.ipa"
+                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
+                >
+                  <span>⬇️ Download Firie App (IPA)</span>
+                </a>
+                <p className="text-center text-[10px] text-[#A1A1AA]">
+                  File: FITLY.ipa ·{" "}
+                  <span title="831A801DE228A635BA6FCB4D06233142DCB1FEE397FE8187CD720A46B4E93ECD" className="font-mono text-zinc-500">
+                    SHA256: 831A801D…93ECD
+                  </span>
+                </p>
+                <a
                   href="https://fitly-lovat.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
+                  className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#FF7F02] text-[#FF7F02] hover:bg-orange-50 font-black text-xs transition-transform active:scale-95"
                 >
-                  <span>🌐 Open Firie in Safari</span>
+                  <span>🌐 Or Open Firie in Safari</span>
                 </a>
                 <p className="text-center text-[10px] text-[#A1A1AA]">
                   Then tap Share → Add to Home Screen for a full app experience
