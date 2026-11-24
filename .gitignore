@@ -25,6 +25,7 @@ build-ipa-temp/
 /FITLY.apk
 /FITLY.ipa
 public/*.apk
+public/*.ipa
 public/Firie.apk
 test-download.apk
 

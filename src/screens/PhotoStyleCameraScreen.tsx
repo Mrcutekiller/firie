@@ -882,7 +882,7 @@ export default function PhotoStyleCameraScreen() {
             </div>
           </div>
 
-          {/* ── 5. Filter Chips Bar (Normal, Snap Glow, iPhone Cine, Sony Vivid, Clean, Golden Hour) ── */}
+          {/* ── 5. Filter Chips Bar (Normal, Snap Glow, Cine, Sony Vivid, Clean, Golden Hour) ── */}
           <div className="relative z-30 flex items-center px-4 mb-2 gap-1.5 overflow-x-auto no-scrollbar">
             {PHOTO_FILTERS.map((f) => {
               const isSelected = activeFilterId === f.id;

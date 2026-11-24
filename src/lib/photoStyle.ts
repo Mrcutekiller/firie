@@ -483,11 +483,11 @@ export const PHOTO_FILTERS: PhotoFilter[] = [
   },
   {
     id: "cinematic",
-    label: "🎬 iPhone Cine",
-    badge: "iPhone",
+    label: "🎬 Cine",
+    badge: "Cine",
     css: "contrast(1.18) brightness(0.97) saturate(0.95) sepia(0.08)",
     pro: false,
-    description: "iPhone Cinematic 35mm filmic tone with rich shadows and organic depth.",
+    description: "Cinematic 35mm filmic tone with rich shadows and organic depth.",
   },
   {
     id: "sonic",

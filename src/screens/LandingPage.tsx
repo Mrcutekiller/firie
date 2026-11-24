@@ -25,8 +25,12 @@ export default function LandingPage() {
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // High-speed direct APK download served from Cloudflare R2 Edge CDN (Works globally across Vercel and Cloudflare)
-  const apkDownloadUrl = "https://firie.birukf37.workers.dev/Firie.apk";
+  // Same-origin /Firie.apk on Vercel (via Edge rewrite) and Cloudflare Workers (via R2), fallback to Workers CDN on localhost
+  const apkDownloadUrl =
+    typeof window !== "undefined" &&
+    (window.location.hostname.includes("vercel.app") || window.location.hostname.includes("workers.dev"))
+      ? "/Firie.apk"
+      : "https://firie.birukf37.workers.dev/Firie.apk";
   // iOS is PWA only — no IPA file served
 
   const triggerDirectDownload = () => {
@@ -916,7 +920,7 @@ export default function LandingPage() {
                   Firie.apk (28 MB) Download Started!
                 </p>
                 <p className="text-[11px] text-zinc-300 mt-0.5">
-                  Check your browser's download manager in the top-right toolbar or notification shade.
+                  Tap the downloaded <b className="text-white">Firie.apk</b> notification → allow <b className="text-white">"Install unknown apps"</b> if prompted.
                 </p>
               </div>
             </div>

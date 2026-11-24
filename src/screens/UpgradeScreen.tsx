@@ -32,7 +32,7 @@ const PRO_PERKS = [
   {
     icon: "✨",
     title: "Cinematic & Studio Filters",
-    desc: "Unlock iPhone Cine, Golden Hour, and Studio lighting camera filters.",
+    desc: "Unlock Cine, Golden Hour, and Studio lighting camera filters.",
   },
 ];
 

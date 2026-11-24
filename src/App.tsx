@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Capacitor } from "@capacitor/core";
 import Layout from "./components/Layout";
 import HomeScreen from "./screens/HomeScreen";
 import ClosetScreen from "./screens/ClosetScreen";
-import AddItemScreen from "./screens/AddItemScreen";
-import HistoryScreen from "./screens/HistoryScreen";
-import UpgradeScreen from "./screens/UpgradeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SplashScreen from "./screens/SplashScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
-import DateSpotsScreen from "./screens/DateSpotsScreen";
-import PlaceDetailScreen from "./screens/PlaceDetailScreen";
-import PhotoStyleCameraScreen from "./screens/PhotoStyleCameraScreen";
-import InsightsScreen from "./screens/InsightsScreen";
-import PackingScreen from "./screens/PackingScreen";
-import LandingPage from "./screens/LandingPage";
 import ProGateScreen from "./components/ProGateScreen";
 import { useApp } from "./lib/store";
+
+const LandingPage = lazy(() => import("./screens/LandingPage"));
+const AddItemScreen = lazy(() => import("./screens/AddItemScreen"));
+const HistoryScreen = lazy(() => import("./screens/HistoryScreen"));
+const UpgradeScreen = lazy(() => import("./screens/UpgradeScreen"));
+const DateSpotsScreen = lazy(() => import("./screens/DateSpotsScreen"));
+const PlaceDetailScreen = lazy(() => import("./screens/PlaceDetailScreen"));
+const PhotoStyleCameraScreen = lazy(() => import("./screens/PhotoStyleCameraScreen"));
+const InsightsScreen = lazy(() => import("./screens/InsightsScreen"));
+const PackingScreen = lazy(() => import("./screens/PackingScreen"));
 
 export default function App() {
   const isNative = Capacitor.isNativePlatform();
@@ -91,7 +92,14 @@ export default function App() {
   // On Web: Default route `/` is the official Landing Page so visitors download the app!
   // On Native App: Default route `/` is the HomeScreen inside the Layout shell!
   return (
-    <Routes>
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-white dark:bg-[#0c0a09]">
+          <div className="h-8 w-8 animate-spin rounded-full border-3 border-[#FF7F02] border-t-transparent" />
+        </div>
+      }
+    >
+      <Routes>
       <Route path="/splash" element={<SplashScreen onDone={() => setShowSplash(false)} />} />
       <Route path="/welcome" element={<OnboardingScreen onDone={handleFinishOnboarding} />} />
       <Route path="/login" element={<OnboardingScreen onDone={handleFinishOnboarding} initialMode="login" />} />
@@ -125,5 +133,6 @@ export default function App() {
       <Route path="/packing" element={<PackingScreen />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </Suspense>
   );
 }
