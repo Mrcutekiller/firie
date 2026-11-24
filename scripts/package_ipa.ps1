@@ -48,13 +48,37 @@ $staged = (Get-ChildItem -Path $payloadDir -Recurse -File | Measure-Object Lengt
 Write-Host ("Staged bundle: {0:N1} MB" -f ($staged / 1MB))
 
 # 4. Package into ZIP with .ipa extension.
-$zipTarget = "$workspaceRoot\FITLY.zip"
-if (Test-Path $zipTarget) {
-    Remove-Item -Force $zipTarget
+#
+# Compress-Archive must NOT be used here: on Windows it writes entry names
+# with backslashes ("Payload\App.app\Info.plist"). The ZIP spec (and every
+# iOS/unzip tool) requires forward slashes, so iTunes, AltStore and Xcode all
+# reject or mis-extract such an archive. We build the entries by hand instead.
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+if (Test-Path $outputIpa) {
+    Remove-Item -Force $outputIpa
 }
 
-Compress-Archive -Path "$payloadDir" -DestinationPath $zipTarget -CompressionLevel Optimal
-Rename-Item -Path $zipTarget -NewName "FITLY.ipa" -Force
+$zipStream = [System.IO.File]::Create($outputIpa)
+$archive = New-Object System.IO.Compression.ZipArchive($zipStream, [System.IO.Compression.ZipArchiveMode]::Create)
+
+try {
+    $root = (Resolve-Path $tempPayloadDir).Path.TrimEnd('\')
+    foreach ($file in Get-ChildItem -Path $payloadDir -Recurse -File) {
+        $relative = $file.FullName.Substring($root.Length).TrimStart('\') -replace '\\', '/'
+        $entry = $archive.CreateEntry($relative, [System.IO.Compression.CompressionLevel]::Optimal)
+        $entryStream = $entry.Open()
+        try {
+            $fileStream = [System.IO.File]::OpenRead($file.FullName)
+            try { $fileStream.CopyTo($entryStream) } finally { $fileStream.Dispose() }
+        } finally { $entryStream.Dispose() }
+    }
+} finally {
+    $archive.Dispose()
+    $zipStream.Dispose()
+}
+
 Copy-Item -Force $outputIpa "$workspaceRoot\public\FITLY.ipa"
 
 Remove-Item -Recurse -Force $tempPayloadDir
