@@ -43,7 +43,6 @@ export default function HomeScreen() {
     theme,
     toggleTheme,
     history,
-    loadDemoCloset,
   } = useApp();
 
   const [selectedOccasion, setSelectedOccasion] = useState<EventType>(() => {
@@ -439,13 +438,6 @@ return (
               className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] dark:bg-white text-xs font-bold text-white dark:text-[#18181B] shadow-md transition-transform active:scale-95"
             >
               <span>📸 Add Your First Piece</span>
-            </button>
-
-            <button
-              onClick={loadDemoCloset}
-              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0C1527] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#18181B] active:scale-95"
-            >
-              <span>✨ Load Sample Wardrobe (Test)</span>
             </button>
           </div>
         </div>

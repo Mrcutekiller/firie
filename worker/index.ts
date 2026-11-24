@@ -244,16 +244,17 @@ export default {
     }
 
     // Direct High-Speed Release APK Download from Cloudflare R2 Edge (Bypasses SPA)
+    const lowerPath = url.pathname.toLowerCase();
     if (
-      url.pathname === "/Firie.apk" ||
-      url.pathname === "/FITLY.apk" ||
-      url.pathname === "/download/apk" ||
-      url.pathname === "/api/download/apk"
+      lowerPath === "/firie.apk" ||
+      lowerPath === "/fitly.apk" ||
+      lowerPath === "/download/apk" ||
+      lowerPath === "/api/download/apk"
     ) {
       if (!photos) {
         return error("Cloudflare R2 storage bucket is not configured", 503);
       }
-      const filename = url.pathname.includes("FITLY") ? "FITLY.apk" : "Firie.apk";
+      const filename = lowerPath.includes("fitly") ? "FITLY.apk" : "Firie.apk";
       const object = (await photos.get(`releases/${filename}`)) || (await photos.get("releases/Firie.apk"));
       if (!object) {
         return new Response("Release APK package not found in Cloudflare R2", { status: 404 });

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/Firie.apk",
+      "destination": "https://firie.birukf37.workers.dev/Firie.apk",
+      "permanent": false
+    },
+    {
+      "source": "/firie.apk",
+      "destination": "https://firie.birukf37.workers.dev/Firie.apk",
+      "permanent": false
+    },
+    {
+      "source": "/FITLY.apk",
+      "destination": "https://firie.birukf37.workers.dev/Firie.apk",
+      "permanent": false
+    },
+    {
+      "source": "/fitly.apk",
+      "destination": "https://firie.birukf37.workers.dev/Firie.apk",
+      "permanent": false
+    },
+    {
+      "source": "/download/apk",
+      "destination": "https://firie.birukf37.workers.dev/Firie.apk",
+      "permanent": false
+    },
+    {
+      "source": "/api/download/apk",
+      "destination": "https://firie.birukf37.workers.dev/Firie.apk",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

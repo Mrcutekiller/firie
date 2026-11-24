@@ -24,6 +24,9 @@ build-ipa-temp/
 # Root duplicate binaries (public/ has the live distribution packages)
 /FITLY.apk
 /FITLY.ipa
+public/*.apk
+public/Firie.apk
+test-download.apk
 
 # Intermediate design video assets
 design/**/*.mp4

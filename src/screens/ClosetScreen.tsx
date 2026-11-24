@@ -91,7 +91,6 @@ export default function ClosetScreen() {
     history,
     itemById,
     lockOutfit,
-    loadDemoCloset,
   } = useApp();
 
   const [segment, setSegment] = useState<MainSegment>("pieces");
@@ -280,14 +279,6 @@ export default function ClosetScreen() {
                 >
                   <span>📸 Add Your First Piece</span>
                 </button>
-                {categoryTab === "all" && (
-                  <button
-                    onClick={loadDemoCloset}
-                    className="flex h-9 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:text-[#18181B] active:scale-95 transition-transform"
-                  >
-                    <span>✨ Load Sample Pieces (Test)</span>
-                  </button>
-                )}
               </div>
             </div>
           ) : categoryTab === "all" ? (

@@ -269,7 +269,7 @@ export default function LandingPage() {
     },
     {
       q: "Can I install Firie directly on Android and iPhone without an App Store?",
-      a: "Yes! For Android, click the Download button to get FITLY.apk and tap to install immediately. For iPhone, you can download the FITLY.ipa package or open this page in Safari and tap 'Add to Home Screen' for an instant standalone app.",
+      a: "Yes! For Android, click the Download button to get the official Firie.apk (28 MB) and tap to install immediately. For iPhone, you can download the package or open this page in Safari and tap 'Add to Home Screen' for an instant standalone app.",
     },
     {
       q: "Are my photos and wardrobe items kept private?",
@@ -335,11 +335,10 @@ export default function LandingPage() {
           {/* Action Area: Mobile Hamburger + Single Download Button */}
           <div className="flex items-center gap-2 sm:gap-3">
             <a
-              href="#download"
-              onClick={scrollToDownload}
+              href={apkDownloadUrl}
               className="rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-4 sm:px-6 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black text-white shadow-md shadow-orange-500/25 active:scale-95 transition-all flex items-center gap-1.5"
             >
-              <span>Download</span>
+              <span>Download APK</span>
               <span className="text-[10px]">⬇</span>
             </a>
 
@@ -418,14 +417,10 @@ export default function LandingPage() {
 
             <div className="pt-5 pb-3 space-y-2 border-t border-orange-100 mt-5">
               <a
-                href="#download"
-                onClick={() => {
-                  scrollToDownload();
-                  setMobileMenuOpen(false);
-                }}
+                href={apkDownloadUrl}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] text-white text-xs font-black shadow-lg shadow-orange-500/25 active:scale-98 transition-all"
               >
-                <span>Download Firie Mobile App</span>
+                <span>Download Firie App (28 MB APK)</span>
                 <span>⬇</span>
               </a>
               <button
@@ -541,18 +536,21 @@ export default function LandingPage() {
                     {s.hasDownloadBtn && (
                       <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
                         <a
-                          href="#download"
-                          onClick={scrollToDownload}
+                          href={apkDownloadUrl}
                           className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#FF7F02] hover:bg-[#E57200] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
                         >
-                          <span>Download App</span>
+                          <span>Download Firie App (28 MB APK)</span>
                           <span className="text-sm sm:text-base">⬇</span>
                         </a>
 
-                        <span className="text-[11px] sm:text-xs font-bold text-[#71717A] flex items-center gap-1.5">
+                        <a
+                          href="#download"
+                          onClick={scrollToDownload}
+                          className="text-[11px] sm:text-xs font-bold text-[#71717A] hover:text-[#FF7F02] flex items-center gap-1.5"
+                        >
                           <span className="h-2 w-2 rounded-full bg-[#FF7F02] animate-pulse" />
-                          <span>Mobile App exclusively for Android & iOS</span>
-                        </span>
+                          <span>iOS & options ›</span>
+                        </a>
                       </div>
                     )}
                   </div>
@@ -613,7 +611,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="mt-4 sm:mt-5 text-xl sm:text-2xl font-black text-[#18181B]">Android Direct APK</h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-[#71717A]">
-                  Official Android application package with adaptive orange launcher icon, camera pose guidance, and desktop widgets.
+                  Official Android application package with adaptive orange launcher icon, camera pose guidance, and instant wardrobe sync.
                 </p>
                 <ul className="mt-3 sm:mt-4 space-y-1.5 text-xs text-[#18181B] font-medium">
                   <li className="flex items-center gap-2">✓ Compatible with Android 10, 11, 12, 13, 14 & 15</li>
@@ -625,13 +623,12 @@ export default function LandingPage() {
               <div className="mt-6 sm:mt-8 pt-4 border-t border-orange-100">
                 <a
                   href={apkDownloadUrl}
-                  download="Firie.apk"
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FF7F02] hover:bg-[#E57200] text-white font-black text-xs transition-transform active:scale-95 shadow-lg shadow-orange-500/25"
                 >
-                  <span>⬇️ Download Firie App (APK)</span>
+                  <span>⬇️ Download Firie App (28 MB APK)</span>
                 </a>
                 <p className="mt-2 text-center text-[10px] text-[#A1A1AA]">
-                  File: Firie.apk (Target Android 14) · Tap file on Android to install immediately
+                  File: Firie.apk (27.93 MB · Target Android 14) · Tap file on Android to install immediately
                 </p>
               </div>
             </div>
@@ -740,7 +737,7 @@ export default function LandingPage() {
                   <li className="flex items-center gap-2">✓ 1 photo style pose guide per day (3 per week)</li>
                   <li className="flex items-center gap-2">✓ Swipe, save and wear your daily look</li>
                   <li className="flex items-center gap-2 text-[#A1A1AA]">🔒 Date Spots venues, prices & plans (Pro Only)</li>
-                  <li className="flex items-center gap-2 text-[#A1A1AA]">🔒 Outfit history & home screen widgets</li>
+                  <li className="flex items-center gap-2 text-[#A1A1AA]">🔒 Full outfit history & monthly calendar</li>
                 </ul>
               </div>
 
@@ -853,8 +850,8 @@ export default function LandingPage() {
             <button onClick={() => setShowTermsModal(true)} className="hover:text-[#FF7F02] transition-colors">
               Terms of Service
             </button>
-            <a href={apkDownloadUrl} download="FITLY.apk" className="hover:text-[#FF7F02] transition-colors">
-              Android APK
+            <a href={apkDownloadUrl} className="hover:text-[#FF7F02] transition-colors">
+              Android APK (28 MB)
             </a>
             <a href={ipaDownloadUrl} download="FITLY.ipa" className="hover:text-[#FF7F02] transition-colors">
               iOS Package
